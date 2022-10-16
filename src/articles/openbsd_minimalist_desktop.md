@@ -154,10 +154,11 @@ In `/etc/login.conf' update the staff class as follows using vi(1):
     
 You should increase datasize-cur depending on your total memory. 4096M works relatively well for 8GB though I have noticed with excessive web browser use that things can freeze up.  Likewise, openfiles-cur/max should be increased depending on your needs.  If you run Syncthing or work with large Bittorrent files for example you will probably want to increase that to an insane amount and replicate it in /etc/sysctl.conf(5): kern.maxfiles.
 
-Rebuild the database:
+~~Rebuild the database:~~
 
-    [ -f /etc/login.conf.db ] && cap_mkdb /etc/login.conf
-    
+~~[ -f /etc/login.conf.db ] && cap_mkdb /etc/login.conf~~
+
+(Unnecessary as we haven't started using it; thanks, Solene!)
 
 #### Kernel settings ####
 

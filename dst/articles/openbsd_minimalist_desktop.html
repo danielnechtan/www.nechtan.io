@@ -193,10 +193,11 @@ e123eac9a466a7c7.e &#47;var ffs rw,noatime,nodev,nosuid 1 2
 
 <p>You should increase datasize-cur depending on your total memory. 4096M works relatively well for 8GB though I have noticed with excessive web browser use that things can freeze up.  Likewise, openfiles-cur&#47;max should be increased depending on your needs.  If you run Syncthing or work with large Bittorrent files for example you will probably want to increase that to an insane amount and replicate it in &#47;etc&#47;sysctl.conf(5): kern.maxfiles.</p>
 
-<p>Rebuild the database:</p>
+<p><del>Rebuild the database:</del></p>
 
-<pre><code>[ -f &#47;etc&#47;login.conf.db ] &#38;&#38; cap_mkdb &#47;etc&#47;login.conf
-</code></pre>
+<p><del>[ -f &#47;etc&#47;login.conf.db ] &#38;&#38; cap_mkdb &#47;etc&#47;login.conf</del></p>
+
+<p>(Unnecessary as we haven&#8217;t started using it; thanks, Solene!)</p>
 
 <h4 id="Kernel%20settings">Kernel settings</h4>
 
