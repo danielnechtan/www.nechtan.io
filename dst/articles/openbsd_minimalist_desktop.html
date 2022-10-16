@@ -72,8 +72,8 @@
 
 <h3 id="Firmware%20and%20networking">Firmware and networking</h3>
 
-<p>OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB sup
-ported adapter or Lenovo&#8217;s adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw
+<p>OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB
+ adapter or Lenovo&#8217;s adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw
 _update(8) if you configure your ethernet adapter correctly.</p>
 
 <p>On another computer with network access, format a USB disk as FAT and copy everything from http:&#47;&#47;firmware.openbsd.org&#47;firmware&#47;7.2&#47; onto it. I find the easiest way to grab these files on a non-OpenBSD system is to install and use lftp:</p>
@@ -83,13 +83,13 @@ cd ok, cwd=&#47;firmware&#47;7.2
 lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget * 
 </code></pre>
 
-<p>Unmount the disk and keep it for later.</p>
+<p>Unmount the disk and keep it for the first boot after installation.</p>
 
 <h3 id="First%20boot">First boot</h3>
 
 <h4 id="Firmware">Firmware</h4>
 
-<p>Insert your USB key with the firmware, mount it, copy the firmware over and install it:</p>
+<p>Insert your USB disk with the firmware, mount it, copy the firmware over and install it:</p>
 
 <pre><code># dmesg | grep sd
 # mount_msdos &#47;dev&#47;sd3i &#47;mnt
@@ -327,7 +327,7 @@ fi
 
 <h4 id="Xresources">Xresources</h4>
 
-<p>You could write a book, or at least a pamphlet, on styling X(7).  Callum Smith has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
+<p>You could write a book, or at least a pamphlet, on styling X(7).  <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Callum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
 
 <pre><code>*visualBell: True 
 xterm.loginShell: true 

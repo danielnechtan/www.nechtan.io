@@ -37,8 +37,8 @@ The default disklabel(8) layout is recommended for most situations, however, if 
 
 ### Firmware and networking ###
 
-OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB sup
-ported adapter or Lenovo's adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw
+OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB
+ adapter or Lenovo's adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw
 _update(8) if you configure your ethernet adapter correctly.
 
 On another computer with network access, format a USB disk as FAT and copy everything from http://firmware.openbsd.org/firmware/7.2/ onto it. I find the easiest way to grab these files on a non-OpenBSD system is to install and use lftp:
@@ -47,14 +47,14 @@ On another computer with network access, format a USB disk as FAT and copy every
     cd ok, cwd=/firmware/7.2
     lftp firmware.openbsd.org:/firmware/7.2> mget * 
    
-Unmount the disk and keep it for later.
+Unmount the disk and keep it for the first boot after installation.
 
 
 ### First boot ###
 
 #### Firmware ####
 
-Insert your USB key with the firmware, mount it, copy the firmware over and install it:
+Insert your USB disk with the firmware, mount it, copy the firmware over and install it:
 
     # dmesg | grep sd
     # mount_msdos /dev/sd3i /mnt
@@ -283,7 +283,7 @@ or by adding the following to .xsession:
 
 #### Xresources ####
 
-You could write a book, or at least a pamphlet, on styling X(7).  Callum Smith has some more complete configs, but the following ~/.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):
+You could write a book, or at least a pamphlet, on styling X(7).  [Callum Smith](https://www.c0ffee.net/blog/openbsd-on-a-laptop/) has some more complete configs, but the following ~/.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):
 
     *visualBell: True 
     xterm.loginShell: true 
