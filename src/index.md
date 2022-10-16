@@ -1,7 +1,7 @@
 ### Projects ###
 
 ### Articles ###
-### Articles
+* [OpenBSD Minimalist Desktop](articles/openbsd_minimalist_desktop.html "2022-10-16") (16 Oct 2022)
 * [OpenBSD Desktop](articles/openbsd_desktop.html "2018-12-03") (03 Dec 2018)
 * [Gopher with OpenBSD, Gophernicus, and TLS](articles/gophernicus.html "2018-11-17") (17 Nov 2018)
 * [Assembly language on OpenBSD/amd64+arm64](articles/openbsd_assembly.html "2018-11-15") (15 Nov 2018)

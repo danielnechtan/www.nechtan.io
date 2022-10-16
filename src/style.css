@@ -103,6 +103,7 @@ h1, h2, h3, h4 { margin-bottom: 0; }
 .cf:after { clear: both; }
 .cf:before, .cf:after { content: " "; display: table; }
 .code, pre, code { font-family: Consolas, Monaco, monospace; }
+.code { font-weight: bold; }
 .dib { display: inline-block; }
 .dim { opacity: 1; transition: opacity .15s ease-in; }
 .dim:active { opacity: .8; transition: opacity .15s ease-out; }
