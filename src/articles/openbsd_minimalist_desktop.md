@@ -315,7 +315,7 @@ A minimal ~/.cwmrc configuration:
     snapdist                20
 
     command firefox         firefox
-    command newsboat        newsboat
+    command newsboat        "xterm -e newsboat"
     command keepassxc       keepassxc 
 
     bind-key 4-Return       terminal
