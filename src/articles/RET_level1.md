@@ -1,4 +1,4 @@
-#### Reverse Engineering Tutorial: level1 - What's the password?
+# Reverse Engineering Tutorial: level1 - What's the password?
 
 Welcome to level1 of the Reverse Engineering Tutorial.  I will be using OpenBSD 6.4/amd64 to demonstrate one way to solve level1 of the 
 Cryogenix wargame (yet TBA).

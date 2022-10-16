@@ -1,4 +1,4 @@
-#### OpenBSD/arm64 on QEMU with networking 
+# OpenBSD/arm64 on QEMU with networking 
 
 With the increasing popularity of ARM64/AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu's move away from SPARC64 supercomputers, there hasn't been a better time to get started with learning this architecture.
 

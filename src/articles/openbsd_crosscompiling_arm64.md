@@ -1,4 +1,4 @@
-#### Cross-compiling for OpenBSD/arm64
+# Cross-compiling for OpenBSD/arm64
 
 Following on from [OpenBSD/arm64 on QEMU](https://cryogenix.net/OpenBSD_arm64_qemu.html), it's not always practical to compile userland software or a new kernel on some systems, particularly small SoCs with limited space and memory - or indeed QEMU, in fear of melting your CPU. 
 

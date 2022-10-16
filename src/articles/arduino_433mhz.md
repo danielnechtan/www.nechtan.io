@@ -1,4 +1,4 @@
-#### 433 Mhz vehicle unlocking with Arduino Duo
+# 433 Mhz vehicle unlocking with Arduino Duo
 
 Having only one key fob for the van is anxiety-inducing in case it fails, so I decided to build a replacement with an Arduino/ATMega and a 433Mhz transceiver module.
 

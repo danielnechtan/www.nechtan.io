@@ -372,10 +372,10 @@ bind-key 4S-b           "xbacklight -inc 10 -time 0"
 <guid>/articles/openbsd_desktop.html</guid>
 <link>/articles/openbsd_desktop.html</link>
 <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>OpenBSD Desktop</title>
 <description><![CDATA[
 
-<h4 id="OpenBSD%20Desktop">OpenBSD Desktop</h4>
+<h1 id="OpenBSD%20Desktop">OpenBSD Desktop</h1>
 
 <p>Everyone loves an OpenBSD Desktop article, don&#8217;t they? So there seems very little point in me reiterating what is a relatively simple process nowadays.  That said, after the install process there are a couple of things which, for me, make OpenBSD the perfect workstation operating system&#8230;</p>
 
@@ -503,16 +503,16 @@ xterm*background: rgb:00&#47;00&#47;00
 <guid>/articles/gophernicus.html</guid>
 <link>/articles/gophernicus.html</link>
 <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>Down the Gopher hole with OpenBSD, Gophernicus, and TLS</title>
 <description><![CDATA[
 
-<h4 id="Down%20the%20Gopher%20hole%20with%20OpenBSD,%20Gophernicus,%20and%20TLS">Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h4>
+<h1 id="Down%20the%20Gopher%20hole%20with%20OpenBSD,%20Gophernicus,%20and%20TLS">Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h1>
 
 <p><strong>UPDATE: I&#8217;ve added TLS support to Gophernicus so you don&#8217;t need to use stunnel anymore. The code is ugly and unpolished though so I wouldn&#8217;t recommend for production use.</strong> </p>
 
 <ul>
-<li><a href="https://github.com/0x16h/gophernicus">https:&#47;&#47;github.com&#47;0x16h&#47;gophernicus</a></li>
-<li><a href="https://github.com/0x16h/gophernicus/blob/master/INSTALL.openbsd">INSTALL.openbsd</a></li>
+<li><a href="https://github.com/danielnechtan/gophernicus">https:&#47;&#47;github.com&#47;danielnechtan&#47;gophernicus</a></li>
+<li><a href="https://github.com/danielnechtan/gophernicus/blob/master/INSTALL.openbsd">INSTALL.openbsd</a></li>
 </ul>
 
 <p><img src="/gopher-tls.png" alt="Gophernicus+TLS" /></p>
@@ -620,10 +620,10 @@ $ gopher gopher:&#47;&#47;localhost:10070
 <guid>/articles/openbsd_assembly.html</guid>
 <link>/articles/openbsd_assembly.html</link>
 <pubDate>Thu, 15 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>Assembly language on OpenBSD amd64+arm64</title>
 <description><![CDATA[
 
-<h4 id="Assembly%20language%20on%20OpenBSD%20amd64+arm64">Assembly language on OpenBSD amd64+arm64</h4>
+<h1 id="Assembly%20language%20on%20OpenBSD%20amd64+arm64">Assembly language on OpenBSD amd64+arm64</h1>
 
 <p>This is a short introduction to assembly language programming on OpenBSD&#47;amd64+arm64.  Because of security features in the kernel, I have had to rethink a series of tutorials covering Aarch64 assembly language on OpenBSD, and therefore this will serve as a placeholder-cum-reminder.</p>
 
@@ -853,10 +853,10 @@ $ echo $?
 <guid>/articles/openbsd_crosscompiling_arm64.html</guid>
 <link>/articles/openbsd_crosscompiling_arm64.html</link>
 <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>Cross-compiling for OpenBSD&#47;arm64</title>
 <description><![CDATA[
 
-<h4 id="Cross-compiling%20for%20OpenBSD&amp;#47;arm64">Cross-compiling for OpenBSD&#47;arm64</h4>
+<h1 id="Cross-compiling%20for%20OpenBSD&amp;#47;arm64">Cross-compiling for OpenBSD&#47;arm64</h1>
 
 <p>Following on from <a href="https://cryogenix.net/OpenBSD_arm64_qemu.html">OpenBSD&#47;arm64 on QEMU</a>, it&#8217;s not always practical to compile userland software or a new kernel on some systems, particularly small SoCs with limited space and memory - or indeed QEMU, in fear of melting your CPU. </p>
 
@@ -976,10 +976,10 @@ Machine:                           AArch64
 <guid>/articles/openbsd_arm64_qemu.html</guid>
 <link>/articles/openbsd_arm64_qemu.html</link>
 <pubDate>Tue, 13 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>OpenBSD&#47;arm64 on QEMU with networking</title>
 <description><![CDATA[
 
-<h4 id="OpenBSD&amp;#47;arm64%20on%20QEMU%20with%20networking">OpenBSD&#47;arm64 on QEMU with networking</h4>
+<h1 id="OpenBSD&amp;#47;arm64%20on%20QEMU%20with%20networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
 
 <p>With the increasing popularity of ARM64&#47;AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu&#8217;s move away from SPARC64 supercomputers, there hasn&#8217;t been a better time to get started with learning this architecture.</p>
 
@@ -1105,10 +1105,10 @@ cc -dumpmachine: aarch64-unknown-openbsd6.4
 <guid>/articles/RET_level1.html</guid>
 <link>/articles/RET_level1.html</link>
 <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>Reverse Engineering Tutorial: level1 - What&#8217;s the password?</title>
 <description><![CDATA[
 
-<h4 id="Reverse%20Engineering%20Tutorial:%20level1%20-%20What&amp;#8217;s%20the%20password?">Reverse Engineering Tutorial: level1 - What&#8217;s the password?</h4>
+<h1 id="Reverse%20Engineering%20Tutorial:%20level1%20-%20What&amp;#8217;s%20the%20password?">Reverse Engineering Tutorial: level1 - What&#8217;s the password?</h1>
 
 <p>Welcome to level1 of the Reverse Engineering Tutorial.  I will be using OpenBSD 6.4&#47;amd64 to demonstrate one way to solve level1 of the 
 Cryogenix wargame (yet TBA).</p>
@@ -1379,10 +1379,10 @@ Secret stuff
 <guid>/articles/openbsd_ncsa_mosaic.html</guid>
 <link>/articles/openbsd_ncsa_mosaic.html</link>
 <pubDate>Sat, 03 Nov 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>NCSA Mosaic 2.7 on OpenBSD</title>
 <description><![CDATA[
 
-<h4 id="NCSA%20Mosaic%202.7%20on%20OpenBSD">NCSA Mosaic 2.7 on OpenBSD</h4>
+<h1 id="NCSA%20Mosaic%202.7%20on%20OpenBSD">NCSA Mosaic 2.7 on OpenBSD</h1>
 
 <p>A classic web browser, now available on OpenBSD</p>
 
@@ -1407,10 +1407,10 @@ $ src&#47;Mosaic gopher:&#47;&#47;gopher.club
 <guid>/articles/openbsd_nameserver.html</guid>
 <link>/articles/openbsd_nameserver.html</link>
 <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
-<title></title>
+<title>OpenBSD as an authoritative DNS nameserver</title>
 <description><![CDATA[
 
-<h4 id="OpenBSD%20as%20an%20authoritative%20DNS%20nameserver">OpenBSD as an authoritative DNS nameserver</h4>
+<h1 id="OpenBSD%20as%20an%20authoritative%20DNS%20nameserver">OpenBSD as an authoritative DNS nameserver</h1>
 
 <p>Configuring NSD on OpenBSD as an authoritative DNS nameserver</p>
 
@@ -1627,10 +1627,10 @@ DS 28892 7 2 FA1B31305013E427A8DAC5318FBF6FFCDBFDA94309DDF12EBDCA101A 5E07167D f
 <guid>/articles/arduino_433mhz.html</guid>
 <link>/articles/arduino_433mhz.html</link>
 <pubDate>Thu, 01 Aug 2013 00:00:00 +0100</pubDate>
-<title></title>
+<title>433 Mhz vehicle unlocking with Arduino Duo</title>
 <description><![CDATA[
 
-<h4 id="433%20Mhz%20vehicle%20unlocking%20with%20Arduino%20Duo">433 Mhz vehicle unlocking with Arduino Duo</h4>
+<h1 id="433%20Mhz%20vehicle%20unlocking%20with%20Arduino%20Duo">433 Mhz vehicle unlocking with Arduino Duo</h1>
 
 <p>Having only one key fob for the van is anxiety-inducing in case it fails, so I decided to build a replacement with an Arduino&#47;ATMega and a 433Mhz transceiver module.</p>
 
@@ -1729,10 +1729,10 @@ void loop() {
 <guid>/articles/alphaserver_es40_emu.html</guid>
 <link>/articles/alphaserver_es40_emu.html</link>
 <pubDate>Mon, 02 Feb 2009 00:00:00 +0000</pubDate>
-<title></title>
+<title>AlphaServer ES40 Emulation</title>
 <description><![CDATA[
 
-<h4 id="AlphaServer%20ES40%20Emulation">AlphaServer ES40 Emulation</h4>
+<h1 id="AlphaServer%20ES40%20Emulation">AlphaServer ES40 Emulation</h1>
 
 <p>Emulating an AlphaServer ES40 for running Tru64 UNIX or OpenVMS</p>
 
@@ -2133,10 +2133,10 @@ Enter CHOICE or ? for help: (1&#47;2&#47;3&#47;4&#47;5&#47;6&#47;7&#47;8&#47;9&#
 <guid>/articles/openvms_simh_2.html</guid>
 <link>/articles/openvms_simh_2.html</link>
 <pubDate>Mon, 12 Jan 2009 00:00:00 +0000</pubDate>
-<title></title>
+<title>OpenVMS and SIMH - Part 2</title>
 <description><![CDATA[
 
-<h4 id="OpenVMS%20and%20SIMH%20-%20Part%202">OpenVMS and SIMH - Part 2</h4>
+<h1 id="OpenVMS%20and%20SIMH%20-%20Part%202">OpenVMS and SIMH - Part 2</h1>
 
 <p>Running OpenVMS on the SIMH VAX simulator</p>
 
@@ -3039,10 +3039,10 @@ OpenVMS V7.3  on node CGXVAX  14-JAN-2009 20:28:15.61  Uptime  1 21:25:15
 <guid>/articles/openvms_simh_1.html</guid>
 <link>/articles/openvms_simh_1.html</link>
 <pubDate>Sat, 10 Jan 2009 00:00:00 +0000</pubDate>
-<title></title>
+<title>OpenVMS and SIMH - Part 1</title>
 <description><![CDATA[
 
-<h4 id="OpenVMS%20and%20SIMH%20-%20Part%201">OpenVMS and SIMH - Part 1</h4>
+<h1 id="OpenVMS%20and%20SIMH%20-%20Part%201">OpenVMS and SIMH - Part 1</h1>
 
 <p>Running OpenVMS on the SIMH VAX simulator</p>
 
@@ -3970,10 +3970,10 @@ Begin Startup...
 <guid>/articles/shellcoding_on_freebsd.html</guid>
 <link>/articles/shellcoding_on_freebsd.html</link>
 <pubDate>Tue, 01 Jun 2004 00:00:00 +0100</pubDate>
-<title></title>
+<title>Beginners Guide To x86 Shellcoding on FreeBSD</title>
 <description><![CDATA[
 
-<h4 id="Beginners%20Guide%20To%20x86%20Shellcoding%20on%20FreeBSD">Beginners Guide To x86 Shellcoding on FreeBSD</h4>
+<h1 id="Beginners%20Guide%20To%20x86%20Shellcoding%20on%20FreeBSD">Beginners Guide To x86 Shellcoding on FreeBSD</h1>
 
 <p>A guide by Xwyzard on writing x86-32 shellcode on FreeBSD</p>
 

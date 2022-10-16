@@ -1,4 +1,4 @@
-#### Assembly language on OpenBSD amd64+arm64
+# Assembly language on OpenBSD amd64+arm64
 
 This is a short introduction to assembly language programming on OpenBSD/amd64+arm64.  Because of security features in the kernel, I have had to rethink a series of tutorials covering Aarch64 assembly language on OpenBSD, and therefore this will serve as a placeholder-cum-reminder.
 

@@ -1,4 +1,4 @@
-#### NCSA Mosaic 2.7 on OpenBSD
+# NCSA Mosaic 2.7 on OpenBSD
 A classic web browser, now available on OpenBSD
 
 
