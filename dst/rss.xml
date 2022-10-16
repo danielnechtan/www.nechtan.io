@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<atom:link href="" rel="self" type="application/rss+xml" />
+<title>Nechtan</title>
+<description>beep, beep</description>
+<link>/</link>
+<lastBuildDate>Sun, 16 Oct 2022 00:00:00 +0100</lastBuildDate>
+
+<item>
+<guid>/</guid>
+<link>/</link>
+<pubDate>Sun, 16 Oct 2022 00:00:00 +0100</pubDate>
+<title></title>
+<description><![CDATA[
+
+<p>beep, beep</p>
+
+]]></description>
+</item>
+</channel></rss>
