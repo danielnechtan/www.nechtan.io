@@ -162,13 +162,23 @@ You should increase datasize-cur depending on your total memory. 4096M works rel
 
 #### Kernel settings ####
 
-Here are some recommended values (based on this system) for a desktop to add to /etc/sysctl.conf(5):
+Here are some recommended sysctl(2) values (based on this system) for a desktop to add to /etc/sysctl.conf(5):
 
     cat <<EOF > /etc/sysctl.conf
     # Shared memory
-    kern.shminfo.shmall=3145728
-    kern.shminfo.shmmax=2147483647
+
+    # Max total shared memory allowed (in pages).
+    # 2097152 * 4096 = 8589934592 (8Gb) 
+    kern.shminfo.shmall=2097152
+
+    # Max shared memory segment size (in bytes)
+    # This should be half of shared memory (4Gb)
+    kern.shminfo.shmmax=4294967296
+
+    # Max number of shared memory identifiers
     kern.shminfo.shmmni=1024
+
+    # Max number of shared memory segments per process
     kern.shminfo.shmseg=1024
 
     # Semaphores
@@ -182,6 +192,7 @@ Here are some recommended values (based on this system) for a desktop to add to 
     kern.maxvnodes=262144
     kern.somaxconn=2048
     EOF
+
     
 #### X Session
 

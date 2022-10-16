@@ -202,13 +202,23 @@ e123eac9a466a7c7.e &#47;var ffs rw,noatime,nodev,nosuid 1 2
 
 <h4 id="Kernel%20settings">Kernel settings</h4>
 
-<p>Here are some recommended values (based on this system) for a desktop to add to &#47;etc&#47;sysctl.conf(5):</p>
+<p>Here are some recommended sysctl(2) values (based on this system) for a desktop to add to &#47;etc&#47;sysctl.conf(5):</p>
 
 <pre><code>cat &#60;&#60;EOF &#62; &#47;etc&#47;sysctl.conf
 # Shared memory
-kern.shminfo.shmall=3145728
-kern.shminfo.shmmax=2147483647
+
+# Max total shared memory allowed (in pages).
+# 2097152 * 4096 = 8589934592 (8Gb) 
+kern.shminfo.shmall=2097152
+
+# Max shared memory segment size (in bytes)
+# This should be half of shared memory (4Gb)
+kern.shminfo.shmmax=4294967296
+
+# Max number of shared memory identifiers
 kern.shminfo.shmmni=1024
+
+# Max number of shared memory segments per process
 kern.shminfo.shmseg=1024
 
 # Semaphores
