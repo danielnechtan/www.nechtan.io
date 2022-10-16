@@ -20,6 +20,6 @@
 * Oracle 10g XE on Linux with PHP and Java - Part 1 (9 Mar 2006)
 * Oracle 10g XE on Linux with PHP and Java - Part 2 (10 Mar 2006)
 * AmigaOS on x86 (Amithlon) (21 April 2005)
-* [x86_32 Shellcoding on FreeBSD](shellcoding_on_freebsd.html "2004-06-01") (c. 2004)
+* [x86_32 Shellcoding on FreeBSD](articles/shellcoding_on_freebsd.html "2004-06-01") (c. 2004)
 * Simple Reversing with OllyDBG (11 May 2004)
 * Manually Unpacking UPX (2 May 2004)
