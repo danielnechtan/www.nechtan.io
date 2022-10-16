@@ -11,10 +11,10 @@
 <guid>/articles/openbsd_minimalist_desktop.html</guid>
 <link>/articles/openbsd_minimalist_desktop.html</link>
 <pubDate>Sun, 16 Oct 2022 00:00:00 +0100</pubDate>
-<title></title>
+<title>OpenBSD Minimalist Desktop</title>
 <description><![CDATA[
 
-<h2 id="OpenBSD%20Minimalist%20Desktop">OpenBSD Minimalist Desktop</h2>
+<h1 id="OpenBSD%20Minimalist%20Desktop">OpenBSD Minimalist Desktop</h1>
 
 <p>It has been a few years since I last wrote about OpenBSD on the desktop (or laptop), and support for modern hardware has continued to improve.  In fact, I even run OpenBSD on an Apple Macbook Pro M1&#47;Silicon now!</p>
 

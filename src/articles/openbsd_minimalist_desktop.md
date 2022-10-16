@@ -1,4 +1,4 @@
-## OpenBSD Minimalist Desktop
+# OpenBSD Minimalist Desktop
 
 It has been a few years since I last wrote about OpenBSD on the desktop (or laptop), and support for modern hardware has continued to improve.  In fact, I even run OpenBSD on an Apple Macbook Pro M1/Silicon now!
 
