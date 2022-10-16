@@ -10,7 +10,7 @@ Hardware: Lenovo Thinkpad X280 (8GB RAM / 256GB NVMe / Intel Wifi)
 
 [![OpenBSD+cwm+xterm+tmux](newdesktop.jpg)](newdesktop.jpg)
 
-Grab install71.img from https://cdn.openbsd.org/pub/OpenBSD/7.1/ and write it to a USB dongle. On a Unix-like operating system dd can be used to accomplish this:
+Grab install71.img from https://cdn.openbsd.org/pub/OpenBSD/7.1/amd64/ and write it to a USB flash disk. On a Unix-like operating system dd can be used to accomplish this:
 
     dd if=install71.img of=/dev/sdb bs=1M conv=fsync
     
@@ -306,7 +306,7 @@ A minimal ~/.cwmrc configuration:
     command newsboat        newsboat
     command keepassxc       keepassxc 
 
-    bind-key M-Return       terminal
+    bind-key 4-Return       terminal
     bind-key CM-Return      "xterm -e top"
     bind-key C4-equal       window-vmaximize
     bind-key C4S-equal      window-hmaximize
@@ -323,9 +323,14 @@ A minimal ~/.cwmrc configuration:
 
     bind-key 4-b            "xbacklight -dec 10 -time 0"
     bind-key 4S-b           "xbacklight -inc 10 -time 0"
+    
+cwm(1) can take some getting used to if you are more accustomed to a traditional desktop environment but with a little effort to learn to use it efficiently you will find it increases your productivity and decreases your dependence on the mouse or trackpad.
 
+In the above example, pressing WINDOWS+Return will spawn a terminal. 
 
-If you have performance issues in Firefox, in the navigation bar type: about:config <enter> then search for an enable this option:
+#### Miscellaneous
+
+If you have performance issues in Firefox, in the navigation bar type: about:config *enter* then search for and enable this option:
 
     layers.acceleration.force-enable=true
 
