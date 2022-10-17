@@ -2,7 +2,7 @@
 
 It has been a few years since I last wrote about OpenBSD on the desktop (or laptop), and support for modern hardware has continued to improve.  In fact, I even run OpenBSD on an Apple Macbook Pro M1/Silicon now!
 
-I was going to update the previous article but as my own habits have changed quite a lot and are more in line with the spirit of the OpenBSD base it seemed like a new article was warranted. I may update this article in the future with 'rice' for cwm(1) (including Xresources, etc) but at present this is a basic guide to getting a generic desktop system up and running. 
+I was going to update the previous article but as my own habits have changed quite a lot and are more in line with the spirit of the OpenBSD base, it seemed like a new article was warranted. I may update this article in the future with 'rice' for cwm(1) (including Xresources, etc) but at present this is a basic guide to getting a generic desktop system up and running. 
 
 It is customary when mentioning any command, file, or topic that has a manual page to include which manual it's included in.  So when you see `cwm(1)` - I am referring to cwm in the General Commands manual, which is manual 1.  To read that manual page, type: man 1 cwm (though `man cwm` will default to cwm(1)).
  
@@ -37,9 +37,7 @@ The default disklabel(8) layout is recommended for most situations, however, if 
 
 ### Firmware and networking ###
 
-OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB
- adapter or Lenovo's adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw
-_update(8) if you configure your ethernet adapter correctly.
+OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB adapter or Lenovo's adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw_update(8) on first boot if your network is configured correctly.
 
 On another computer with network access, format a USB disk as FAT and copy everything from http://firmware.openbsd.org/firmware/7.2/ onto it. I find the easiest way to grab these files on a non-OpenBSD system is to install and use lftp:
 
@@ -346,4 +344,12 @@ If you have performance issues in Firefox, in the navigation bar type: about:con
 
     layers.acceleration.force-enable=true
 
+
+GTK Annoyance - keyboard shortcuts don't work as expected (CTRL-A to select all, for example). I have borrowed this from [Cullum Smith](https://www.c0ffee.net/blog/openbsd-on-a-laptop/) as I had no idea why it was happening - I don't use emacs, I like CTRL-A to work normally in GTK apps, it feels natural!
+
+Create ~/.config/gtk-3.0/settings.ini and add the lines below to it. Check out the other options available from [Cullum's post](https://www.c0ffee.net/blog/openbsd-on-a-laptop). 
+
+    [Settings]
+    gtk-key-theme-name=Default
+    
 
