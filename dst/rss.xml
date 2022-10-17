@@ -1400,7 +1400,7 @@ Secret stuff
 
 <p>Now using Cameron Kaiser&#8217;s patches and alternative (&#8216;modern&#8217;) renderer.  This needs a serious code audit before even considering submitting to ports.</p>
 
-<pre><code>$ git clone https:&#47;&#47;github.com&#47;0x16h&#47;mosaic-CK-openbsd
+<pre><code>$ git clone https:&#47;&#47;github.com&#47;danielnechtan&#47;mosaic-CK-openbsd
 $ doas pkg_add motif
 $ cd mosaic-CK-openbsd &#38;&#38; make openbsd
 $ src&#47;Mosaic gopher:&#47;&#47;gopher.club

@@ -6,7 +6,7 @@ Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy 
 
 Now using Cameron Kaiser's patches and alternative ('modern') renderer.  This needs a serious code audit before even considering submitting to ports.
 
-    $ git clone https://github.com/0x16h/mosaic-CK-openbsd
+    $ git clone https://github.com/danielnechtan/mosaic-CK-openbsd
     $ doas pkg_add motif
     $ cd mosaic-CK-openbsd && make openbsd
     $ src/Mosaic gopher://gopher.club
