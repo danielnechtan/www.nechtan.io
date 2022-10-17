@@ -288,7 +288,9 @@ or by adding the following to .xsession:
       eval `dbus-launch --sh-syntax --exit-with-x11`
     fi
     
+NOTE: jmclnx [made a point](https://news.ycombinator.com/item?id=33237968) about dbus on Hacker News - he actually avoids running it and Firefox still runs fine.  If you want to try this out instead of the GTK IPC bloat, add the following to your .xsession:
 
+    export DBUS_SESSION_BUS_ADDRESS="no" 
 
 #### Xresources ####
 

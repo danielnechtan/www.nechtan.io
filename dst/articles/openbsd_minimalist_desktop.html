@@ -332,6 +332,11 @@ $ doas reboot
 fi
 </code></pre>
 
+<p>NOTE: jmclnx <a href="https://news.ycombinator.com/item?id=33237968">made a point</a> about dbus on Hacker News - he actually avoids running it and Firefox still runs fine.  If you want to try this out instead of the GTK IPC bloat, add the following to your .xsession:</p>
+
+<pre><code>export DBUS_SESSION_BUS_ADDRESS="no" 
+</code></pre>
+
 <h4 id="Xresources">Xresources</h4>
 
 <p>You could write a book, or at least a pamphlet, on styling X(7).  <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Cullum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
