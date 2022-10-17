@@ -4,13 +4,15 @@ Born in 1984, I grew up in the golden age of hacker and demoscene culture and sp
 
 We never had internet or even BBS access at home so I spent most of my evenings after school at the local college where I enrolled in a Pascal course; the Windows computers there had Bardon WinU installed (a kiosk system used to abstract and prevent access to much of the operating system) but it didn't take long before I worked out how to gain access to regedit.exe through Microsoft Word and decode the admin passwords, much to the annoyance of the SysAdmins. Simon, one of the tutors there, and many of the students would ask me to unlock their computers -- it seemed counterproductive for a college to be teaching people how to use computers while not giving them access to the operating systems they would be using. 
 
-By the time I was old enough to enroll full time at the college, I was Public Enemy Number 1, and was ultimately used as a scapegoat for anything that happened through the incompetence of the SysAdmins. This included being blamed for the creation and distribution of the [trojan.win32.ILOVEYOU](https://www.kaspersky.com/blog/cybersecurity-history-iloveyou/45001/) worm.  This resulted in me losing my job and place at the college (it was an apprenticeship in Administration).
+By the time I was old enough to enrol full time at the college, I was Public Enemy Number 1, and was ultimately used as a scapegoat for anything that happened through the incompetence of the SysAdmins. This included being blamed for the creation and distribution of the [trojan.win32.ILOVEYOU](https://www.kaspersky.com/blog/cybersecurity-history-iloveyou/45001/) worm.  This resulted in me losing my job and place at the college (it was an apprenticeship in Administration).
 
 I soon found another apprenticeship, this time with the local council's environmental health service - again in Administration.  I lasted longer here, but I really wasn't built for the mundane life of data input and filing - as much as I love it. It didn't take long before I was exploring their Novell Netware network and studying it intensely.  I left some code listings locked in my desk drawer which the lead Administrator found and requested my apprenticeship there be terminated; although I was sad to be let go, at least this time it was my fault.
 
 My first proper job was at a local web hosting & design company when I was 17/18. They used Windows NT 4 and 2000 servers, and ASP - it wasn't ideal but it gave me some real-life experience and I did manage to convince them to allow me to migrate the office server to GNU/Linux!
 
 Throughout this time and beyond I was an active member of various groups and communities, CyberArmy being the longest from c. 1998 until 2010.
+
+Big shout out to #c4n, Lz0, TiTAN, RISCISO, Hoodlum, RST, PC, PDX, FLT, SKIDROW, h0no, #vuln, myg0t, PN, GNAA, Nectarine radio, SAC, and anyone I've missed - active or inactive. 
 
 #### Early computer acquisition timeline
 
