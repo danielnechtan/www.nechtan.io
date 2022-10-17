@@ -286,7 +286,7 @@ If you are not using xfce, then you will need to enable messagebus/dbus with:
 
 or by adding the following to .xsession:
 
-    if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SSEEION_BUS_ADDRESS}" ]; then
+    if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
       eval `dbus-launch --sh-syntax --exit-with-x11`
     fi
     

@@ -313,7 +313,7 @@ $ doas reboot
 
 <p>or by adding the following to .xsession:</p>
 
-<pre><code>if [ -x &#47;usr&#47;local&#47;bin&#47;dbus-launch -a -z "${DBUS_SSEEION_BUS_ADDRESS}" ]; then
+<pre><code>if [ -x &#47;usr&#47;local&#47;bin&#47;dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
   eval `dbus-launch --sh-syntax --exit-with-x11`
 fi
 </code></pre>
