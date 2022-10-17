@@ -294,7 +294,7 @@ or by adding the following to .xsession:
 
 #### Xresources ####
 
-You could write a book, or at least a pamphlet, on styling X(7).  [Callum Smith](https://www.c0ffee.net/blog/openbsd-on-a-laptop/) has some more complete configs, but the following ~/.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):
+You could write a book, or at least a pamphlet, on styling X(7).  [Cullum Smith](https://www.c0ffee.net/blog/openbsd-on-a-laptop/) has some more complete configs, but the following ~/.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):
 
     *visualBell: True 
     xterm.loginShell: true 

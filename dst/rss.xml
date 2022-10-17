@@ -3,7 +3,7 @@
 <channel>
 <atom:link href="" rel="self" type="application/rss+xml" />
 <title>Nechtan</title>
-<description></description>
+<description>Born in 1984, I grew up in the golden age of hacker and demoscene culture and spent much of my childhood tracking MODules, creating demoscene-esque art, programming in BASIC &#38; Assembly, and disassembling Amiga ROM code.</description>
 <link>/</link>
 <lastBuildDate>Mon, 17 Oct 2022 00:00:00 +0100</lastBuildDate>
 
@@ -320,7 +320,7 @@ fi
 
 <h4 id="Xresources">Xresources</h4>
 
-<p>You could write a book, or at least a pamphlet, on styling X(7).  <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Callum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
+<p>You could write a book, or at least a pamphlet, on styling X(7).  <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Cullum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
 
 <pre><code>*visualBell: True 
 xterm.loginShell: true 

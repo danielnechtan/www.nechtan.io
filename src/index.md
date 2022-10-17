@@ -1,3 +1,25 @@
+### Early Bio ###
+
+Born in 1984, I grew up in the golden age of hacker and demoscene culture and spent much of my childhood tracking MODules, creating demoscene-esque art, programming in BASIC & Assembly, and disassembling Amiga ROM code.
+
+We never had internet or even BBS access at home so I spent most of my evenings at the local college where I enrolled in a Pascal course; the Windows computers there had Bardon WinU installed which was a kiosk system to prevent access to much of the operating system.  It didn't take long before I worked out how to gain access to regedit.exe through Microsoft Word and decode the admin passwords, much to the annoyance of the SysAdmins.  
+
+By the time I was old enough to enroll full time at the college, I was Public Enemy Number 1, and was ultimately used as a scapegoat for anything that happened through the incompetence of the SysAdmins - including being blamed for the creation and distribution of the ILOVEYOU worm.  This resulted in me losing my job and place at the college (it was an apprenticeship in Administration).
+
+I soon found another apprenticeship, this time with the local council's environmental health service - again in Administration.  I lasted longer here, but I really wasn't built for the mundane life of data input and filing - as much as I love it. It didn't take long before I was exploring their Novell Netware network and studying it intensely.  I left some code listings locked in my desk drawer which the lead Administrator found and requested my apprenticeship there be terminated; although I was sad to be let go, at least this time it was my fault.
+
+My first proper job was at a local web hosting & design company. They used Windows NT 4 and 2000 servers, and ASP - it wasn't ideal but it gave me some real-life experience.  I did manage to migrate the office server to Linux. 
+
+#### Early computer acquisition timeline
+
+* Sinclair ZX Spectrum
+* Commodore 64
+* Atari ST
+* Commodore Amiga 600, 1200
+* IBM 8086
+* Patriot Cyrix M-II 333Mhz 80686 
+
+
 ### Projects ###
 
 ### Articles ###
