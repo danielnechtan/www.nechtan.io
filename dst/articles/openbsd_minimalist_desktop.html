@@ -202,32 +202,9 @@ e123eac9a466a7c7.e &#47;var ffs rw,noatime,nodev,nosuid 1 2
 <p>Here are some recommended sysctl(2) values (based on this system) for a desktop to add to &#47;etc&#47;sysctl.conf(5):</p>
 
 <pre><code>cat &#60;&#60;EOF &#62; &#47;etc&#47;sysctl.conf
-# Shared memory
-
-# Max total shared memory allowed (in pages).
-# 2097152 * 4096 = 8589934592 (8Gb) 
-kern.shminfo.shmall=2097152
-
-# Max shared memory segment size (in bytes)
-# This should be half of shared memory (4Gb)
-kern.shminfo.shmmax=4294967296
-
-# Max number of shared memory identifiers
-kern.shminfo.shmmni=1024
-
-# Max number of shared memory segments per process
-kern.shminfo.shmseg=1024
-
-# Semaphores
-kern.seminfo.semmns=4096
-kern.seminfo.semmni=1024
-
-kern.maxproc=32768
+kern.maxproc=4096
 kern.maxthread=4096
-kern.maxfiles=65535
-kern.bufcachepercent=90
-kern.maxvnodes=262144
-kern.somaxconn=2048
+kern.maxfiles=32768
 EOF
 </code></pre>
 
