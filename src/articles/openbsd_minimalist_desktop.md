@@ -8,7 +8,7 @@ It is customary when mentioning any command, file, or topic that has a manual pa
  
 Hardware: Lenovo Thinkpad X280 (8GB RAM / 256GB NVMe / Intel Wifi)
 
-[![OpenBSD+cwm+xterm+tmux](newdesktop.jpg)](newdesktop.jpg)
+[![OpenBSD](neofetch.png)](neofetch.png)
 
 Grab install71.img from https://cdn.openbsd.org/pub/OpenBSD/7.1/amd64/ and write it to a USB flash disk. On a Unix-like operating system dd can be used to accomplish this:
 
