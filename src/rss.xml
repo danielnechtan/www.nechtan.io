@@ -5,7 +5,7 @@
 <title>Nechtan</title>
 <description>Born in 1984, I grew up in the golden age of hacker and demoscene culture and spent much of my childhood tracking MODules, creating demoscene-esque art, programming in BASIC &#38; Assembly, and disassembling Amiga ROM code.</description>
 <link>/</link>
-<lastBuildDate>Mon, 17 Oct 2022 00:00:00 +0100</lastBuildDate>
+<lastBuildDate>Tue, 18 Oct 2022 00:00:00 +0100</lastBuildDate>
 
 <item>
 <guid>/articles/openbsd_minimalist_desktop.html</guid>
@@ -63,6 +63,8 @@ lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget *
 </code></pre>
 
 <p>Unmount the disk and keep it for the first boot after installation.</p>
+
+<p><a href="/newscreen.png"><img src="/newscreen.png" alt="OpenBSD+cwm+xterm+tmux+cplay+weechat" /></a></p>
 
 <h3 id="First%20boot">First boot</h3>
 
@@ -268,10 +270,12 @@ $ doas reboot
     keepassxc \
     weechat \
     picom \ 
-    mupdf \
-    newsboat \
-    neomutt \
-    vim
+        mupdf \
+        weechat \
+        cplay \
+        newsboat \
+        neomutt \
+        vim
 </code></pre>
 
 <p>If you would prefer a more familiar desktop environment, xfce can be installed:</p>
@@ -362,6 +366,8 @@ bind-key 4S-b           "xbacklight -inc 10 -time 0"
 <pre><code>[Settings]
 gtk-key-theme-name=Default
 </code></pre>
+
+<p><a href="/productivity.png"><img src="/productivity.png" alt="OpenBSD+cwm productivity for the HN moaners" /></a></p>
 
 ]]></description>
 </item>

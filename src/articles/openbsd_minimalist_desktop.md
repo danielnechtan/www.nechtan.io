@@ -47,6 +47,7 @@ On another computer with network access, format a USB disk as FAT and copy every
    
 Unmount the disk and keep it for the first boot after installation.
 
+[![OpenBSD+cwm+xterm+tmux+cplay+weechat](newscreen.png)](newscreen.png)
 
 ### First boot ###
 
@@ -244,10 +245,12 @@ Let's install some packages, adjusting to your own taste:
 		keepassxc \
 		weechat \
 		picom \	
-   		mupdf \
-		newsboat \
-		neomutt \
-		vim
+       		mupdf \
+    		weechat \
+    		cplay \
+    		newsboat \
+    		neomutt \
+    		vim
 
 If you would prefer a more familiar desktop environment, xfce can be installed:
 
@@ -332,3 +335,5 @@ Create ~/.config/gtk-3.0/settings.ini and add the lines below to it. Check out t
     gtk-key-theme-name=Default
     
 
+
+[![OpenBSD+cwm productivity for the HN moaners](productivity.png)](productivity.png)
