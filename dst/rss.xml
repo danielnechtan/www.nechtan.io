@@ -5,7 +5,7 @@
 <title>Nechtan</title>
 <description>Born in 1984, I grew up in the golden age of hacker and demoscene culture and spent much of my childhood tracking MODules, creating demoscene-esque art, programming in BASIC &#38; Assembly, and disassembling Amiga ROM code.</description>
 <link>/</link>
-<lastBuildDate>Tue, 18 Oct 2022 00:00:00 +0100</lastBuildDate>
+<lastBuildDate>Wed, 19 Oct 2022 00:00:00 +0100</lastBuildDate>
 
 <item>
 <guid>/articles/openbsd_minimalist_desktop.html</guid>
@@ -14,24 +14,24 @@
 <title>OpenBSD Minimalist Desktop</title>
 <description><![CDATA[
 
-<h1 id="OpenBSD%20Minimalist%20Desktop">OpenBSD Minimalist Desktop</h1>
+<h1 id="openbsd-minimalist-desktop">OpenBSD Minimalist Desktop</h1>
 
-<p>It has been a few years since I last wrote about OpenBSD on the desktop (or laptop), and support for modern hardware has continued to improve.  In fact, I even run OpenBSD on an Apple Macbook Pro M1&#47;Silicon now!</p>
+<p>It has been a few years since I last wrote about OpenBSD on the desktop (or laptop), and support for modern hardware has continued to improve. In fact, I even run OpenBSD on an Apple Macbook Pro M1&#47;Silicon now!</p>
 
-<p>I was going to update the previous article but as my own habits have changed quite a lot and are more in line with the spirit of the OpenBSD base, it seemed like a new article was warranted. I may update this article in the future with &#8216;rice&#8217; for cwm(1) (including Xresources, etc) but at present this is a basic guide to getting a generic desktop system up and running. </p>
+<p>I was going to update the previous article but as my own habits have changed quite a lot and are more in line with the spirit of the OpenBSD base, it seemed like a new article was warranted. I may update this article in the future with &#8216;rice&#8217; for cwm(1) (including Xresources, etc) but at present this is a basic guide to getting a generic desktop system up and running.</p>
 
-<p>It is customary when mentioning any command, file, or topic that has a manual page to include which manual it&#8217;s included in.  So when you see <code>cwm(1)</code> - I am referring to cwm in the General Commands manual, which is manual 1.  To read that manual page, type: man 1 cwm (though <code>man cwm</code> will default to cwm(1)).</p>
+<p>It is customary when mentioning any command, file, or topic that has a manual page to include which manual it&#8217;s included in. So when you see <code>cwm(1)</code> - I am referring to cwm in the General Commands manual, which is manual 1. To read that manual page, type: man 1 cwm (though <code>man cwm</code> will default to cwm(1)).</p>
 
 <p>Hardware: Lenovo Thinkpad X280 (8GB RAM &#47; 256GB NVMe &#47; Intel Wifi)</p>
 
-<p><a href="/neofetch.png"><img src="/neofetch.png" alt="OpenBSD" /></a></p>
+<p><a href="/productivity.png"><img src="/productivity.png" alt="OpenBSD productivity" /></a></p>
 
 <p>Grab install71.img from https:&#47;&#47;cdn.openbsd.org&#47;pub&#47;OpenBSD&#47;7.1&#47;amd64&#47; and write it to a USB flash disk. On a Unix-like operating system dd can be used to accomplish this:</p>
 
 <pre><code>dd if=install71.img of=&#47;dev&#47;sdb bs=1M conv=fsync
 </code></pre>
 
-<p>When installing OpenBSD I always use softraid(8) CRYPTO to encrypt my system.  Instructions to do this are in the <a href="https://openbsd.org/faq/faq14.html#softraidFDE">OpenBSD FAQ</a>.</p>
+<p>When installing OpenBSD I always use softraid(8) CRYPTO to encrypt my system. Instructions to do this are in the <a href="https://openbsd.org/faq/faq14.html#softraidFDE">OpenBSD FAQ</a>.</p>
 
 <p>The default disklabel(8) layout is recommended for most situations, however, if you will be compiling a lot of ports you may want to edit the default layout to make more space in &#47;usr&#47;src and &#47;usr&#47;obj; here is what I ended up with:</p>
 
@@ -39,19 +39,19 @@
 #                size           offset  fstype [fsize bsize   cpg]
   a:             1.0G             1024  4.2BSD   2048 16384 12960 # &#47;
   b:             8.1G          2098176    swap                    # none
-  c:           238.5G                0  unused                    
+  c:           238.5G                0  unused
   d:            16.0G         19086080  4.2BSD   2048 16384 12960 # &#47;tmp
   e:            20.0G         52644992  4.2BSD   2048 16384 12960 # &#47;var
   f:            10.0G         94590720  4.2BSD   2048 16384 12960 # &#47;usr
   g:             4.0G        115571584  4.2BSD   2048 16384 12960 # &#47;usr&#47;X11R6
   h:            30.0G        123973600  4.2BSD   2048 16384 12960 # &#47;usr&#47;local
-  i:             0.0G               64   MSDOS                    
+  i:             0.0G               64   MSDOS
   j:            12.0G        186900192  4.2BSD   2048 16384 12960 # &#47;usr&#47;src
   k:            16.0G        212074048  4.2BSD   2048 16384 12960 # &#47;usr&#47;obj
   l:           121.3G        245633824  4.2BSD   2048 16384 12960 # &#47;home
 </code></pre>
 
-<h3 id="Firmware%20and%20networking">Firmware and networking</h3>
+<h3 id="firmware-and-networking">Firmware and networking</h3>
 
 <p>OpenBSD detects the iwm(8) 802.11x wireless device but will need the firmware for it to be functional. If you have a supported USB adapter or Lenovo&#8217;s adapter cable for the built-in em(8) ethernet device you can skip the following step as OpenBSD will run fw_update(8) on first boot if your network is configured correctly.</p>
 
@@ -59,16 +59,16 @@
 
 <pre><code>$ lftp http:&#47;&#47;firmware.openbsd.org&#47;firmware&#47;7.2&#47;
 cd ok, cwd=&#47;firmware&#47;7.2
-lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget * 
+lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget *
 </code></pre>
 
 <p>Unmount the disk and keep it for the first boot after installation.</p>
 
-<p><a href="/newscreen.png"><img src="/newscreen.png" alt="OpenBSD+cwm+xterm+tmux+cplay+weechat" /></a></p>
+<p><a href="/chat.png"><img src="/chat.png" alt="OpenBSD+cwm+xterm+tmux+cplay+weechat" /></a></p>
 
-<h3 id="First%20boot">First boot</h3>
+<h3 id="first-boot">First boot</h3>
 
-<h4 id="Firmware">Firmware</h4>
+<h4 id="firmware">Firmware</h4>
 
 <p>Insert your USB disk with the firmware, mount it, copy the firmware over and install it:</p>
 
@@ -80,7 +80,7 @@ lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget *
 # fw_update -p &#47;home&#47;firmware&#47;
 </code></pre>
 
-<h4 id="Connecting%20to%20Wifi">Connecting to Wifi</h4>
+<h4 id="connecting-to-wifi">Connecting to Wifi</h4>
 
 <p>If you skipped setting up wifi during installation, you can do so now by editing hostname.if(5), where <code>if</code> is your wifi interface. Running ifconfig(8) can help you identify the interface. For Intel 7000-9000 based cards such as on this Thinkpad, the device is iwm0.</p>
 
@@ -90,14 +90,14 @@ lftp firmware.openbsd.org:&#47;firmware&#47;7.2&#62; mget *
 inet autoconf
 </code></pre>
 
-<p>That&#8217;s it. When you next reboot it will connect automatically.  If you ever need to manually reset your network interfaces and bring them back up, see netstart(8). For example:</p>
+<p>That&#8217;s it. When you next reboot it will connect automatically. If you ever need to manually reset your network interfaces and bring them back up, see netstart(8). For example:</p>
 
 <pre><code>sh &#47;etc&#47;netstart iwm0
 </code></pre>
 
-<h4 id="Performance">Performance</h4>
+<h4 id="performance">Performance</h4>
 
-<p>It is recommended to disable the updating of atime (access time) on filesystems with heavy usage such as laptops or NNTP servers where disk performance is more important than maintaining accurate file access times. </p>
+<p>It is recommended to disable the updating of atime (access time) on filesystems with heavy usage such as laptops or NNTP servers where disk performance is more important than maintaining accurate file access times.</p>
 
 <p>For user data (&#47;home), we can increase performance by using the softdep (soft dependencies) mount option which prevents filesystem metadata from being written immediately. This isn&#8217;t recommended for critical filesystem mountpoints where it can cause problems but for user data it is generally safe.</p>
 
@@ -129,15 +129,15 @@ e123eac9a466a7c7.e &#47;var ffs rw,noatime,nodev,nosuid 1 2
 # rcctl set apmd flags -A
 </code></pre>
 
-<p>One side effect of this on some systems is that the CPU will run at full speed when connected to AC and at its lowest speed when on battery.  One workaround is to use the -L flag (manual mode, hw.setperf=0) then use something like <a href="https://tildegit.org/solene/obsdfreqd">obsdfreqd</a> - which facilitates userland CPU frequency scheduling. </p>
+<p>One side effect of this on some systems is that the CPU will run at full speed when connected to AC and at its lowest speed when on battery. One workaround is to use the -L flag (manual mode, hw.setperf=0) then use something like <a href="https://tildegit.org/solene/obsdfreqd">obsdfreqd</a> - which facilitates userland CPU frequency scheduling.</p>
 
-<h4 id="Xenocara%20&amp;#47;%20xenodm(1)">Xenocara &#47; xenodm(1)</h4>
+<h4 id="xenocara-xenodm1">Xenocara &#47; xenodm(1)</h4>
 
 <p>Xenocara is OpenBSD&#8217;s infrastructure for the X(7).org Server and window managers included in base - cwm(1) and fvwm(1).</p>
 
 <p>xenodm(1) is the X(1) Display Manager which manages access to the Xserver(1), providing a graphical login interface.</p>
 
-<p>By default, xconsole(1) is started by xenodm(1) and the background set to the familiar (and perhaps ugly) root weave pattern.  We can easily remove these in &#47;etc&#47;X11&#47;xenodm&#47;Xsetup_0, have the background set to a solid dark grey colour and disable the system bell:</p>
+<p>By default, xconsole(1) is started by xenodm(1) and the background set to the familiar (and perhaps ugly) root weave pattern. We can easily remove these in &#47;etc&#47;X11&#47;xenodm&#47;Xsetup_0, have the background set to a solid dark grey colour and disable the system bell:</p>
 
 <pre><code># sed -i &#39;&#47;${exec&#47;s&#47;^&#47;#&#47;g&#39; &#47;etc&#47;X11&#47;xenodm&#47;Xsetup_0
 # PREF="\${exec_prefix}&#47;bin" &#38;&#38;
@@ -146,7 +146,7 @@ $PREF&#47;xset b off
 " &#62;&#62; &#47;etc&#47;X11&#47;xenodm&#47;Xsetup_0
 </code></pre>
 
-<h4 id="Add%20your%20user%20to%20staff%20and%20doas.conf(5)">Add your user to staff and doas.conf(5)</h4>
+<h4 id="add-your-user-to-staff-and-doas.conf5">Add your user to staff and doas.conf(5)</h4>
 
 <p>It&#8217;s not recommended to normally login as the root user. For a long time, Unix-like operating systems relied on <code>sudo</code> to perform operations as another user (such as root); in 2015 Ted Unangst developed doas(1) for OpenBSD as a safer and simpler replacement.</p>
 
@@ -155,7 +155,7 @@ $PREF&#47;xset b off
 <pre><code># echo "permit :wheel" &#62;&#62; &#47;etc&#47;doas.conf
 </code></pre>
 
-<p>In addition to groups such as wheel, OpenBSD (like other BSD operating systems) maintains a login class capability database that is configured in login.conf(5).  This allows fine-tuning of resources for users and processes in a robust yet simple way. On a desktop or laptop, the user we created is probably going to be our only human user so we should add it to the staff class and increase resources to ensure we can use the system as a daily driver:</p>
+<p>In addition to groups such as wheel, OpenBSD (like other BSD operating systems) maintains a login class capability database that is configured in login.conf(5). This allows fine-tuning of resources for users and processes in a robust yet simple way. On a desktop or laptop, the user we created is probably going to be our only human user so we should add it to the staff class and increase resources to ensure we can use the system as a daily driver:</p>
 
 <pre><code># usermod -L staff myuser
 # usermod -G staff myuser
@@ -175,15 +175,14 @@ $PREF&#47;xset b off
 :tc=default:
 </code></pre>
 
-<p>You should increase datasize-cur depending on your total memory. 4096M works relatively well for 8GB though I have noticed with excessive web browser use that things can freeze up.  Likewise, openfiles-cur&#47;max should be increased depending on your needs.  If you run Syncthing or work with large Bittorrent files for example you will probably want to increase that to an insane amount and replicate it in &#47;etc&#47;sysctl.conf(5): kern.maxfiles.</p>
+<p>You should increase datasize-cur depending on your total memory. 4096M works relatively well for 8GB though I have noticed with excessive web browser use that things can freeze up. Likewise, openfiles-cur&#47;max should be increased depending on your needs. If you run Syncthing or work with large Bittorrent files for example you will probably want to increase that to an insane amount and replicate it in &#47;etc&#47;sysctl.conf(5): kern.maxfiles.</p>
 
-<p><del>Rebuild the database:</del></p>
+<p>Build the database:</p>
 
-<p><del>[ -f &#47;etc&#47;login.conf.db ] &#38;&#38; cap_mkdb &#47;etc&#47;login.conf</del></p>
+<pre><code>cap_mkdb &#47;etc&#47;login.conf
+</code></pre>
 
-<p>(Unnecessary as we haven&#8217;t started using it; thanks, Solene!)</p>
-
-<h4 id="Kernel%20settings">Kernel settings</h4>
+<h4 id="kernel-settings">Kernel settings</h4>
 
 <p>Here are some recommended sysctl(2) values (based on this system) for a desktop to add to &#47;etc&#47;sysctl.conf(5):</p>
 
@@ -194,7 +193,7 @@ kern.maxfiles=32768
 EOF
 </code></pre>
 
-<h4 id="X%20Session">X Session</h4>
+<h4 id="x-session">X Session</h4>
 
 <p>To enable tap-to-click on the trackpad:</p>
 
@@ -206,42 +205,44 @@ EOF
 <pre><code># Set your locale(1)
 export LANG=en_US.UTF-8
 
-# Set your environment (korn shell) 
+# Set your environment (korn shell)
 export ENV=$HOME&#47;.kshrc
 
-# No core dumps! 
-ulimit -Sc 0 
+# No core dumps!
+ulimit -Sc 0
 
 # Merge our X resources
 xrdb -merge $HOME&#47;.Xresources
 
-# Set background colour 
+# Set background colour
 setroot -solid dimgrey
 
-# Make sure that bell is off! 
+# Make sure that bell is off!
 xset b off
 
-# Use Capslock as CTRL 
+# Use Capslock as CTRL
 setxkbmap -option ctrl:nocaps
 
-# Run xterm 
+# Run xterm
 xterm &#38;
 
-# Fix scaling of some X&#47;QT programs 
+# Fix scaling of some X&#47;QT programs
 xrandr --dpi 96
 
-# Automatically lock X 
+# Automatically lock X
 xidle -delay 5 -sw -timeout 300 -program "&#47;usr&#47;X11R6&#47;bin&#47;xlock -mode qix" &#38;
 
 # Run our window manager.
 # Can later be replaced with `exec startxfce4` if desired.
 # exec runs it in the foreground - X will exit when the cwm proc exits.
-exec cwm 
+exec cwm
 </code></pre>
 
 <p>At this point we should <code>reboot(8)</code> - then we can benefit from our disk performance tweaks which you will be thankful for when installing packages.</p>
 
-<h3 id="Second%20boot">Second boot</h3>
+<p><a href="/newdesktop.jpg"><img src="/newdesktop.jpg" alt="OpenBSD with cwm, tmux, newsboat, neomutt." /></a></p>
+
+<h3 id="second-boot">Second boot</h3>
 
 <p>If you didn&#8217;t make any typos, you should be greeted by xenodm(1) again and able to login as your normal staff user before being presented with a terminal.</p>
 
@@ -251,7 +252,7 @@ exec cwm
 $ doas reboot
 </code></pre>
 
-<h4 id="Customisation">Customisation</h4>
+<h4 id="customisation">Customisation</h4>
 
 <p>Let&#8217;s install some packages, adjusting to your own taste:</p>
 
@@ -269,10 +270,11 @@ $ doas reboot
     unzip \
     keepassxc \
     weechat \
-    picom \ 
+    picom \
         mupdf \
         weechat \
         cplay \
+        cmus \
         newsboat \
         neomutt \
         vim
@@ -283,7 +285,7 @@ $ doas reboot
 <pre><code>$ doas pkg_add xfce xfce-extras xfce4-power-manager upower xscreensaver
 </code></pre>
 
-<p>Then in .xsession, replace <code>exec cwm</code> with <code>exec startxfce4</code> and remove the xidle and xterm lines. </p>
+<p>Then in .xsession, replace <code>exec cwm</code> with <code>exec startxfce4</code> and remove the xidle and xterm lines.</p>
 
 <p>If you are not using xfce, then you will need to enable messagebus&#47;dbus with:</p>
 
@@ -297,27 +299,54 @@ $ doas reboot
 fi
 </code></pre>
 
-<p>NOTE: jmclnx <a href="https://news.ycombinator.com/item?id=33237968">made a point</a> about dbus on Hacker News - he actually avoids running it and Firefox still runs fine.  If you want to try this out instead of the GTK IPC bloat, add the following to your .xsession:</p>
+<p>NOTE: jmclnx <a href="https://news.ycombinator.com/item?id=33237968">made a point</a> about dbus on Hacker News - he actually avoids running it and Firefox still runs fine. If you want to try this out instead of the GTK IPC bloat, add the following to your .xsession:</p>
 
-<pre><code>export DBUS_SESSION_BUS_ADDRESS="no" 
+<pre><code>export DBUS_SESSION_BUS_ADDRESS="no"
 </code></pre>
 
-<h4 id="Xresources">Xresources</h4>
+<h4 id="xresources">Xresources</h4>
 
-<p>You could write a book, or at least a pamphlet, on styling X(7).  <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Cullum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
+<p>You could write a book, or at least a pamphlet, on styling X(7). <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Cullum Smith</a> has some more complete configs, but the following ~&#47;.Xresources file will at least get you started with a less-ugly xterm to use in cwm(1):</p>
 
-<pre><code>*visualBell: True 
-xterm.loginShell: true 
+<pre><code>*visualBell: True
+xterm.loginShell: true
 xterm*faceName: Inconsolata:size=16
-xterm*dynamicColors: true
+! xterm*dynamicColors: true
 xterm*utf8: 2
 xterm*eightBitInput: true
 xterm*scrollBar: false
-xterm*foreground: rgb:a8&#47;a8&#47;a8
-xterm*background: rgb:00&#47;00&#47;00
+! xterm*foreground: rgb:a8&#47;a8&#47;a8
+! xterm*background: rgb:00&#47;00&#47;00
+
+*background             : #171717
+*foreground             : #F8F8F8
+! black
+*color0                         : #171717
+*color8                         : #38252C
+! red
+*color1                         : #D81765
+*color9                         : #FF0000
+! green
+*color2                         : #97D01A
+*color10                        : #76B639
+! yellow
+*color3                         : #FFA800
+*color11                        : #E1A126
+! blue
+*color4                         : #16B1FB
+*color12                        : #289CD5
+! magenta
+*color5                         : #FF2491
+*color13                        : #FF2491
+! cyan
+*color6                         : #0FDCB6
+*color14                        : #0A9B81
+! white
+*color7                         : #EBEBEB
+*color15                        : #F8F8F8
 </code></pre>
 
-<h4 id="cwmrc(5)">cwmrc(5)</h4>
+<h4 id="cwmrc5">cwmrc(5)</h4>
 
 <p>A minimal ~&#47;.cwmrc configuration:</p>
 
@@ -327,7 +356,7 @@ snapdist                20
 
 command firefox         firefox
 command newsboat        "xterm -e newsboat"
-command keepassxc       keepassxc 
+command keepassxc       keepassxc
 
 bind-key 4-Return       terminal
 bind-key CM-Return      "xterm -e top"
@@ -350,9 +379,9 @@ bind-key 4S-b           "xbacklight -inc 10 -time 0"
 
 <p>cwm(1) can take some getting used to if you are more accustomed to a traditional desktop environment but with a little effort to learn to use it efficiently you will find it increases your productivity and decreases your dependence on the mouse or trackpad.</p>
 
-<p>In the above example, pressing WINDOWS+Return will spawn a terminal. </p>
+<p>In the above example, pressing WINDOWS+Return will spawn a terminal.</p>
 
-<h4 id="Miscellaneous">Miscellaneous</h4>
+<h4 id="miscellaneous">Miscellaneous</h4>
 
 <p>If you have performance issues in Firefox, in the navigation bar type: about:config <em>enter</em> then search for and enable this option:</p>
 
@@ -361,13 +390,13 @@ bind-key 4S-b           "xbacklight -inc 10 -time 0"
 
 <p>GTK Annoyance - keyboard shortcuts don&#8217;t work as expected (CTRL-A to select all, for example). I have borrowed this from <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">Cullum Smith</a> as I had no idea why it was happening - I don&#8217;t use emacs, I like CTRL-A to work normally in GTK apps, it feels natural!</p>
 
-<p>Create ~&#47;.config&#47;gtk-3.0&#47;settings.ini and add the lines below to it. Check out the other options available from <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop">Cullum&#8217;s post</a>. </p>
+<p>Create ~&#47;.config&#47;gtk-3.0&#47;settings.ini and add the lines below to it. Check out the other options available from <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop">Cullum&#8217;s post</a>.</p>
 
 <pre><code>[Settings]
 gtk-key-theme-name=Default
 </code></pre>
 
-<p><a href="/productivity.png"><img src="/productivity.png" alt="OpenBSD+cwm productivity for the HN moaners" /></a></p>
+<p><a href="/neofetch.png"><img src="/neofetch.png" alt="OpenBSD+cwm" /></a></p>
 
 ]]></description>
 </item>
@@ -379,7 +408,7 @@ gtk-key-theme-name=Default
 <title>OpenBSD Desktop</title>
 <description><![CDATA[
 
-<h1 id="OpenBSD%20Desktop">OpenBSD Desktop</h1>
+<h1 id="openbsd-desktop">OpenBSD Desktop</h1>
 
 <p>Everyone loves an OpenBSD Desktop article, don&#8217;t they? So there seems very little point in me reiterating what is a relatively simple process nowadays.  That said, after the install process there are a couple of things which, for me, make OpenBSD the perfect workstation operating system&#8230;</p>
 
@@ -510,7 +539,7 @@ xterm*background: rgb:00&#47;00&#47;00
 <title>Down the Gopher hole with OpenBSD, Gophernicus, and TLS</title>
 <description><![CDATA[
 
-<h1 id="Down%20the%20Gopher%20hole%20with%20OpenBSD,%20Gophernicus,%20and%20TLS">Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h1>
+<h1 id="down-the-gopher-hole-with-openbsd-gophernicus-and-tls">Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h1>
 
 <p><strong>UPDATE: I&#8217;ve added TLS support to Gophernicus so you don&#8217;t need to use stunnel anymore. The code is ugly and unpolished though so I wouldn&#8217;t recommend for production use.</strong> </p>
 
@@ -602,7 +631,7 @@ $ socat TCP4-LISTEN:10070 openssl-connect:go.cryogenix.net:343,cafile=&#47;etc&#
 $ gopher gopher:&#47;&#47;localhost:10070
 </code></pre>
 
-<h5 id="Caveats">Caveats</h5>
+<h5 id="caveats">Caveats</h5>
 
 <ul>
 <li>when connecting to stunnel, libressl returns error 21 (unable to verify first cert) - however the same cert returns no error on port 443 (httpd(8)).</li>
@@ -627,7 +656,7 @@ $ gopher gopher:&#47;&#47;localhost:10070
 <title>Assembly language on OpenBSD amd64+arm64</title>
 <description><![CDATA[
 
-<h1 id="Assembly%20language%20on%20OpenBSD%20amd64+arm64">Assembly language on OpenBSD amd64+arm64</h1>
+<h1 id="assembly-language-on-openbsd-amd64arm64">Assembly language on OpenBSD amd64+arm64</h1>
 
 <p>This is a short introduction to assembly language programming on OpenBSD&#47;amd64+arm64.  Because of security features in the kernel, I have had to rethink a series of tutorials covering Aarch64 assembly language on OpenBSD, and therefore this will serve as a placeholder-cum-reminder.</p>
 
@@ -648,7 +677,7 @@ $ gopher gopher:&#47;&#47;localhost:10070
 
 <p>For our assembled programs to link and execute correctly, we must create this section; If you are an ld(1) wizard, you can also use PHDRS to accomplish this. </p>
 
-<h5 id="Our%20first%20program:%20in%20C!">Our first program: in C!</h5>
+<h5 id="our-first-program-in-c">Our first program: in C!</h5>
 
 <p>It&#8217;s often a good idea to prototype your assembly programs in a high level language such as C - it can then double up as both a set of notes and a working program that you can debug and compile into assembly language to compare with your own asm code. Create sysexit.c:</p>
 
@@ -677,7 +706,7 @@ return 0;
 
 <p>If you run the program, it should do nothing - just silently exit and return you to the shell prompt.  Exciting! Next we will rewrite this program in assembly language.</p>
 
-<h5 id="Our%20first%20program:%20in%20x86-64%20Asm%20(AT&amp;#38;T&amp;#47;GAS%20syntax)">Our first program: in x86-64 Asm (AT&#38;T&#47;GAS syntax)</h5>
+<h5 id="our-first-program-in-x86-64-asm-attgas-syntax">Our first program: in x86-64 Asm (AT&#38;T&#47;GAS syntax)</h5>
 
 <p>x86-64 General Purpose Registers:</p>
 
@@ -745,7 +774,7 @@ $ ld sysexit.o -o sysexit --dynamic-linker &#47;usr&#47;libexec&#47;ld.so
 $ echo $?
 </code></pre>
 
-<h5 id="Our%20first%20program:%20in%20inline%20x86-64%20assembly">Our first program: in inline x86-64 assembly</h5>
+<h5 id="our-first-program-in-inline-x86-64-assembly">Our first program: in inline x86-64 assembly</h5>
 
 <p>Nowadays it&#8217;s often desirable to use inline assembly language within C programs; this allows precision control of registers and optimised routines to be made while retaining the beautiful ANSI C language for the bulk of the code.  Here&#8217;s how we implement our program using inline asm, inline.c:</p>
 
@@ -780,7 +809,7 @@ $ echo $?
 
 <p>Done! </p>
 
-<h5 id="Our%20first%20program:%20in%20x86-64%20asm%20(NASM%20syntax)">Our first program: in x86-64 asm (NASM syntax)</h5>
+<h5 id="our-first-program-in-x86-64-asm-nasm-syntax">Our first program: in x86-64 asm (NASM syntax)</h5>
 
 <pre><code>section .note.openbsd.ident progbits alloc noexec nowrite
     dd 0x00000008 ; namesz
@@ -805,7 +834,7 @@ _start:
 ld -o sysexit-nasm sysexit-nasm.o --dynamic-linker &#47;usr&#47;libexec&#47;ld.so 
 </code></pre>
 
-<h5 id="Our%20first%20program:%20in%20ARMv8%20AArch64%20assembly">Our first program: in ARMv8 AArch64 assembly</h5>
+<h5 id="our-first-program-in-armv8-aarch64-assembly">Our first program: in ARMv8 AArch64 assembly</h5>
 
 <p>AArch64 is the 64-bit state of ARMv8 processors; these processors can run a 32-bit kernel with 32-bit userland, or a 64-bit kernel with both 32 and 64-bit userland.  The architecture changes a little when in the 64-bit state.</p>
 
@@ -860,13 +889,13 @@ $ echo $?
 <title>Cross-compiling for OpenBSD&#47;arm64</title>
 <description><![CDATA[
 
-<h1 id="Cross-compiling%20for%20OpenBSD&amp;#47;arm64">Cross-compiling for OpenBSD&#47;arm64</h1>
+<h1 id="cross-compiling-for-openbsdarm64">Cross-compiling for OpenBSD&#47;arm64</h1>
 
 <p>Following on from <a href="https://cryogenix.net/OpenBSD_arm64_qemu.html">OpenBSD&#47;arm64 on QEMU</a>, it&#8217;s not always practical to compile userland software or a new kernel on some systems, particularly small SoCs with limited space and memory - or indeed QEMU, in fear of melting your CPU. </p>
 
 <p>There are two scenarios here - the first, if you are looking for a standard cross-compiler for Aarch64, and the second if you want an OpenBSD-specific environment.</p>
 
-<h4 id="Scenario%201:%20Linaro%20ARM&amp;#47;AArch64%20toolchain">Scenario 1: Linaro ARM&#47;AArch64 toolchain</h4>
+<h4 id="scenario-1-linaro-armaarch64-toolchain">Scenario 1: Linaro ARM&#47;AArch64 toolchain</h4>
 
 <p>Available in ports, this is the go-to GCC toolchain for cross-compilation to ARM targets.  aarch64-none-elf-gcc-linaro is relatively new and there doesn&#8217;t exist a port for gdb nor newlib as yet.</p>
 
@@ -884,7 +913,7 @@ doas pkg_add arm-none-eabi-newlib
 
 <p>This will give us a traditional cross-compilation environment with gdb built to use your host, in my case x86_64-unknown-openbsd6.4 and a target of arm-none-eabi. Newlib is an implementation of the standard C library which was intended to be a free library for embedded devices and is popular with OS development hobbyists at stages where they have not written their own implementations.  This will allow us to write and compile C code that uses the std C library.</p>
 
-<h4 id="Scenario%202:%20OpenBSD%20aarch64%20development">Scenario 2: OpenBSD aarch64 development</h4>
+<h4 id="scenario-2-openbsd-aarch64-development">Scenario 2: OpenBSD aarch64 development</h4>
 
 <p>Cross-building is unsupported on OpenBSD - if you&#8217;ve ever dabbled in OS development or LinuxFromScratch, you can probably guess why; it can be unpredictable.
 Moreover, the OpenBSD platform lifecycle focuses on making OpenBSD self-hosting and only cross-compiles to the target platform for initial bootstrapping.</p>
@@ -983,7 +1012,7 @@ Machine:                           AArch64
 <title>OpenBSD&#47;arm64 on QEMU with networking</title>
 <description><![CDATA[
 
-<h1 id="OpenBSD&amp;#47;arm64%20on%20QEMU%20with%20networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
+<h1 id="openbsdarm64-on-qemu-with-networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
 
 <p>With the increasing popularity of ARM64&#47;AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu&#8217;s move away from SPARC64 supercomputers, there hasn&#8217;t been a better time to get started with learning this architecture.</p>
 
@@ -991,7 +1020,7 @@ Machine:                           AArch64
 
 <p>The first pre-built EDK2 binary I downloaded wouldn&#8217;t play nicely with the OpenBSD kernel so I grabbed a release mentioned by the <a href="https://wiki.freebsd.org/arm64/QEMU">FreeBSD team</a> - which worked.</p>
 
-<h4 id="Prerequisites">Prerequisites</h4>
+<h4 id="prerequisites">Prerequisites</h4>
 
 <ul>
 <li>OpenBSD&#47;amd64 host</li>
@@ -1000,7 +1029,7 @@ Machine:                           AArch64
 <li>QEMU (doas pkg_add qemu)</li>
 </ul>
 
-<h4 id="Network%20Prep">Network Prep</h4>
+<h4 id="network-prep">Network Prep</h4>
 
 <p>The procedure here is pretty much identical to that outlined in <a href="https://www.openbsd.org/faq/faq16.html">faq16</a>. We create a vether0 and bridge0 interface for our tap interface to NAT through egress.</p>
 
@@ -1038,7 +1067,7 @@ subnet 192.168.54.0 netmask 255.255.255.0 {
 <pre><code># rcctl -f start dhcpd
 </code></pre>
 
-<h4 id="Preparing%20QEMU">Preparing QEMU</h4>
+<h4 id="preparing-qemu">Preparing QEMU</h4>
 
 <p>Fetch miniroot64.fs, SHA256, SHA256.sig, and QEMU_EFI.fd:</p>
 
@@ -1052,7 +1081,7 @@ $ signify -Cp &#47;etc&#47;signify&#47;openbsd-64-base.pub -x SHA256.sig miniroo
 <pre><code>$ qemu-img create -f qcow2 root.qcow2 10G
 </code></pre>
 
-<h4 id="Booting%20miniroot64.fs">Booting miniroot64.fs</h4>
+<h4 id="booting-miniroot64.fs">Booting miniroot64.fs</h4>
 
 <p>Thanks to <a href="https://marc.info/?l=openbsd-arm&amp;m=151582483025728&amp;w=2">jsg@</a> for the -M and -device arguments to use instead of -M raspi3.</p>
 
@@ -1112,7 +1141,7 @@ cc -dumpmachine: aarch64-unknown-openbsd6.4
 <title>Reverse Engineering Tutorial: level1 - What&#8217;s the password?</title>
 <description><![CDATA[
 
-<h1 id="Reverse%20Engineering%20Tutorial:%20level1%20-%20What&amp;#8217;s%20the%20password?">Reverse Engineering Tutorial: level1 - What&#8217;s the password?</h1>
+<h1 id="reverse-engineering-tutorial-level1---whats-the-password">Reverse Engineering Tutorial: level1 - What&#8217;s the password?</h1>
 
 <p>Welcome to level1 of the Reverse Engineering Tutorial.  I will be using OpenBSD 6.4&#47;amd64 to demonstrate one way to solve level1 of the 
 Cryogenix wargame (yet TBA).</p>
@@ -1120,7 +1149,7 @@ Cryogenix wargame (yet TBA).</p>
 <p>You may download the binary, or if you&#8217;re a bit tinfoilhat-inclined the source is also available.  You&#8217;ll also need gdb (lldb will be added at 
 a later date), binutils, and optionally Vim.</p>
 
-<h5 id="Get%20level1">Get level1</h5>
+<h5 id="get-level1">Get level1</h5>
 
 <p>Binary (OpenBSD&#47;amd64):</p>
 
@@ -1133,7 +1162,7 @@ a later date), binutils, and optionally Vim.</p>
 gcc -fno-stack-protector -o level1 level1.c
 </code></pre>
 
-<h5 id="Let&amp;#8217;s%20begin&amp;#8230;">Let&#8217;s begin&#8230;</h5>
+<h5 id="lets-begin">Let&#8217;s begin&#8230;</h5>
 
 <pre><code>.&#47;level1
 
@@ -1386,7 +1415,7 @@ Secret stuff
 <title>NCSA Mosaic 2.7 on OpenBSD</title>
 <description><![CDATA[
 
-<h1 id="NCSA%20Mosaic%202.7%20on%20OpenBSD">NCSA Mosaic 2.7 on OpenBSD</h1>
+<h1 id="ncsa-mosaic-2.7-on-openbsd">NCSA Mosaic 2.7 on OpenBSD</h1>
 
 <p>A classic web browser, now available on OpenBSD</p>
 
@@ -1414,7 +1443,7 @@ $ src&#47;Mosaic gopher:&#47;&#47;gopher.club
 <title>OpenBSD as an authoritative DNS nameserver</title>
 <description><![CDATA[
 
-<h1 id="OpenBSD%20as%20an%20authoritative%20DNS%20nameserver">OpenBSD as an authoritative DNS nameserver</h1>
+<h1 id="openbsd-as-an-authoritative-dns-nameserver">OpenBSD as an authoritative DNS nameserver</h1>
 
 <p>Configuring NSD on OpenBSD as an authoritative DNS nameserver</p>
 
@@ -1562,7 +1591,7 @@ rcctl start nsd
 
 <p>That&#8217;s it! But we haven&#8217;t enabled DNSSEC for our zone&#8230;</p>
 
-<h4 id="Signing%20our%20zone%20with%20DNSSEC">Signing our zone with DNSSEC</h4>
+<h4 id="signing-our-zone-with-dnssec">Signing our zone with DNSSEC</h4>
 
 <p>For this we will need ldns-keygen from <a href="https://www.nlnetlabs.nl/projects/ldns/about/">LDNS</a>:</p>
 
@@ -1634,7 +1663,7 @@ DS 28892 7 2 FA1B31305013E427A8DAC5318FBF6FFCDBFDA94309DDF12EBDCA101A 5E07167D f
 <title>433 Mhz vehicle unlocking with Arduino Duo</title>
 <description><![CDATA[
 
-<h1 id="433%20Mhz%20vehicle%20unlocking%20with%20Arduino%20Duo">433 Mhz vehicle unlocking with Arduino Duo</h1>
+<h1 id="433-mhz-vehicle-unlocking-with-arduino-duo">433 Mhz vehicle unlocking with Arduino Duo</h1>
 
 <p>Having only one key fob for the van is anxiety-inducing in case it fails, so I decided to build a replacement with an Arduino&#47;ATMega and a 433Mhz transceiver module.</p>
 
@@ -1736,7 +1765,7 @@ void loop() {
 <title>AlphaServer ES40 Emulation</title>
 <description><![CDATA[
 
-<h1 id="AlphaServer%20ES40%20Emulation">AlphaServer ES40 Emulation</h1>
+<h1 id="alphaserver-es40-emulation">AlphaServer ES40 Emulation</h1>
 
 <p>Emulating an AlphaServer ES40 for running Tru64 UNIX or OpenVMS</p>
 
@@ -1748,7 +1777,7 @@ void loop() {
 
 <p>We are going to build and configure ES40 on a UNIX-like system without X11 or SDL support as we will be treating it as a virtual server and ES40 doesn&#8217;t support running DECWindows yet anyway (but feel free to configure DECWindows with XDM or X11 Forwarding later).</p>
 
-<h3 id="Prerequisites">Prerequisites</h3>
+<h3 id="prerequisites">Prerequisites</h3>
 
 <p>As per  <a href="https://web.archive.org/web/20090606221007/http://www.es40.org/Building_the_Emulator_on_UNIX%2C_BSD%2C_Linux%2C_etc">the instructions</a>  for building ES40, you will need to make sure the following are available:</p>
 
@@ -1763,7 +1792,7 @@ void loop() {
 <li>  <a href="http://nongnu.org/vgabios/">vgabios-0.6a.bin</a>  - VGA BIOS</li>
 </ul>
 
-<h3 id="Building">Building</h3>
+<h3 id="building">Building</h3>
 
 <p>Make sure libpcap, OpenSSL&#47;LibreSSL and their respective development files are installed on your system.</p>
 
@@ -1955,7 +1984,7 @@ pci0.15 = ali_ide
 
 <p>This is a good, simple configuration for your first Emulated ES40 system. You may increase &#8220;<strong>autocreate_size</strong>&#8221; to your liking as well as add, remove or modify any other options (refer to the documentation and the original config file). We are now ready to launch the emulator.</p>
 
-<h3 id="Starting%20the%20Emulator">Starting the Emulator</h3>
+<h3 id="starting-the-emulator">Starting the Emulator</h3>
 
 <pre><code>[int16h@cgxsrv01 es40]$ sudo .&#47;es40 
 
@@ -2140,7 +2169,7 @@ Enter CHOICE or ? for help: (1&#47;2&#47;3&#47;4&#47;5&#47;6&#47;7&#47;8&#47;9&#
 <title>OpenVMS and SIMH - Part 2</title>
 <description><![CDATA[
 
-<h1 id="OpenVMS%20and%20SIMH%20-%20Part%202">OpenVMS and SIMH - Part 2</h1>
+<h1 id="openvms-and-simh---part-2">OpenVMS and SIMH - Part 2</h1>
 
 <p>Running OpenVMS on the SIMH VAX simulator</p>
 
@@ -2469,7 +2498,7 @@ Usage: dua1:[int16h.bin]wget.exe;1 [OPTION]... [URL]...
 
 <p>Try `dua1:[int16h.bin]wget.exe;1 &#8211;help&#8217; for more options.</p>
 
-<h2 id="Installing%20Supplemental%20Software">Installing Supplemental Software</h2>
+<h2 id="installing-supplemental-software">Installing Supplemental Software</h2>
 
 <p>A supplemental disc is available for OpenVMS 7.3, this contains developer tools which can be essential if you want a fully-functional learning system. This will give us an opportunity to make use of our recently-installed &#8216;wget&#8217; utility. While still in [.DOWNLOADS], create a new directory called SUPP, change to this dir then use &#8216;wget&#8217; to retrieve your ZIP:</p>
 
@@ -2596,7 +2625,7 @@ As we have already installed and loaded our PAK, you should answer &#39;YES&#39;
 
 <p>Again, these kind of installation notes can be very useful. In this case it&#8217;s not crucial to perform this task for the product to function, but sometimes there will be additional steps you must take.  </p>
 
-<h2 id="Installing%20WASD%20VMS%20Hypertext%20Services">Installing WASD VMS Hypertext Services</h2>
+<h2 id="installing-wasd-vms-hypertext-services">Installing WASD VMS Hypertext Services</h2>
 
 <p><a href="http://wasd.vsm.com.au/">WASD</a> is <strong>the</strong> HTTP server package exclusive to OpenVMS. We&#8217;re going to compile and install it now so you can test out the compiler you just installed. There are architecture-specific packages we could use to install WASD, but I&#8217;m sure you&#8217;re eager to let it compile while you go make some coffee. We&#8217;ll start by downloading <strong>htroot930.zip</strong> from <a href="http://wasd.vsm.com.au/wasd/">wasd.vsm.com.au&#47;wasd&#47;</a>; make sure you are in your <strong>DOWNLOADS</strong>directory. After the transfer has completed, logout and then login as the SYSTEM user.</p>
 
@@ -3046,7 +3075,7 @@ OpenVMS V7.3  on node CGXVAX  14-JAN-2009 20:28:15.61  Uptime  1 21:25:15
 <title>OpenVMS and SIMH - Part 1</title>
 <description><![CDATA[
 
-<h1 id="OpenVMS%20and%20SIMH%20-%20Part%201">OpenVMS and SIMH - Part 1</h1>
+<h1 id="openvms-and-simh---part-1">OpenVMS and SIMH - Part 1</h1>
 
 <p>Running OpenVMS on the SIMH VAX simulator</p>
 
@@ -3977,7 +4006,7 @@ Begin Startup...
 <title>Beginners Guide To x86 Shellcoding on FreeBSD</title>
 <description><![CDATA[
 
-<h1 id="Beginners%20Guide%20To%20x86%20Shellcoding%20on%20FreeBSD">Beginners Guide To x86 Shellcoding on FreeBSD</h1>
+<h1 id="beginners-guide-to-x86-shellcoding-on-freebsd">Beginners Guide To x86 Shellcoding on FreeBSD</h1>
 
 <p>A guide by Xwyzard on writing x86-32 shellcode on FreeBSD</p>
 
