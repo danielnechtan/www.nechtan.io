@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <title>Contact &mdash; Daniel Nechtan</title>
+  <title>NCSA Mosaic 2.7 on OpenBSD &mdash; Daniel Nechtan</title>
   <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="og:type" content="summary_large_image" />
@@ -29,22 +29,32 @@
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
-    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
   </p>
   <hr/>
-<h1 id="contact">Contact</h1>
+<h1 id="NCSA%20Mosaic%202.7%20on%20OpenBSD">NCSA Mosaic 2.7 on OpenBSD</h1>
 
-<p>GPG fingerprint: <code>DFBA 296C C6A3 C417 4C16  C07D 7697 F7DA CBC6 8923</code></p>
+<p>A classic web browser, now available on OpenBSD</p>
 
-<p>GPG Key: <a href="/gpg.txt">gpg.txt</a></p>
+<p>Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy this historic web browser. NCSA&#8217;s site causes a coredump, so run the binary with another URL as an argument. It&#8217;s not great as a browser on the modern web, but it does make a great gopher client!</p>
+
+<p>Now using Cameron Kaiser&#8217;s patches and alternative (&#8216;modern&#8217;) renderer.  This needs a serious code audit before even considering submitting to ports.</p>
+
+<pre><code>$ git clone https:&#47;&#47;github.com&#47;danielnechtan&#47;mosaic-CK-openbsd
+$ doas pkg_add motif
+$ cd mosaic-CK-openbsd &#38;&#38; make openbsd
+$ src&#47;Mosaic gopher:&#47;&#47;gopher.club
+</code></pre>
+
+<p><a href="fvwm.png"><img src="fvwm.png" alt="Mosaic Screenshot" /></a>
+<img src="mosaic-ck.png" alt="Mosaic Screenshot" />
+<img src="mosaic-ck-2.png" alt="Mosaic Screenshot 2" /></p>
 <hr/>
 <hr/>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
-<h4>Tips and requests are very welcome, thank you :).</h4>
+<h4>Tips are very welcome</h4>
 <p>Doge: DFzZJSWTsuM3NAD41HZtbqMR5EeM3KYhcu</p>
-<p>BTC: bc1quf68wgmz3qc84du4vsqe0fjh6573kevty37rrv</p>
-<p>LTC: ltc1qpvargtpj2khh2ar2ytpp5yv359wucu3mmvtzc5</p>
 <hr/>
 <p>&copy; 1996&ndash;2022 <a href="/">Daniel Nechtan</a> | No cookies or JavaScript | <a href="https://rgz.ee/ssg.html">ssg</a></p>
 </div>

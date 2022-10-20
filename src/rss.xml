@@ -3,9 +3,9 @@
 <channel>
 <atom:link href="" rel="self" type="application/rss+xml" />
 <title>Nechtan</title>
-<description>Born in 1984, I grew up in the golden age of hacker and demoscene culture and spent much of my childhood tracking MODules, creating demoscene-esque art, programming in BASIC &#38; Assembly, and disassembling Amiga ROM code.</description>
+<description></description>
 <link>/</link>
-<lastBuildDate>Wed, 19 Oct 2022 00:00:00 +0100</lastBuildDate>
+<lastBuildDate>Thu, 20 Oct 2022 00:00:00 +0100</lastBuildDate>
 
 <item>
 <guid>/articles/openbsd_minimalist_desktop.html</guid>

@@ -29,10 +29,10 @@
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
-    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
   </p>
   <hr/>
-<h1 id="openbsdarm64-on-qemu-with-networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
+<h1 id="OpenBSD&amp;#47;arm64%20on%20QEMU%20with%20networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
 
 <p>With the increasing popularity of ARM64&#47;AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu&#8217;s move away from SPARC64 supercomputers, there hasn&#8217;t been a better time to get started with learning this architecture.</p>
 
@@ -40,7 +40,7 @@
 
 <p>The first pre-built EDK2 binary I downloaded wouldn&#8217;t play nicely with the OpenBSD kernel so I grabbed a release mentioned by the <a href="https://wiki.freebsd.org/arm64/QEMU">FreeBSD team</a> - which worked.</p>
 
-<h4 id="prerequisites">Prerequisites</h4>
+<h4 id="Prerequisites">Prerequisites</h4>
 
 <ul>
 <li>OpenBSD&#47;amd64 host</li>
@@ -49,7 +49,7 @@
 <li>QEMU (doas pkg_add qemu)</li>
 </ul>
 
-<h4 id="network-prep">Network Prep</h4>
+<h4 id="Network%20Prep">Network Prep</h4>
 
 <p>The procedure here is pretty much identical to that outlined in <a href="https://www.openbsd.org/faq/faq16.html">faq16</a>. We create a vether0 and bridge0 interface for our tap interface to NAT through egress.</p>
 
@@ -87,7 +87,7 @@ subnet 192.168.54.0 netmask 255.255.255.0 {
 <pre><code># rcctl -f start dhcpd
 </code></pre>
 
-<h4 id="preparing-qemu">Preparing QEMU</h4>
+<h4 id="Preparing%20QEMU">Preparing QEMU</h4>
 
 <p>Fetch miniroot64.fs, SHA256, SHA256.sig, and QEMU_EFI.fd:</p>
 
@@ -101,7 +101,7 @@ $ signify -Cp &#47;etc&#47;signify&#47;openbsd-64-base.pub -x SHA256.sig miniroo
 <pre><code>$ qemu-img create -f qcow2 root.qcow2 10G
 </code></pre>
 
-<h4 id="booting-miniroot64.fs">Booting miniroot64.fs</h4>
+<h4 id="Booting%20miniroot64.fs">Booting miniroot64.fs</h4>
 
 <p>Thanks to <a href="https://marc.info/?l=openbsd-arm&amp;m=151582483025728&amp;w=2">jsg@</a> for the -M and -device arguments to use instead of -M raspi3.</p>
 
@@ -154,10 +154,8 @@ cc -dumpmachine: aarch64-unknown-openbsd6.4
 <hr/>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
-<h4>Tips and requests are very welcome, thank you :).</h4>
+<h4>Tips are very welcome</h4>
 <p>Doge: DFzZJSWTsuM3NAD41HZtbqMR5EeM3KYhcu</p>
-<p>BTC: bc1quf68wgmz3qc84du4vsqe0fjh6573kevty37rrv</p>
-<p>LTC: ltc1qpvargtpj2khh2ar2ytpp5yv359wucu3mmvtzc5</p>
 <hr/>
 <p>&copy; 1996&ndash;2022 <a href="/">Daniel Nechtan</a> | No cookies or JavaScript | <a href="https://rgz.ee/ssg.html">ssg</a></p>
 </div>

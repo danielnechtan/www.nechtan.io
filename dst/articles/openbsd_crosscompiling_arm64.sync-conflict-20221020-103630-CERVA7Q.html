@@ -29,16 +29,16 @@
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
-    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
   </p>
   <hr/>
-<h1 id="cross-compiling-for-openbsdarm64">Cross-compiling for OpenBSD&#47;arm64</h1>
+<h1 id="Cross-compiling%20for%20OpenBSD&amp;#47;arm64">Cross-compiling for OpenBSD&#47;arm64</h1>
 
 <p>Following on from <a href="https://cryogenix.net/OpenBSD_arm64_qemu.html">OpenBSD&#47;arm64 on QEMU</a>, it&#8217;s not always practical to compile userland software or a new kernel on some systems, particularly small SoCs with limited space and memory - or indeed QEMU, in fear of melting your CPU. </p>
 
 <p>There are two scenarios here - the first, if you are looking for a standard cross-compiler for Aarch64, and the second if you want an OpenBSD-specific environment.</p>
 
-<h4 id="scenario-1-linaro-armaarch64-toolchain">Scenario 1: Linaro ARM&#47;AArch64 toolchain</h4>
+<h4 id="Scenario%201:%20Linaro%20ARM&amp;#47;AArch64%20toolchain">Scenario 1: Linaro ARM&#47;AArch64 toolchain</h4>
 
 <p>Available in ports, this is the go-to GCC toolchain for cross-compilation to ARM targets.  aarch64-none-elf-gcc-linaro is relatively new and there doesn&#8217;t exist a port for gdb nor newlib as yet.</p>
 
@@ -56,7 +56,7 @@ doas pkg_add arm-none-eabi-newlib
 
 <p>This will give us a traditional cross-compilation environment with gdb built to use your host, in my case x86_64-unknown-openbsd6.4 and a target of arm-none-eabi. Newlib is an implementation of the standard C library which was intended to be a free library for embedded devices and is popular with OS development hobbyists at stages where they have not written their own implementations.  This will allow us to write and compile C code that uses the std C library.</p>
 
-<h4 id="scenario-2-openbsd-aarch64-development">Scenario 2: OpenBSD aarch64 development</h4>
+<h4 id="Scenario%202:%20OpenBSD%20aarch64%20development">Scenario 2: OpenBSD aarch64 development</h4>
 
 <p>Cross-building is unsupported on OpenBSD - if you&#8217;ve ever dabbled in OS development or LinuxFromScratch, you can probably guess why; it can be unpredictable.
 Moreover, the OpenBSD platform lifecycle focuses on making OpenBSD self-hosting and only cross-compiles to the target platform for initial bootstrapping.</p>
