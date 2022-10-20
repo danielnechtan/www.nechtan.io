@@ -1,9 +1,30 @@
 ### Things I like ###
 
 * [🐡 OpenBSD](https://www.openbsd.org)
+* [💬 RFC 1459](https://www.rfc-editor.org/rfc/rfc1459)
 * [🍊 Nectarine Demoscene Radio](https://scenestream.net/demovibes/)
 * [🛥️ Newsboat](https://newsboat.org/)
 * [🐪 Perl](https://www.perl.org)
+* [☁️ Mojolicious](https://mojolicious.org)
+* [style(9)](https://man.openbsd.org/style)
+* [Syncthing](https://syncthing.net/)
+
+#### OpenBSD things ####
+
+* [OpenBSD Amsterdam](https://openbsd.amsterdam) - OpenBSD VM hosting by
+  [High5!](https://high5.nl)
+* [OpenBSD.app](https://openbsd.app) - OpenBSD package set search
+* [OpenBSD Ports](https://openports.se/) - OpenBSD ports updates and
+  search
+* [CVSweb](https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/) - OpenBSD
+  sources
+* [bxr.su](https://bxr.su) - OpenGrok search & cross-reference BSD OS sources
+
+#### News and publications ####
+
+* [Lobste.rs](https://lobste.rs) - CompSci link aggregation community
+* [OSNews](https://osnews.com) - Operating System news
+* [OpenBSD Journal](https://undeadly.org
 
 ### Projects ###
 

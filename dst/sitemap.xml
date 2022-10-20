@@ -21,8 +21,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://nechtan.io/articles/openbsd_assembly.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/openbsd_arm64_qemu.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/openbsd_crosscompiling_arm64.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
-<url><loc>https://nechtan.io/articles/openbsd_minimalist_desktop.sync-conflict-20221019-140554-CERVA7Q.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/contact.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/about.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
-<url><loc>https://nechtan.io/index.sync-conflict-20221020-103112-CERVA7Q.html</loc><lastmod>2022-10-20</lastmod><priority>1.0</priority></url>
 </urlset>
