@@ -2,6 +2,10 @@
 
 * [CGXLive](projects/cgxlive.html "2009-08-05") - OpenBSD Live ISO (05 Aug 2009) [discontinued]
 
+### Code ###
+
+* [Win32 Blaster / Lovesan A worm analysis](code/blaster_analysis.html "2004-04-10") (10 Apr 2004)
+
 ### Articles ###
 * [OpenBSD Minimalist Desktop](articles/openbsd_minimalist_desktop.html "2022-10-16") (16 Oct 2022)
 * [OpenBSD Desktop](articles/openbsd_desktop.html "2018-12-03") (03 Dec 2018)
