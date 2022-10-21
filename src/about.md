@@ -18,6 +18,12 @@ GPG Key: [gpg.txt](/gpg.txt)
 * [C style(9)](https://man.openbsd.org/style)
 * [🌐 Syncthing](https://syncthing.net/)
 
+#### Network things ####
+
+* [info.addr.tools](https://info.addr.tools/)
+* [dnscheck.tools](dnscheck.tools)
+* [DNSviz](https://dnsviz.net)
+
 #### OpenBSD things ####
 
 * [OpenBSD Amsterdam](https://openbsd.amsterdam) - OpenBSD VM hosting by [High5!](https://high5.nl)
@@ -101,4 +107,3 @@ SAC, and anyone I've missed - active or inactive.
 * Amstrad PCW 8256 (Grandad's!)
 * IBM 8086
 * Patriot Cyrix M-II 333Mhz 80686
-

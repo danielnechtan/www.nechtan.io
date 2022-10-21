@@ -48,7 +48,7 @@
 <pre><code>dd if=&#47;dev&#47;urandom of=&#47;dev&#47;stdout count=1 bs=64 | openssl base64
 </code></pre>
 
-<p>Keep the resulting base64-encoded key for later.  For demonstration purposes I will be using the following sha256 key:</p>
+<p>Keep the resulting base64-encoded key for later. For demonstration purposes I will be using the following sha256 key:</p>
 
 <pre><code>0i96GKeAPxwGZ2ALxrvM882oL107NuCnXLjv4PRpzCS31oySYILYzbs02Aes0OqCgy5+rA96YGep2xFWmzsKHg==
 </code></pre>
@@ -65,7 +65,7 @@ remote-control:
         control-interface: &#47;var&#47;run&#47;nsd.sock
         server-key-file: "&#47;var&#47;nsd&#47;etc&#47;nsd_server.key"
         server-cert-file: "&#47;var&#47;nsd&#47;etc&#47;nsd_server.pem"
-        control-key-file: &#47;var&#47;nsd&#47;etc&#47;nsd_control.key"
+        control-key-file: "&#47;var&#47;nsd&#47;etc&#47;nsd_control.key"
         control-cert-file: "&#47;var&#47;nsd&#47;etc&#47;nsd_control.pem"
 
 key:
@@ -84,7 +84,7 @@ zone:
 
 <p>The default base location (OpenBSD users rarely deviate from good defaults!) for zonefiles is <strong>&#47;var&#47;nsd&#47;zones</strong> so we create the file <strong>&#47;var&#47;nsd&#47;zones&#47;master&#47;foresthall.org.uk</strong>:</p>
 
-<pre><code>$ORIGIN foresthall.org.uk.    ; default zone domain
+<pre><code>$ORIGIN foresthall.org.uk. ; default zone domain
 $TTL 86400                    ; default time to live
 
 @ IN SOA ns1.cryogenix.net. foresthall.org.uk. (
@@ -155,13 +155,13 @@ Setup success. Certificates created. Enable in nsd.conf file to use
 ;; WARNING: recursion requested but not available
 
 ;; QUESTION SECTION:
-;foresthall.org.uk.             IN      ANY
+;foresthall.org.uk. IN      ANY
 
 ;; ANSWER SECTION:
-foresthall.org.uk.      86400   IN      SOA     ns1.cryogenix.net. foresthall.org.uk. 2018010203 28800 7200 864000 86400
-foresthall.org.uk.      86400   IN      NS      ns1.cryogenix.net.
-foresthall.org.uk.      86400   IN      MX      10 mail.foresthall.org.uk.
-foresthall.org.uk.      86400   IN      A       82.35.249.157
+foresthall.org.uk. 86400   IN      SOA     ns1.cryogenix.net. foresthall.org.uk. 2018010203 28800 7200 864000 86400
+foresthall.org.uk. 86400   IN      NS      ns1.cryogenix.net.
+foresthall.org.uk. 86400   IN      MX      10 mail.foresthall.org.uk.
+foresthall.org.uk. 86400   IN      A       82.35.249.157
 
 ;; ADDITIONAL SECTION:
 mail.foresthall.org.uk. 86400   IN      A       82.35.249.157
@@ -190,8 +190,8 @@ rcctl start nsd
 <p>Now we generate keys - a zone-signing key (ZSK) and a key-signing key (KSK):</p>
 
 <pre><code>$ cd &#47;var&#47;nsd&#47;zones
-$ export ZSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -a RSASHA512 -b 2048 foresthall.org.uk`
-$ export KSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -k -a RSASHA512 -b 4096 foresthall.org.uk`
+$ export ZSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -a ECDSAP256SHA256 -b 256 foresthall.org.uk`
+$ export KSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -k -a ECDSAP256SHA256 -b 256 foresthall.org.uk`
 </code></pre>
 
 <p>DS records were automagically generated, but we will create our own later so delete them:</p>
@@ -223,11 +223,11 @@ $ nsd-control reload foresthall.org.uk
 <p>Generate DS records for our zone and save the result to your clipboard or somewhere:</p>
 
 <pre><code>$ ldns-key2ds -n -f -2 master&#47;foresthall.org.uk.signed
-foresthall.org.uk.      86400   IN      DS      28892 7 2 fa1b31305013e427a8dac5318fbf6ffcdbfda94309ddf12ebdca101a5e07167d
-foresthall.org.uk.      86400   IN      DS      28316 10 2 1e38d492215cd05a28b8ea64eaf42c82648064b7c563b7ea27eddd9a7e8d69d3
+foresthall.org.uk. 86400   IN      DS      28892 7 2 fa1b31305013e427a8dac5318fbf6ffcdbfda94309ddf12ebdca101a5e07167d
+foresthall.org.uk. 86400   IN      DS      28316 10 2 1e38d492215cd05a28b8ea64eaf42c82648064b7c563b7ea27eddd9a7e8d69d3
 </code></pre>
 
-<p>These records must be added at TLD level - as we&#8217;re using a .org.uk domain, we are covered by nominet&#8217;s dns*.nic.uk.  Your domain registrar may have a form in their control panel for you to add these DS records, else you may have to contact their customer services. Once the keys have been added, you can check them using dig:</p>
+<p>These records must be added at TLD level - as we&#8217;re using a .org.uk domain, we are covered by nominet&#8217;s dns*.nic.uk. Your domain registrar may have a form in their control panel for you to add these DS records, else you may have to contact their customer services. Once the keys have been added, you can check them using dig:</p>
 
 <pre><code>$ dig DS foresthall.org.uk. +trace +short | egrep &#39;^DS&#39;
 DS 28316 10 2 1E38D492215CD05A28B8EA64EAF42C82648064B7C563B7EA27EDDD9A 7E8D69D3 from server dns1.nic.uk in 29 ms.
@@ -236,11 +236,11 @@ DS 28892 7 2 FA1B31305013E427A8DAC5318FBF6FFCDBFDA94309DDF12EBDCA101A 5E07167D f
 
 <p>The easiest way to verify everything is working is to check the domain on <a href="https://en.internet.nl/">internet.nl</a>.</p>
 
-<p>Unfortunately, this setup requires maintenance - the DNSSEC signatures will expire in four weeks (thanks <a href="https://twitter.com/Habbie">@Habbie</a>!), so some hackery with shell scripts and cron jobs is probably the best solution until something more robust is included in OpenBSD.  One such example is <a href="https://github.com/wekers/Sign-DNSSEC">sign-DNSSEC</a>.</p>
+<p>Unfortunately, this setup requires maintenance - the DNSSEC signatures will expire in four weeks (thanks <a href="https://twitter.com/Habbie">@Habbie</a>!), so some hackery with shell scripts and cron jobs is probably the best solution until something more robust is included in OpenBSD. One such example is <a href="https://github.com/wekers/Sign-DNSSEC">sign-DNSSEC</a>.</p>
 
 <p>Update: Callum Smith, author of <a href="https://github.com/cullum/dank-selfhosted/">dank-selfhosted</a> has a very clean script which can be run in a cron nightly <a href="https://github.com/cullum/dank-selfhosted/blob/master/roles/nsd/files/resign-zone.sh">here</a></p>
 
-<p>To setup a slave, follow this procedure again - but replace the allow-notify and request-xfr IP with that of the master nameserver.  Once both are up and running, use nsd-control(8) with the force_transfer command to test a zone transfer.</p>
+<p>To setup a slave, follow this procedure again - but replace the allow-notify and request-xfr IP with that of the master nameserver. Once both are up and running, use nsd-control(8) with the force_transfer command to test a zone transfer.</p>
 <hr/>
 <hr/>
 <p><a href="/">${HOME}</a></p>
