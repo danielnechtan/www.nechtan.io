@@ -142,7 +142,7 @@ Now we generate keys - a zone-signing key (ZSK) and a key-signing key (KSK):
 
     $ cd /var/nsd/zones
     $ export ZSK=`/usr/local/bin/ldns-keygen -a RSASHA512 -b 2048 foresthall.org.uk`
-    $ export KSK=`/usr/local/bin/ldns-keygen -k RSASHA512 -b 4096 foresthall.org.uk`
+    $ export KSK=`/usr/local/bin/ldns-keygen -k -a RSASHA512 -b 4096 foresthall.org.uk`
 
 DS records were automagically generated, but we will create our own later so delete them:
 

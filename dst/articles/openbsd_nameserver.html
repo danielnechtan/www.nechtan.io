@@ -191,7 +191,7 @@ rcctl start nsd
 
 <pre><code>$ cd &#47;var&#47;nsd&#47;zones
 $ export ZSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -a RSASHA512 -b 2048 foresthall.org.uk`
-$ export KSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -k RSASHA512 -b 4096 foresthall.org.uk`
+$ export KSK=`&#47;usr&#47;local&#47;bin&#47;ldns-keygen -k -a RSASHA512 -b 4096 foresthall.org.uk`
 </code></pre>
 
 <p>DS records were automagically generated, but we will create our own later so delete them:</p>
