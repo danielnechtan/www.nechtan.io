@@ -8,10 +8,18 @@ and communication. Remember! Tor isn't perfect, we recommend you still
 use additional security layers such as SSL/TLS on top of the Tor
 Network. OpenVPN is also available should you wish to join a network.
 
+## Screenshots
+
+[![CGXLive 0.43](CGXLive043a.png)](CGXLive043a.png)
+
+[![CGXLive 0.43](CGXLive043a-1.png)](CGXLive043a-1.png)
+
+[![CGXLive 0.43](CGXLive043a-2.png)](CGXLive043a-2.png)
+
+
 ## Featured Software (0.43a)
 
 * **OpenBSD 4.3; OpenSSL 0.9.7j; OpenSSH 4.8; Xorg 7.3**
-
 * **fluxbox-0.9.15.1p1** - A nice, light-weight WM
 * **BitchX-1.0c18p3** - ircII on LSD
 * **cryptcat-1.2.1p0** - Netcat->encrypted()

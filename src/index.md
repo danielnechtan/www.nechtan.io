@@ -1,14 +1,18 @@
 ### Projects ###
 
-* [CGXLive](projects/cgxlive.html "2009-08-05") - OpenBSD Live ISO (05 Aug 2009) [discontinued]
+* [CGXLive](projects/cgxlive.html "2009-08-05") - Anonymous OpenBSD Live ISO (05 Aug 2009) [discontinued]
 
 ### Code ###
 
-* [sysinfo.pl](code/sysinfo.pl "2005-01-01") (32.6K) - imbezol's sysinfo.pl / [read](https://github.com/danielnechtan/danielnechtan.github.io/blob/main/code/sysinfo.pl)
 * [W32.Blaster.A / Lovesan Worm Analysis](code/blaster_analysis.html "2004-04-10") (10 Apr 2004)
+
+#### Historical 3rd Party ####
+
+* [sysinfo.pl](code/sysinfo.pl "2005-01-01") (32.6K) - imbezol's sysinfo.pl / [read](https://github.com/danielnechtan/danielnechtan.github.io/blob/main/code/sysinfo.pl)
 * [CAUnreal3.2-beta17b.patch.gz](code/CAUnreal3.2-beta17b.patch.gz "2003-07-20") (27.6K) - CyberArmy UnrealIRCd patch (20 Jul 2003)
 * [Unreal3.2-beta17.tar.gz](code/Unreal3.2-beta17.tar.gz) (1.2M) - UnrealIRCd v3.2 beta17 (16 Jun 2003)
 * [board183a.zip](code/board183a.zip "2000-08-21") (76.9K) - Mr Fong Device (WWWBoard) (21 Aug 2000)
+
 
 ### Articles ###
 * [OpenBSD Minimalist Desktop](articles/openbsd_minimalist_desktop.html "2022-10-16") (16 Oct 2022)
