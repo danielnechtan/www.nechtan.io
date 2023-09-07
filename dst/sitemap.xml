@@ -21,6 +21,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://nechtan.io/articles/openvms_simh_1.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/openvms_simh_2.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/shellcoding_on_freebsd.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
+<url><loc>https://nechtan.io/articles/bluesky_pds_el9.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/code/blaster_analysis.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/contact.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/index.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
