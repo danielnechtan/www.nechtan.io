@@ -24,8 +24,8 @@
   </div>
   <p></p>
   <p>
-    <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="/#Projects">Projects</a> &mdash;
     <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
@@ -33,25 +33,18 @@
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1>NCSA Mosaic 2.7 on OpenBSD</h1>
-
+<h1 id="ncsa-mosaic-2.7-on-openbsd">NCSA Mosaic 2.7 on OpenBSD</h1>
 <p>A classic web browser, now available on OpenBSD</p>
-
-<p>Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy this historic web browser. NCSA's site causes a coredump, so run the binary with another URL as an argument. It's not great as a browser on the modern web, but it does make a great gopher client!</p>
-
-<p>Now using Cameron Kaiser's patches and alternative ('modern') renderer.  This needs a serious code audit before even considering submitting to ports.</p>
-
-<pre><code>$ git clone https://github.com/danielnechtan/mosaic-CK-openbsd
+<p>Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy this historic web browser. NCSA&#8217;s site causes a coredump, so run the binary with another URL as an argument. It&#8217;s not great as a browser on the modern web, but it does make a great gopher client!</p>
+<p>Now using Cameron Kaiser&#8217;s patches and alternative (&#8216;modern&#8217;) renderer.  This needs a serious code audit before even considering submitting to ports.</p>
+<pre><code>$ git clone https:&#47;&#47;github.com&#47;danielnechtan&#47;mosaic-CK-openbsd
 $ doas pkg_add motif
-$ cd mosaic-CK-openbsd &amp;&amp; make openbsd
-$ src/Mosaic gopher://gopher.club
+$ cd mosaic-CK-openbsd &#38;&#38; make openbsd
+$ src&#47;Mosaic gopher:&#47;&#47;gopher.club
 </code></pre>
-
 <p><a href="fvwm.png"><img src="fvwm.png" alt="Mosaic Screenshot" /></a>
 <img src="mosaic-ck.png" alt="Mosaic Screenshot" />
 <img src="mosaic-ck-2.png" alt="Mosaic Screenshot 2" /></p>
-<hr/>
-<hr/>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
 <!--

@@ -24,8 +24,8 @@
   </div>
   <p></p>
   <p>
-    <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="/#Projects">Projects</a> &mdash;
     <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
@@ -33,114 +33,78 @@
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1>Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h1>
-
-<p><strong>UPDATE: I've added TLS support to Gophernicus so you don't need to use stunnel anymore. The code is ugly and unpolished though so I wouldn't recommend for production use.</strong> </p>
-
+<h1 id="down-the-gopher-hole-with-openbsd-gophernicus-and-tls">Down the Gopher hole with OpenBSD, Gophernicus, and TLS</h1>
+<p><strong>UPDATE: I&#8217;ve added TLS support to Gophernicus so you don&#8217;t need to use stunnel anymore. The code is ugly and unpolished though so I wouldn&#8217;t recommend for production use.</strong> </p>
 <ul>
-<li><a href="https://github.com/danielnechtan/gophernicus">https://github.com/danielnechtan/gophernicus</a></li>
+<li><a href="https://github.com/danielnechtan/gophernicus">https:&#47;&#47;github.com&#47;danielnechtan&#47;gophernicus</a></li>
 <li><a href="https://github.com/danielnechtan/gophernicus/blob/master/INSTALL.openbsd">INSTALL.openbsd</a></li>
 </ul>
-
 <p><img src="gopher-tls.png" alt="Gophernicus+TLS" /></p>
-
-<p>In the early 2000s I thought I had seen the worst of the web - Java applets, Macromedia (>Adobe) Flash, animated GIFs, javascript snow that kept you warm in the winter by burning out your CPU, and so on.  For a time we learned from these mistakes, and started putting the burden on the server-side - then with improvements in javascript engines we started abusing it again with JSON/AJAX and it all went down hill from there.</p>
-
-<p>Like cloud computing, blockchains, machine learning and a tonne of other a la mode technologies around today - most users and service providers don't need websites that consume 1GB of memory processing JS and downloading 50MB of compressed data just to read Alice's one-page travel blog or Bob's notes on porting NetBSD to his blood-pressure monitor.</p>
-
-<p>Before the HTTP web we relied on Prestel/Minitel style systems, BBS systems, and arguably the most accessible of all - Gopher! Gopher was similar to the locally accessed AmigaGuide format, in that it allowed users to search and retrieve documents interactively, with links and cross-references. Its efficiency and distraction-free nature make it attractive to those who are tired of the invasive, clickbait, ad-filled, javascript-laden web2/3.x. But enough complaining and evangelism - here's how to get your own Gopher Hole!</p>
-
-<p>Gophernicus is a modern gopher daemon which aims to be secure (although it still uses inetd -_-); it's even in OpenBSD ports so at least we can rely on it to be reasonably audited. Let's install that and also an ncurses-based gopher client (or lynx(1)) to test things out later:</p>
-
+<p>In the early 2000s I thought I had seen the worst of the web - Java applets, Macromedia (&#62;Adobe) Flash, animated GIFs, javascript snow that kept you warm in the winter by burning out your CPU, and so on.  For a time we learned from these mistakes, and started putting the burden on the server-side - then with improvements in javascript engines we started abusing it again with JSON&#47;AJAX and it all went down hill from there.</p>
+<p>Like cloud computing, blockchains, machine learning and a tonne of other a la mode technologies around today - most users and service providers don&#8217;t need websites that consume 1GB of memory processing JS and downloading 50MB of compressed data just to read Alice&#8217;s one-page travel blog or Bob&#8217;s notes on porting NetBSD to his blood-pressure monitor.</p>
+<p>Before the HTTP web we relied on Prestel&#47;Minitel style systems, BBS systems, and arguably the most accessible of all - Gopher! Gopher was similar to the locally accessed AmigaGuide format, in that it allowed users to search and retrieve documents interactively, with links and cross-references. Its efficiency and distraction-free nature make it attractive to those who are tired of the invasive, clickbait, ad-filled, javascript-laden web2&#47;3.x. But enough complaining and evangelism - here&#8217;s how to get your own Gopher Hole!</p>
+<p>Gophernicus is a modern gopher daemon which aims to be secure (although it still uses inetd -_-); it&#8217;s even in OpenBSD ports so at least we can rely on it to be reasonably audited. Let&#8217;s install that and also an ncurses-based gopher client (or lynx(1)) to test things out later:</p>
 <pre><code>$ doas pkg_add gophernicus gopher
 </code></pre>
-
 <p>If you plan on offering Gopher over TLS:</p>
-
 <pre><code>$ doas pkg_add stunnel
 </code></pre>
-
-<p>Instruct inetd(8) how to handle gopher connections (defaults to port 70 TCP) by adding this to /etc/inetd.conf</p>
-
-<pre><code>gopher stream tcp nowait _gophernicus /usr/local/libexec/in.gophernicus in.gophernicus -h go.cryogenix.net
+<p>Instruct inetd(8) how to handle gopher connections (defaults to port 70 TCP) by adding this to &#47;etc&#47;inetd.conf</p>
+<pre><code>gopher stream tcp nowait _gophernicus &#47;usr&#47;local&#47;libexec&#47;in.gophernicus in.gophernicus -h go.cryogenix.net
 </code></pre>
-
 <ul>
 <li>Replace go.cryogenix.net with your FQDN. </li>
 <li>Add <strong>-T 343</strong> if you plan on using TLS on port 343 (IANA has no port allocated for Gopher over TLS but 343 is unassigned and I came across a post with someone mentioning it as a possibility).</li>
 </ul>
-
-<p>See <strong>/usr/local/share/doc/gophernicus/README</strong> for a full listing of command-line arguments and usage options; Gophernicus is feature-rich so it's recommended you RTFM carefully.</p>
-
-<p>If you are using TLS, add a [gophernicus] service to /etc/stunnel/stunnel.conf. For the cert and key, I just added an alternative name for my domain in /etc/acme-client.conf, moved the old cert and ran <strong>acme-client -vFAD cryogenix.net</strong> to update my Let's Encrypt cert:</p>
-
+<p>See <strong>&#47;usr&#47;local&#47;share&#47;doc&#47;gophernicus&#47;README</strong> for a full listing of command-line arguments and usage options; Gophernicus is feature-rich so it&#8217;s recommended you RTFM carefully.</p>
+<p>If you are using TLS, add a [gophernicus] service to &#47;etc&#47;stunnel&#47;stunnel.conf. For the cert and key, I just added an alternative name for my domain in &#47;etc&#47;acme-client.conf, moved the old cert and ran <strong>acme-client -vFAD cryogenix.net</strong> to update my Let&#8217;s Encrypt cert:</p>
 <pre><code>[gophernicus]
-cert = /etc/ssl/cryogenix.net.crt
-key = /etc/ssl/private/cryogenix.net.key
+cert = &#47;etc&#47;ssl&#47;cryogenix.net.crt
+key = &#47;etc&#47;ssl&#47;private&#47;cryogenix.net.key
 accept = 343
 connect = 127.0.0.1:70
 protocol = proxy
 </code></pre>
-
-<p>Create a directory for our virtual host's gopher hole and copy the default 'index' to it so we can test it:</p>
-
-<pre><code>$ doas mkdir /var/gopher/go.cryogenix.net
-$ doas cp /var/gopher/gophermap /var/gopher/go.cryogenix.net/
+<p>Create a directory for our virtual host&#8217;s gopher hole and copy the default &#8216;index&#8217; to it so we can test it:</p>
+<pre><code>$ doas mkdir &#47;var&#47;gopher&#47;go.cryogenix.net
+$ doas cp &#47;var&#47;gopher&#47;gophermap &#47;var&#47;gopher&#47;go.cryogenix.net&#47;
 </code></pre>
-
 <p>Enable and start inetd (and optionally stunnel):</p>
-
 <pre><code>$ rcctl enable inetd
 $ rcctl start inetd
 
 $ rcctl enable stunnel
 $ rcctl start stunnel
 </code></pre>
-
-<p>If you had no errors, you should now be able to use gopher(1) to connect to your server - either by hostname [and optional port] or gopher:// url.</p>
-
-<pre><code>$ gopher gopher://go.cryogenix.net
+<p>If you had no errors, you should now be able to use gopher(1) to connect to your server - either by hostname [and optional port] or gopher:&#47;&#47; url.</p>
+<pre><code>$ gopher gopher:&#47;&#47;go.cryogenix.net
 </code></pre>
-
 <p>If you used stunnel(1) to TLSify Gophernicus, one way you can connect with gopher(1) over TLS on port 343 is by using stunnel(1) on the client or socat(1):</p>
-
 <pre><code>$ pkg_add stunnel
 </code></pre>
-
-<p>Add the following to /etc/stunnel/stunnel.conf:</p>
-
+<p>Add the following to &#47;etc&#47;stunnel&#47;stunnel.conf:</p>
 <pre><code>[gophers]
 client = yes
 accept = 127.0.0.1:10343
-connect = &lt;hostname&gt;:343
-CApath = /etc/ssl/cert.pem
+connect = &#60;hostname&#62;:343
+CApath = &#47;etc&#47;ssl&#47;cert.pem
 </code></pre>
-
 <p>Then start stunnel with rcctl and connect gopher to 127.0.0.1:10343.</p>
-
 <p>Alternatively, with socat:</p>
-
 <pre><code>$ doas pkg_add socat
-$ socat TCP4-LISTEN:10070 openssl-connect:go.cryogenix.net:343,cafile=/etc/ssl/cert.pem,method=TLS1.2,verify=0,reuseaddr &amp;
-$ gopher gopher://localhost:10070
+$ socat TCP4-LISTEN:10070 openssl-connect:go.cryogenix.net:343,cafile=&#47;etc&#47;ssl&#47;cert.pem,method=TLS1.2,verify=0,reuseaddr &#38;
+$ gopher gopher:&#47;&#47;localhost:10070
 </code></pre>
-
-<h5>Caveats</h5>
-
+<h5 id="caveats">Caveats</h5>
 <ul>
 <li>when connecting to stunnel, libressl returns error 21 (unable to verify first cert) - however the same cert returns no error on port 443 (httpd(8)).</li>
-<li>socat(1) will die when the connection is closed or reaches EOF, which is on every gopher request. Normally we would add the 'fork' option to the end of the openssl-connect command but for some reason it causes gopher(1) to become a runaway process and eat up CPU time.</li>
+<li>socat(1) will die when the connection is closed or reaches EOF, which is on every gopher request. Normally we would add the &#8216;fork&#8217; option to the end of the openssl-connect command but for some reason it causes gopher(1) to become a runaway process and eat up CPU time.</li>
 </ul>
-
-<p>If you need a starting point with Gopher, SDF-EU's wiki has a good article <a href="https://sdfeu.org/w/tutorials:gopher">here</a>.</p>
-
-<p>Finally, if you don't like gopher(1) - there's always lynx(1) or <a href="https://cryogenix.net/NCSA_Mosaic_OpenBSD.html">NCSA Mosaic</a>!</p>
-
+<p>If you need a starting point with Gopher, SDF-EU&#8217;s wiki has a good article <a href="https://sdfeu.org/w/tutorials:gopher">here</a>.</p>
+<p>Finally, if you don&#8217;t like gopher(1) - there&#8217;s always lynx(1) or <a href="https://cryogenix.net/NCSA_Mosaic_OpenBSD.html">NCSA Mosaic</a>!</p>
 <p><img src="gop2.jpg" alt="Gopher client viewing cryogenix" />
 <img src="gop3.jpg" alt="Gopher client viewing cryogenix" />
 <img src="gop.jpg" alt="Gopher on Mosaic Screenshot" /></p>
-<hr/>
-<hr/>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
 <!--

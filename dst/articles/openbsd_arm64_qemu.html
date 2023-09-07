@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <title>OpenBSD/arm64 on QEMU with networking &mdash; Daniel Nechtan</title>
+  <title>OpenBSD&#47;arm64 on QEMU with networking &mdash; Daniel Nechtan</title>
   <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="og:type" content="summary_large_image" />
@@ -24,8 +24,8 @@
   </div>
   <p></p>
   <p>
-    <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="/#Projects">Projects</a> &mdash;
     <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
@@ -33,47 +33,33 @@
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1>OpenBSD/arm64 on QEMU with networking</h1>
-
-<p>With the increasing popularity of ARM64/AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu's move away from SPARC64 supercomputers, there hasn't been a better time to get started with learning this architecture.</p>
-
-<p>I wanted to make a start to an Aarch64 assembly language tutorial but didn't have access to my RPi3, so I looked into the state of QEMU's emulation. I didn't need RPi3-specific hardware - which is just as well as I can't remember off-hand how the bootcode and start.elf crap would work with QEMU - anyway, I opted for a generic device using Linaro's EDK2 UEFI firmware.</p>
-
-<p>The first pre-built EDK2 binary I downloaded wouldn't play nicely with the OpenBSD kernel so I grabbed a release mentioned by the <a href="https://wiki.freebsd.org/arm64/QEMU">FreeBSD team</a> - which worked.</p>
-
-<h4>Prerequisites</h4>
-
+<h1 id="openbsdarm64-on-qemu-with-networking">OpenBSD&#47;arm64 on QEMU with networking</h1>
+<p>With the increasing popularity of ARM64&#47;AArch64 systems, from the Raspberry Pi 3 and PINE64 to Fujitsu&#8217;s move away from SPARC64 supercomputers, there hasn&#8217;t been a better time to get started with learning this architecture.</p>
+<p>I wanted to make a start to an Aarch64 assembly language tutorial but didn&#8217;t have access to my RPi3, so I looked into the state of QEMU&#8217;s emulation. I didn&#8217;t need RPi3-specific hardware - which is just as well as I can&#8217;t remember off-hand how the bootcode and start.elf crap would work with QEMU - anyway, I opted for a generic device using Linaro&#8217;s EDK2 UEFI firmware.</p>
+<p>The first pre-built EDK2 binary I downloaded wouldn&#8217;t play nicely with the OpenBSD kernel so I grabbed a release mentioned by the <a href="https://wiki.freebsd.org/arm64/QEMU">FreeBSD team</a> - which worked.</p>
+<h4 id="prerequisites">Prerequisites</h4>
 <ul>
-<li>OpenBSD/amd64 host</li>
+<li>OpenBSD&#47;amd64 host</li>
 <li>miniroot64.fs (arm64)</li>
 <li><a href="http://releases.linaro.org/components/kernel/uefi-linaro/16.02/release/qemu64/QEMU_EFI.fd">QEMU_EFI.fd</a> (v16.02) </li>
 <li>QEMU (doas pkg_add qemu)</li>
 </ul>
-
-<h4>Network Prep</h4>
-
+<h4 id="network-prep">Network Prep</h4>
 <p>The procedure here is pretty much identical to that outlined in <a href="https://www.openbsd.org/faq/faq16.html">faq16</a>. We create a vether0 and bridge0 interface for our tap interface to NAT through egress.</p>
-
 <pre><code>$ doas su -
-# echo 'inet 192.168.54.1 255.255.255.0 NONE' &gt;/etc/hostname.vether0
-# echo 'add vether0' &gt;/etc/hostname.bridge0
-# sh /etc/netstart vether0 
-# sh /etc/netstart bridge0 
+# echo &#39;inet 192.168.54.1 255.255.255.0 NONE&#39; &#62;&#47;etc&#47;hostname.vether0
+# echo &#39;add vether0&#39; &#62;&#47;etc&#47;hostname.bridge0
+# sh &#47;etc&#47;netstart vether0 
+# sh &#47;etc&#47;netstart bridge0 
 # sysctl net.inet.ip.forwarding=1
 </code></pre>
-
-<p>Add the following rule to /etc/pf.conf (replace egress if necessary with your network_interface:0):</p>
-
+<p>Add the following rule to &#47;etc&#47;pf.conf (replace egress if necessary with your network_interface:0):</p>
 <pre><code>match out on egress from vether0:network to any nat-to (egress)
 </code></pre>
-
 <p>Reload our pf configuration:</p>
-
-<pre><code># pfctl -f /etc/pf.conf
+<pre><code># pfctl -f &#47;etc&#47;pf.conf
 </code></pre>
-
-<p>Create /etc/dhcpd.conf so your VM can use dhcp:</p>
-
+<p>Create &#47;etc&#47;dhcpd.conf so your VM can use dhcp:</p>
 <pre><code>option domain-name "cryogenix.net"
 option domain-name-servers 1.1.1.1;
 
@@ -82,30 +68,20 @@ subnet 192.168.54.0 netmask 255.255.255.0 {
     range 192.168.54.100 192.168.54.199;
 }
 </code></pre>
-
 <p>Start dhcpd:</p>
-
 <pre><code># rcctl -f start dhcpd
 </code></pre>
-
-<h4>Preparing QEMU</h4>
-
+<h4 id="preparing-qemu">Preparing QEMU</h4>
 <p>Fetch miniroot64.fs, SHA256, SHA256.sig, and QEMU_EFI.fd:</p>
-
-<pre><code>$ ftp https://cdn.openbsd.org/pub/OpenBSD/6.4/arm64/{SHA256,SHA256.sig,miniroot64.fs}
-$ ftp http://releases.linaro.org/components/kernel/uefi-linaro/16.02/release/qemu64/QEMU_EFI.fd 
-$ signify -Cp /etc/signify/openbsd-64-base.pub -x SHA256.sig miniroot64.fs
+<pre><code>$ ftp https:&#47;&#47;cdn.openbsd.org&#47;pub&#47;OpenBSD&#47;6.4&#47;arm64&#47;{SHA256,SHA256.sig,miniroot64.fs}
+$ ftp http:&#47;&#47;releases.linaro.org&#47;components&#47;kernel&#47;uefi-linaro&#47;16.02&#47;release&#47;qemu64&#47;QEMU_EFI.fd 
+$ signify -Cp &#47;etc&#47;signify&#47;openbsd-64-base.pub -x SHA256.sig miniroot64.fs
 </code></pre>
-
 <p>Create a qcow2 image to use as our disk:</p>
-
 <pre><code>$ qemu-img create -f qcow2 root.qcow2 10G
 </code></pre>
-
-<h4>Booting miniroot64.fs</h4>
-
+<h4 id="booting-miniroot64.fs">Booting miniroot64.fs</h4>
 <p>Thanks to <a href="https://marc.info/?l=openbsd-arm&amp;m=151582483025728&amp;w=2">jsg@</a> for the -M and -device arguments to use instead of -M raspi3.</p>
-
 <pre><code>doas sh -c "qemu-system-aarch64 -runas $USER \
 -m 2048 \
 -M virt \
@@ -119,40 +95,31 @@ $ signify -Cp /etc/signify/openbsd-64-base.pub -x SHA256.sig miniroot64.fs
 -nographic \
 -serial tcp::4450,server,telnet,wait"
 </code></pre>
-
 <p>In another terminal (hello, tmux!):</p>
-
 <pre><code>$ telnet localhost 4450
-&gt;&gt; OpenBSD/arm64 BOOTAA64 0.13
-boot&gt;
+&#62;&#62; OpenBSD&#47;arm64 BOOTAA64 0.13
+boot&#62;
 </code></pre>
-
-<p>Proceed to install OpenBSD as normal; at set selection -x* -g* is recommended. To boot into your new system, remove the line with miniroot64.fs from the command above and perhaps saving the full command as a shell script for your convenience. We don't need the serial console anymore if you elected to start sshd at boot, so the -serial line could either be removed or changed to '-serial FILE:serial.log'.</p>
-
+<p>Proceed to install OpenBSD as normal; at set selection -x* -g* is recommended. To boot into your new system, remove the line with miniroot64.fs from the command above and perhaps saving the full command as a shell script for your convenience. We don&#8217;t need the serial console anymore if you elected to start sshd at boot, so the -serial line could either be removed or changed to &#8216;-serial FILE:serial.log&#8217;.</p>
 <pre><code>Tue Nov 13 16:43:48 GMT 2018
 
-OpenBSD/arm64 (foo.cryogenix.net) (console)
+OpenBSD&#47;arm64 (foo.cryogenix.net) (console)
 
 login:
 </code></pre>
-
 <p>Done.</p>
-
 <pre><code>$ uname -a
 OpenBSD foo.cryogenix.net 6.4 GENERIC#511 arm64
 
 $ sysinfo.pl
-Hostname: foo - OS: OpenBSD 6.4/arm64 - CPU:  - Processes: 31 
+Hostname: foo - OS: OpenBSD 6.4&#47;arm64 - CPU:  - Processes: 31 
 Uptime: 2m - Users: 1 - Load Average: 1.19 - 
-Memory Usage: 26.94MB/1990.47MB (1.35%) - 
-Disk Usage: 0.62GB/9.73GB (6.42%)
+Memory Usage: 26.94MB&#47;1990.47MB (1.35%) - 
+Disk Usage: 0.62GB&#47;9.73GB (6.42%)
 
 cc -dumpmachine: aarch64-unknown-openbsd6.4
 </code></pre>
-
 <p>As always, thank you for reading and all feedback is welcome. </p>
-<hr/>
-<hr/>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
 <!--

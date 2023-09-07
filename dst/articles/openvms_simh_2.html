@@ -24,8 +24,8 @@
   </div>
   <p></p>
   <p>
-    <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="/#Projects">Projects</a> &mdash;
     <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
@@ -33,35 +33,22 @@
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1>OpenVMS and SIMH - Part 2</h1>
-
+<h1 id="openvms-and-simh---part-2">OpenVMS and SIMH - Part 2</h1>
 <p>Running OpenVMS on the SIMH VAX simulator</p>
-
-<p>Welcome to the second part of  <a href="OpenVMS_and_SIMH_pt1.html">Getting Started with OpenVMS and SIMH</a>. This article assumes that you have already followed  <a href="OpenVMS_and_SIMH_pt1.html">part 1</a>  or have at least installed  <strong>OpenVMS VAX 7.3</strong>  on a system, with  <strong>dua0</strong> containing the OS,  <strong>dua1</strong>  containing user-directories, and TCP/IP services are functional. If in doubt, have a quick read over what we did in the first part. For this part, we will install and use  <strong>UNZIP</strong>,  <strong>wget</strong>,  <strong>Compaq C</strong> and the  <strong>WASD</strong>  HTTP server.  </p>
-
-<p>Although I'd /love/ to throw you in at the deep-end, I think the transition to OpenVMS will be easier if we introduce a couple of utilities you may be familiar with and break you in gently. This is a bit of a 'ghetto' guide to OpenVMS 7.3, and is primarily for users learning through SIMH - so, we will use the easiest methods of retrieving and installing what we need (despite them not being the most traditional methods).  </p>
-
-<p><strong>UNZIP &amp; WGET</strong>  </p>
-
-<p>These two utilities, in my opinion, are extremely useful when getting started with OpenVMS 7.3 in SIMH. The main reason being that you will find many 3rd-party applications will be ZIP archived, and nowadays - HTTP is much more common for files than FTP. WGET, although slightly bloated, is one of the most popular utilities in the UNIX(-like) world for grabbing files over HTTP and FTP. Although you should be ashamed for bringing it and similar utilities into your nice, clean, OpenVMS installation - it will aid you in the transition from UNIX to OpenVMS by providing some niceties you have become accustomed to having. So, let's grab 'wget' first. Login to your OpenVMS system as a normal user, and type '<strong>sh def</strong>'. This is short for '<strong>SHOW DEFAULT</strong>' and is like the '<strong>pwd</strong>' command on UNIX/Unix-like systems. It will display the current directory you are in. If you followed the first tutorial on installing OpenVMS in SIMH, you should see something like the following:  </p>
-
+<p>Welcome to the second part of  <a href="OpenVMS_and_SIMH_pt1.html">Getting Started with OpenVMS and SIMH</a>. This article assumes that you have already followed  <a href="OpenVMS_and_SIMH_pt1.html">part 1</a>  or have at least installed  <strong>OpenVMS VAX 7.3</strong>  on a system, with  <strong>dua0</strong> containing the OS,  <strong>dua1</strong>  containing user-directories, and TCP&#47;IP services are functional. If in doubt, have a quick read over what we did in the first part. For this part, we will install and use  <strong>UNZIP</strong>,  <strong>wget</strong>,  <strong>Compaq C</strong> and the  <strong>WASD</strong>  HTTP server.  </p>
+<p>Although I&#8217;d &#47;love&#47; to throw you in at the deep-end, I think the transition to OpenVMS will be easier if we introduce a couple of utilities you may be familiar with and break you in gently. This is a bit of a &#8216;ghetto&#8217; guide to OpenVMS 7.3, and is primarily for users learning through SIMH - so, we will use the easiest methods of retrieving and installing what we need (despite them not being the most traditional methods).  </p>
+<p><strong>UNZIP &#38; WGET</strong>  </p>
+<p>These two utilities, in my opinion, are extremely useful when getting started with OpenVMS 7.3 in SIMH. The main reason being that you will find many 3rd-party applications will be ZIP archived, and nowadays - HTTP is much more common for files than FTP. WGET, although slightly bloated, is one of the most popular utilities in the UNIX(-like) world for grabbing files over HTTP and FTP. Although you should be ashamed for bringing it and similar utilities into your nice, clean, OpenVMS installation - it will aid you in the transition from UNIX to OpenVMS by providing some niceties you have become accustomed to having. So, let&#8217;s grab &#8216;wget&#8217; first. Login to your OpenVMS system as a normal user, and type &#8216;<strong>sh def</strong>&#8217;. This is short for &#8216;<strong>SHOW DEFAULT</strong>&#8217; and is like the &#8216;<strong>pwd</strong>&#8217; command on UNIX&#47;Unix-like systems. It will display the current directory you are in. If you followed the first tutorial on installing OpenVMS in SIMH, you should see something like the following:  </p>
 <pre><code>$ sh def
   DUA1:[INT16H]
 </code></pre>
-
-<p>This means that you are in a directory named "<strong>INT16H</strong>" at the root of the <strong>DUA1:</strong> drive. We will discover more about how directories are addressed in a moment.  </p>
-
-<p>We should create a directory for our downloaded files to live in. Looking at the above '<strong>path</strong>', how would you expect a full path to '<strong>DOWNLOADS</strong>' within the '<strong>INT16H</strong>' directory to look? On a Unix-like system, you would probably expect something like '<strong>/home/int16h/downloads</strong>' - but this is not UNIX.  </p>
-
-<p>For clarity, we will create a directory using its full path using the '<strong>create</strong>' command like when we created the user-directory:</p>
-
-<pre><code>$ create/dir dua1:[INT16H.DOWNLOADS]
+<p>This means that you are in a directory named &#8220;<strong>INT16H</strong>&#8221; at the root of the <strong>DUA1:</strong> drive. We will discover more about how directories are addressed in a moment.  </p>
+<p>We should create a directory for our downloaded files to live in. Looking at the above &#8216;<strong>path</strong>&#8217;, how would you expect a full path to &#8216;<strong>DOWNLOADS</strong>&#8217; within the &#8216;<strong>INT16H</strong>&#8217; directory to look? On a Unix-like system, you would probably expect something like &#8216;<strong>&#47;home&#47;int16h&#47;downloads</strong>&#8217; - but this is not UNIX.  </p>
+<p>For clarity, we will create a directory using its full path using the &#8216;<strong>create</strong>&#8217; command like when we created the user-directory:</p>
+<pre><code>$ create&#47;dir dua1:[INT16H.DOWNLOADS]
 </code></pre>
-
-<p>As you can see, we first reference the device, then the path from there is [enclosed], with each directory separated by a period/dot/full-stop. This is probably more similar to AmigaDOS than any other modern operating systems you may have came across.  </p>
-
-<p>You will receive no confirmation of the command's success, but if it did not succeed - you will receive an error message. To see that your new directory does actually exist, run '<strong>dir</strong>' (<strong>DIRECTORY</strong>), which will provide you with a directory-listing, similar to that below.</p>
-
+<p>As you can see, we first reference the device, then the path from there is [enclosed], with each directory separated by a period&#47;dot&#47;full-stop. This is probably more similar to AmigaDOS than any other modern operating systems you may have came across.  </p>
+<p>You will receive no confirmation of the command&#8217;s success, but if it did not succeed - you will receive an error message. To see that your new directory does actually exist, run &#8216;<strong>dir</strong>&#8217; (<strong>DIRECTORY</strong>), which will provide you with a directory-listing, similar to that below.</p>
 <pre><code>$ dir
 
 Directory DUA1:[INT16H]
@@ -70,9 +57,7 @@ DOWNLOADS.DIR;1
 
 Total of 1 file.    
 </code></pre>
-
-<p>We can now move into this directory by issuing the "<strong>set def</strong>" (<strong>SET DEFAULT</strong>) command. You could pass '<strong>dua1:[INT16H.DOWNLOADS]</strong>' as the path to change to, but as we are in the directory where our target directory exists - that wouldn't be the quickest path. Instead, run '<strong>set def [.DOWNLOADS]</strong>' - the '.' before '<strong>DOWNLOADS</strong>' tells the system that we want to change to a directory named '<strong>DOWNLOADS</strong>' within the current directory. Although it may be tempting to issue '<strong>set def DOWNLOADS</strong>' or '<strong>set def [DOWNLOADS]</strong>' but this wouldn't work how you may expect:</p>
-
+<p>We can now move into this directory by issuing the &#8220;<strong>set def</strong>&#8221; (<strong>SET DEFAULT</strong>) command. You could pass &#8216;<strong>dua1:[INT16H.DOWNLOADS]</strong>&#8217; as the path to change to, but as we are in the directory where our target directory exists - that wouldn&#8217;t be the quickest path. Instead, run &#8216;<strong>set def [.DOWNLOADS]</strong>&#8217; - the &#8216;.&#8217; before &#8216;<strong>DOWNLOADS</strong>&#8217; tells the system that we want to change to a directory named &#8216;<strong>DOWNLOADS</strong>&#8217; within the current directory. Although it may be tempting to issue &#8216;<strong>set def DOWNLOADS</strong>&#8217; or &#8216;<strong>set def [DOWNLOADS]</strong>&#8217; but this wouldn&#8217;t work how you may expect:</p>
 <pre><code>$ set def [.DOWNLOADS]
 $ sh def
   DUA1:[INT16H.DOWNLOADS]
@@ -81,40 +66,27 @@ $ set def dua1:[INT16H.DOWNLOADS]
 $ sh def
   DUA1:[INT16H.DOWNLOADS]
 </code></pre>
-
-<p>As you can see from either command above, we are now in the correct directory. If you were to change to '[DOWNLOADS]' instead of [.DOWNLOADS] we would receive:</p>
-
+<p>As you can see from either command above, we are now in the correct directory. If you were to change to &#8216;[DOWNLOADS]&#8217; instead of [.DOWNLOADS] we would receive:</p>
 <pre><code>$ set def [DOWNLOADS]
 $ sh def
   DUA1:[DOWNLOADS]
 %DCL-I-INVDEF, DUA1:[DOWNLOADS] does not exist
 </code></pre>
-
-<p>This is because '<strong>[DOWNLOADS]</strong>' would take us to '<strong>DUA1:[DOWNLOADS]</strong>' which doesn't currently exist.  </p>
-
-<p>It would be quite useful if we knew how to go back a directory. In many operating systems, '<strong>cd ..</strong>' would allow you to do this, but as you know - we use '<strong>set def</strong> ('<strong>SET DEFAULT</strong>'), and rather than '<strong>..</strong>' we use '<strong>[-]</strong>'. So, we will move back into your 'home' directory now:</p>
-
+<p>This is because &#8216;<strong>[DOWNLOADS]</strong>&#8217; would take us to &#8216;<strong>DUA1:[DOWNLOADS]</strong>&#8217; which doesn&#8217;t currently exist.  </p>
+<p>It would be quite useful if we knew how to go back a directory. In many operating systems, &#8216;<strong>cd ..</strong>&#8217; would allow you to do this, but as you know - we use &#8216;<strong>set def</strong> (&#8216;<strong>SET DEFAULT</strong>&#8217;), and rather than &#8216;<strong>..</strong>&#8217; we use &#8216;<strong>[-]</strong>&#8217;. So, we will move back into your &#8216;home&#8217; directory now:</p>
 <pre><code>$ set def [-]
 $ sh def
   DUA1:[INT16H]
 </code></pre>
-
-<p>Now that you know how to create directories and navigate around the data disk, we will create one more directory, naming it "BIN" - so store programs you want for your own use.</p>
-
-<pre><code>$ create/dir [.BIN]
+<p>Now that you know how to create directories and navigate around the data disk, we will create one more directory, naming it &#8220;BIN&#8221; - so store programs you want for your own use.</p>
+<pre><code>$ create&#47;dir [.BIN]
 </code></pre>
-
 <p>Change directory to [.BIN] and we shall download the UNZIP utility.</p>
-
 <pre><code>$ set def [.BIN]
 </code></pre>
-
-<p>Available for OpenVMS is a wide range of freeware utilities and applications, usually made available from the ~~<a href="https://web.archive.org/web/20090312034329/http://www.openvms.compaq.com/openvms/freeware/">OpenVMS Freeware CDs</a>~~. These are available as large zip files from Compaq (HP) or alternatively, you can browse and download programs from the Freeware CDs as well as many others via ~~<a href="https://web.archive.org/web/20090312034329/http://www.saic.com/">SAIC.com's</a>  <a href="https://web.archive.org/web/20090312034329/http://mvb.saic.com/">OpenVMS Freeware Archive</a>.~~ The problem is, many of them are zipped - and we do not have the means to unzip these archives.  </p>
-
-<p>Luckily, many FTP sites contain useful tools such as UNZIP in a compiled executable for Alpha, ia64 and VAX; suitable for running straight away. Such sites include <a href="https://web.archive.org/web/20090312034329/http://www.process.com/">Process.com</a> and the ~~<a href="https://web.archive.org/web/20090312034329/http://mvb.saic.com/">SAIC OpenVMS Freeware Archive</a>~~ mentioned above. We will be using SAIC's archive so that you can get used to the structure of the Freeware CDs.  </p>
-
-<p>Use the 'FTP' client supplied with OpenVMS to connect to ~~<strong>mvb.saic.com</strong>~~ (no longer available) and login Anonymously</p>
-
+<p>Available for OpenVMS is a wide range of freeware utilities and applications, usually made available from the <del><a href="https://web.archive.org/web/20090312034329/http://www.openvms.compaq.com/openvms/freeware/">OpenVMS Freeware CDs</a></del>. These are available as large zip files from Compaq (HP) or alternatively, you can browse and download programs from the Freeware CDs as well as many others via <del><a href="https://web.archive.org/web/20090312034329/http://www.saic.com/">SAIC.com&#8217;s</a>  <a href="https://web.archive.org/web/20090312034329/http://mvb.saic.com/">OpenVMS Freeware Archive</a>.</del> The problem is, many of them are zipped - and we do not have the means to unzip these archives.  </p>
+<p>Luckily, many FTP sites contain useful tools such as UNZIP in a compiled executable for Alpha, ia64 and VAX; suitable for running straight away. Such sites include <a href="https://web.archive.org/web/20090312034329/http://www.process.com/">Process.com</a> and the <del><a href="https://web.archive.org/web/20090312034329/http://mvb.saic.com/">SAIC OpenVMS Freeware Archive</a></del> mentioned above. We will be using SAIC&#8217;s archive so that you can get used to the structure of the Freeware CDs.  </p>
+<p>Use the &#8216;FTP&#8217; client supplied with OpenVMS to connect to <del><strong>mvb.saic.com</strong></del> (no longer available) and login Anonymously</p>
 <pre><code>$ ftp mvb.saic.com
 220 mvb.saic.com MultiNet FTP Server Process V5.2(16) at Tue 13-Jan-2009 6:38AM-PST
 Connected to mvb.saic.com. 
@@ -123,10 +95,10 @@ Name (mvb.saic.com:int16h): Anonymous
 Password: 
 230-
 230-    Greetings, and welcome to the DECUS tape archives here at Mvb.Saic.Com. 
-230-    This archive contains submissions of the VMS and L&amp;T; SIGs of the U.S.
+230-    This archive contains submissions of the VMS and L&#38;T; SIGs of the U.S.
 230-    DECUS chapter.  The entire SIG tape collection of the VMS (nee VAX) SIG
 230-    and the Languages and Tools SIG are available here.  There are also a
-230-    few extras here such as the Info-VAX archive, Freeware V4.0 &amp; V5.0 disks,
+230-    few extras here such as the Info-VAX archive, Freeware V4.0 &#38; V5.0 disks,
 230-    x11r6, Tex, ISO9660, etc.  There is also a mirror of the VMS freeware
 230-    archive at Process Software (in the [.PROCESS] directory) and a mirror
 230-    of the DECWindows archive at CENA (in the [.DECWINDOWS] directory).
@@ -137,24 +109,19 @@ Password:
 230-    syntax in order to accomodate all of the "the world is unix" ftp
 230-    clients out there.  To return to VMS syntax, issue the command: cd []
 230-
-230-Guest User INT16H logged into /disk$misc/decus at Tue 13-Jan-2009 6:38AM-PST, job 36903.
+230-Guest User INT16H logged into &#47;disk$misc&#47;decus at Tue 13-Jan-2009 6:38AM-PST, job 36903.
 230 Directory and access restrictions apply
-FTP&gt; 
+FTP&#62; 
 </code></pre>
-
-<p>You will see that we logged in as user <strong>Anonymous</strong> and we gave our ident (username) as the password. As you connect to more FTP servers running OpenVMS, you will notice that the 'Anonymous' login will always require your ident - rather than an e-mail address like many other servers nowadays.  </p>
-
-<p>The utilities we will be downloading are located in <strong>[.FREEWAREV80.000tools.vax_images]</strong>. Although the server has been set to use UNIX syntax by default (as we were informed by the MOTD), we can still navigate through the server like a normal OpenVMS system. Let's go to the directory we require now.</p>
-
-<pre><code>FTP&gt; sh def
+<p>You will see that we logged in as user <strong>Anonymous</strong> and we gave our ident (username) as the password. As you connect to more FTP servers running OpenVMS, you will notice that the &#8216;Anonymous&#8217; login will always require your ident - rather than an e-mail address like many other servers nowadays.  </p>
+<p>The utilities we will be downloading are located in <strong>[.FREEWAREV80.000tools.vax_images]</strong>. Although the server has been set to use UNIX syntax by default (as we were informed by the MOTD), we can still navigate through the server like a normal OpenVMS system. Let&#8217;s go to the directory we require now.</p>
+<pre><code>FTP&#62; sh def
 257 "DISK$MISC:[DECUS]" is current directory.
-FTP&gt; set def [.FREEWAREV80.000tools.vax_images]
+FTP&#62; set def [.FREEWAREV80.000tools.vax_images]
 250 Connected to DISK$MISC:[DECUS.FREEWAREV80.000TOOLS.VAX_IMAGES].
 </code></pre>
-
-<p>Let's have a look at which tools are available before we go downloading:</p>
-
-<pre><code>FTP&gt; dir
+<p>Let&#8217;s have a look at which tools are available before we go downloading:</p>
+<pre><code>FTP&#62; dir
 200 Port 192.8 at Host 79.64.146.144 accepted.
 150 List started.
 
@@ -171,43 +138,35 @@ ZIP.EXE;1                 137  20-JUL-2006 17:35 [BERRYMAN] (RE,RE,RE,RE)
 Total of 664 blocks in 6 files.
 
 226 Transfer completed.
-542 bytes received in 00:00:00.03 seconds (17.64 Kbytes/s)
+542 bytes received in 00:00:00.03 seconds (17.64 Kbytes&#47;s)
 </code></pre>
-
-<p>You may download any utilities you will require, but for now we will just grab ZIP.EXE and UNZIP.EXE. Remember to switch to binary mode for transfers though, else you won't be able to execute the files:</p>
-
-<pre><code>FTP&gt; binary
+<p>You may download any utilities you will require, but for now we will just grab ZIP.EXE and UNZIP.EXE. Remember to switch to binary mode for transfers though, else you won&#8217;t be able to execute the files:</p>
+<pre><code>FTP&#62; binary
 200 Type I ok.
-FTP&gt; get ZIP.EXE
+FTP&#62; get ZIP.EXE
 200 Port 192.9 at Host 79.xxx.xxx.xxx accepted.
 150 IMAGE retrieve of DISK$MISC:[DECUS.FREEWAREV80.000TOOLS.VAX_IMAGES]ZIP.EXE;1 (70144 bytes) started.
 226 Transfer completed.  70144 (8) bytes transferred.
 local: DUA1:[INT16H.BIN]ZIP.EXE;1  remote: ZIP.EXE
-70144 bytes received in 00:00:01.34 seconds (51.11 Kbytes/s)
-FTP&gt; get UNZIP.EXE
+70144 bytes received in 00:00:01.34 seconds (51.11 Kbytes&#47;s)
+FTP&#62; get UNZIP.EXE
 200 Port 192.10 at Host 79.xxx.xxx.xxx accepted.
 150 IMAGE retrieve of DISK$MISC:[DECUS.FREEWAREV80.000TOOLS.VAX_IMAGES]UNZIP.EXE;1 (106496 bytes) started.
 226 Transfer completed.  106496 (8) bytes transferred.
 local: DUA1:[INT16H.BIN]UNZIP.EXE;1  remote: UNZIP.EXE
-106496 bytes received in 00:00:01.56 seconds (66.66 Kbytes/s)
-FTP&gt; 
+106496 bytes received in 00:00:01.56 seconds (66.66 Kbytes&#47;s)
+FTP&#62; 
 </code></pre>
-
-<p>If you have any problems retrieving directory listings, downloading files etc - you can adjust the PASV/PASSIVE FTP settings with the '<strong>passive</strong>' command. Type "<strong>exit</strong>" to disconnect and terminate FTP. Using the '<strong>r</strong>' ('<strong>RUN</strong>') command, we can check that the binaries/images will run successfully:</p>
-
+<p>If you have any problems retrieving directory listings, downloading files etc - you can adjust the PASV&#47;PASSIVE FTP settings with the &#8216;<strong>passive</strong>&#8217; command. Type &#8220;<strong>exit</strong>&#8221; to disconnect and terminate FTP. Using the &#8216;<strong>r</strong>&#8217; (&#8216;<strong>RUN</strong>&#8217;) command, we can check that the binaries&#47;images will run successfully:</p>
 <pre><code>$ r unzip.exe
 UnZip 5.52 of 28 February 2005, by Info-ZIP.  For more details see: unzip -v.
 ~
 </code></pre>
-
-<p>Perfect! Or is it? Let's try to run unzip.exe again, but this time we'll append '-v' to it.</p>
-
+<p>Perfect! Or is it? Let&#8217;s try to run unzip.exe again, but this time we&#8217;ll append &#8216;-v&#8217; to it.</p>
 <pre><code>$ r unzip.exe -v
 %DCL-W-MAXPARM, too many parameters - reenter command with fewer parameters
 </code></pre>
-
-<p>That's not very useful, not for running a command which requires parameters anyway. OpenVMS has an extremely useful online help system (online as in live, within the OS). Let's have a brief look at that now and hope we can discover why we can't use '<strong>RUN</strong>' how we would like:</p>
-
+<p>That&#8217;s not very useful, not for running a command which requires parameters anyway. OpenVMS has an extremely useful online help system (online as in live, within the OS). Let&#8217;s have a brief look at that now and hope we can discover why we can&#8217;t use &#8216;<strong>RUN</strong>&#8217; how we would like:</p>
 <pre><code>$ help run
 
 RUN
@@ -227,34 +186,25 @@ RUN
 
 RUN Subtopic? 
 </code></pre>
-
-<p>We have established that '<strong>run</strong>' won't let us use programs which require argc/argv-style parameters, and now the help system has informed us that we must use the <strong>Automatic Foreign Command</strong> format or the <strong>Foreign Command</strong> format. Foreign Commands are usually programs which aren't native to OpenVMS and as such don't comply with how OpenVMS expects applications to be run - or can be any programs/commands outside of DCL. For example the '<strong>RUN</strong>' command, if issued without a filename as a parameter, will prompt you to enter a filename. This is not the case with the vast majority of programs which have been ported from UNIX and other systems. To exit from the help system, press <strong>CTRL-Z</strong>.  </p>
-
-<p>To be able to run these commands, we will define a <strong>symbol</strong>. A symbol is a symbolic name or alias for a string, the result isn't unlike setting environment variables in other operating systems. <strong>==</strong> is used for global symbols, and prepended a colon (':') is used for strings. Here are a couple of examples of setting symbols:</p>
-
+<p>We have established that &#8216;<strong>run</strong>&#8217; won&#8217;t let us use programs which require argc&#47;argv-style parameters, and now the help system has informed us that we must use the <strong>Automatic Foreign Command</strong> format or the <strong>Foreign Command</strong> format. Foreign Commands are usually programs which aren&#8217;t native to OpenVMS and as such don&#8217;t comply with how OpenVMS expects applications to be run - or can be any programs&#47;commands outside of DCL. For example the &#8216;<strong>RUN</strong>&#8217; command, if issued without a filename as a parameter, will prompt you to enter a filename. This is not the case with the vast majority of programs which have been ported from UNIX and other systems. To exit from the help system, press <strong>CTRL-Z</strong>.  </p>
+<p>To be able to run these commands, we will define a <strong>symbol</strong>. A symbol is a symbolic name or alias for a string, the result isn&#8217;t unlike setting environment variables in other operating systems. <strong>==</strong> is used for global symbols, and prepended a colon (&#8216;:&#8217;) is used for strings. Here are a couple of examples of setting symbols:</p>
 <pre><code>$ A == 1
 $ B :== bee
 </code></pre>
-
 <p>The online help system can tell us the format used for setting symbols:</p>
-
 <pre><code>     symbol-name =[=] expression
 
    symbol-name[bit-position,size] =[=] replacement-expression
 </code></pre>
-
-<p>Using the '<strong>SHOW</strong>' command, you can display the value of any single symbol or all of them at once:</p>
-
+<p>Using the &#8216;<strong>SHOW</strong>&#8217; command, you can display the value of any single symbol or all of them at once:</p>
 <pre><code>$ show symbol A
   A = 1   Hex = 00000001  Octal = 00000000001
 
-$ show symbol/all
+$ show symbol&#47;all
   A = 1   Hex = 00000001  Octal = 00000000001
   B = "BEE"
 </code></pre>
-
-<p>These can be used like variables, aliases for commands etc. If we wanted to create a symbol called '<strong>ls</strong>' which had the string value "<strong>DIR</strong>" associated with it, we could use '<strong>ls</strong>' in place of '<strong>DIR</strong>':</p>
-
+<p>These can be used like variables, aliases for commands etc. If we wanted to create a symbol called &#8216;<strong>ls</strong>&#8217; which had the string value &#8220;<strong>DIR</strong>&#8221; associated with it, we could use &#8216;<strong>ls</strong>&#8217; in place of &#8216;<strong>DIR</strong>&#8217;:</p>
 <pre><code>$ ls :== DIR
 $ sh symbol ls
   LS = "DIR"
@@ -266,55 +216,40 @@ UNZIP.EXE;1         ZIP.EXE;1
 
 Total of 2 files.
 </code></pre>
-
-<p>This is all very useful, but it doesn't quite let us run our Foreign Commands yet. Try creating a symbol which will point to '<strong>DUA1:[INT16H.BIN]UNZIP.EXE</strong>', then issue your new symbol as a command:</p>
-
+<p>This is all very useful, but it doesn&#8217;t quite let us run our Foreign Commands yet. Try creating a symbol which will point to &#8216;<strong>DUA1:[INT16H.BIN]UNZIP.EXE</strong>&#8217;, then issue your new symbol as a command:</p>
 <pre><code>$ unzip :== DUA1:[INT16H.BIN]UNZIP.EXE
 $ unzip
 %DCL-W-IVVERB, unrecognized command verb - check validity and spelling \DUA1\
 </code></pre>
-
-<p>We need to flag the symbol as being associated with a foreign command, so it will treat it as such. This is done by adding '$' at the beginning of the 'path':</p>
-
+<p>We need to flag the symbol as being associated with a foreign command, so it will treat it as such. This is done by adding &#8216;$&#8217; at the beginning of the &#8216;path&#8217;:</p>
 <pre><code>$ unzip :== $DUA1:[INT16H.BIN]UNZIP.EXE
 $ sh symbol unzip
   UNZIP == "$DUA1:[INT16H.BIN]UNZIP.EXE"
 </code></pre>
-
-<p>Now let's try running 'unzip' again, and then try issuing the '-v' parameter.</p>
-
+<p>Now let&#8217;s try running &#8216;unzip&#8217; again, and then try issuing the &#8216;-v&#8217; parameter.</p>
 <pre><code>$ unzip
 UnZip 5.52 of 28 February 2005, by Info-ZIP.  For more details see: unzip -v.
 ~
 
 $ unzip -v
 UnZip 5.52 of 28 February 2005, by Info-ZIP.  Maintained by C. Spieler.  Send
-bug reports using http://www.info-zip.org/zip-bug.html; see README for details.
+bug reports using http:&#47;&#47;www.info-zip.org&#47;zip-bug.html; see README for details.
 
-Latest sources and executables are at ftp://ftp.info-zip.org/pub/infozip/ ;
-see ftp://ftp.info-zip.org/pub/infozip/UnZip.html for other sites.
+Latest sources and executables are at ftp:&#47;&#47;ftp.info-zip.org&#47;pub&#47;infozip&#47; ;
+see ftp:&#47;&#47;ftp.info-zip.org&#47;pub&#47;infozip&#47;UnZip.html for other sites.
 
 Compiled with VAX C for VMS (V5.4-2 VAX) on Feb 28 2005.
 </code></pre>
-
 <p>Congratulations, you can now unzip files. Usually you would put system utilities somewhere such as </p>
-
 <pre><code>SYS$SYSTEM
 </code></pre>
-
-<p>this is a logical name which points to '<strong>SYS$SYSROOT:[SYSEXE]</strong>' which has another logical name ;). If you would like to see a list of defined logical names, you may run '<strong>show logical/all</strong>'.  </p>
-
-<p>Because it's not ideal to create symbols for every Foreign Command program you wish to use, OpenVMS now has something comparable to the $PATH environment variable - '<strong>dcl$path</strong>'. This is defined with the '<strong>define</strong>' command, and will allow you to set one or more directories to be in your "path" for running Foreign Commands. To enable us to run any executables from our [.BIN] directory, we shall add it to '<strong>dcl$path</strong>' now:</p>
-
+<p>this is a logical name which points to &#8216;<strong>SYS$SYSROOT:[SYSEXE]</strong>&#8217; which has another logical name ;). If you would like to see a list of defined logical names, you may run &#8216;<strong>show logical&#47;all</strong>&#8217;.  </p>
+<p>Because it&#8217;s not ideal to create symbols for every Foreign Command program you wish to use, OpenVMS now has something comparable to the $PATH environment variable - &#8216;<strong>dcl$path</strong>&#8217;. This is defined with the &#8216;<strong>define</strong>&#8217; command, and will allow you to set one or more directories to be in your &#8220;path&#8221; for running Foreign Commands. To enable us to run any executables from our [.BIN] directory, we shall add it to &#8216;<strong>dcl$path</strong>&#8217; now:</p>
 <pre><code>$ define dcl$path dua1:[INT16H.BIN]
 </code></pre>
-
-<p>You can check that it is working by running "zip" from the command-line.  </p>
-
-<p>Finally we have acquired the ZIP and UNZIP utilities, but have also learned some basic but important OpenVMS commands. Next we will download 'wget', another utility from the UNIX world, and install it into our personal 'BIN' directory.  </p>
-
+<p>You can check that it is working by running &#8220;zip&#8221; from the command-line.  </p>
+<p>Finally we have acquired the ZIP and UNZIP utilities, but have also learned some basic but important OpenVMS commands. Next we will download &#8216;wget&#8217;, another utility from the UNIX world, and install it into our personal &#8216;BIN&#8217; directory.  </p>
 <p><strong>Wget - the web-getter</strong> Wget for OpenVMS is available from <a href="http://www.antinode.info/dec/index.html">AntiNode.info</a> amongst other places, as are a few other utilities you may find useful. We will be downloading a ZIP file to our DOWNLOADS directory, extracting it, then copying the wget binary to BIN:</p>
-
 <pre><code>$ set def [-.DOWNLOADS]
 $ ftp antinode.info
 
@@ -327,62 +262,52 @@ Name (alp.antinode.info:int16h): Anonymous
 Password: 
 230 Guest login OK, access restrictions apply.
 
-FTP&gt; set def [.WGET.wget-1_10_2c_vms]
+FTP&#62; set def [.WGET.wget-1_10_2c_vms]
 250-CWD command successful.
 250 New default directory is SYS$SYSDEVICE:[ANONYMOUS.WGET.WGET-1_10_2C_VMS]
 
-FTP&gt; binary
+FTP&#62; binary
 200 TYPE set to IMAGE.
 
-FTP&gt; get WGET-1_10_2C_VMS.ZIP
+FTP&#62; get WGET-1_10_2C_VMS.ZIP
 200 PORT command successful.
 150 Opening data connection for SYS$SYSDEVICE:[ANONYMOUS.WGET.WGET-1_10_2C_VMS]WGET-1_10_2C_VMS.ZIP;
     (79.xxx.xxx.xxx,49166) (3171539 bytes)
 226 Transfer complete.
 local: DUA1:[INT16H.DOWNLOADS]WGET-1_10_2C_VMS.ZIP;1  remote: WGET-1_10_2C_VMS.ZIP
-3171539 bytes received in 00:00:54.61 seconds (56.71 Kbytes/s)
+3171539 bytes received in 00:00:54.61 seconds (56.71 Kbytes&#47;s)
 
-FTP&gt; exit
+FTP&#62; exit
 221 Goodbye.
 </code></pre>
-
-<p>We will now extract '<strong>WGET-1_10_2C_VMS.ZIP</strong>'. Run '<strong>unzip WGET-1_10_2C_VMS.ZIP</strong>'. You will see a lot of files extracting, but we only need one - <strong>WGET.EXE</strong> from <strong>[.wget-1_10_2c_vms.src.vax]</strong>. We will copy it to our BIN directory:</p>
-
+<p>We will now extract &#8216;<strong>WGET-1<em>10</em>2C_VMS.ZIP</strong>&#8217;. Run &#8216;<strong>unzip WGET-1<em>10</em>2C_VMS.ZIP</strong>&#8217;. You will see a lot of files extracting, but we only need one - <strong>WGET.EXE</strong> from <strong>[.wget-1<em>10</em>2c_vms.src.vax]</strong>. We will copy it to our BIN directory:</p>
 <pre><code>$ unzip WGET-1_10_2C_VMS.ZIP
 inflating: ~~
 $ copy [.wget-1_10_2c_vms.src.vax]WGET.EXE DUA1:[INT16H.BIN]WGET.EXE
 </code></pre>
-
-<p>Now you can run 'wget' for times of laziness.</p>
-
+<p>Now you can run &#8216;wget&#8217; for times of laziness.</p>
 <pre><code>$ wget
 dua1:[int16h.bin]wget.exe;1: missing URL
 Usage: dua1:[int16h.bin]wget.exe;1 [OPTION]... [URL]...
 </code></pre>
-
-<p>Try `dua1:[int16h.bin]wget.exe;1 --help' for more options.</p>
-
-<h2>Installing Supplemental Software</h2>
-
-<p>A supplemental disc is available for OpenVMS 7.3, this contains developer tools which can be essential if you want a fully-functional learning system. This will give us an opportunity to make use of our recently-installed 'wget' utility. While still in [.DOWNLOADS], create a new directory called SUPP, change to this dir then use 'wget' to retrieve your ZIP:</p>
-
-<pre><code>$ create/dir SUPP
+<p>Try `dua1:[int16h.bin]wget.exe;1 &#8211;help&#8217; for more options.</p>
+<h2 id="installing-supplemental-software">Installing Supplemental Software</h2>
+<p>A supplemental disc is available for OpenVMS 7.3, this contains developer tools which can be essential if you want a fully-functional learning system. This will give us an opportunity to make use of our recently-installed &#8216;wget&#8217; utility. While still in [.DOWNLOADS], create a new directory called SUPP, change to this dir then use &#8216;wget&#8217; to retrieve your ZIP:</p>
+<pre><code>$ create&#47;dir SUPP
 $ set def [.SUPP]
 
-$ wget "https://mirrors.pdp-11.ru/_vax__/_VMS/_distrib/7.X/Openvms%20Vax%2073%20Supplement.zip"
---22:24:46--  https://mirrors.pdp-11.ru/_vax__/_VMS/_distrib/7.X/Openvms%20Vax%2073%20Supplement.zip
-           =&gt; `Openvms Vax 73 Supplement.zip'
+$ wget "https:&#47;&#47;mirrors.pdp-11.ru&#47;_vax__&#47;_VMS&#47;_distrib&#47;7.X&#47;Openvms%20Vax%2073%20Supplement.zip"
+--22:24:46--  https:&#47;&#47;mirrors.pdp-11.ru&#47;_vax__&#47;_VMS&#47;_distrib&#47;7.X&#47;Openvms%20Vax%2073%20Supplement.zip
+           =&#62; `Openvms Vax 73 Supplement.zip&#39;
 Resolving ... xxx.xxx.xxx.xxx
 Connecting to ...|xxx.xxx.xxx.xxx|:80... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 54,545,839 (52M) [application/zip]
-100%[====================================&gt;] 54,545,839   231.87K/s    ETA 00:00
+Length: 54,545,839 (52M) [application&#47;zip]
+100%[====================================&#62;] 54,545,839   231.87K&#47;s    ETA 00:00
 
-22:28:10 (261.50 KB/s) - `Openvms Vax 73 Supplement.zip' saved [54545839/54545839]
+22:28:10 (261.50 KB&#47;s) - `Openvms Vax 73 Supplement.zip&#39; saved [54545839&#47;54545839]
 </code></pre>
-
 <p>Unzip the file, and have a look at the contents. Unzipping will probably take some time.</p>
-
 <pre><code>$ unzip OpenVMS-VAX-7_3-Supplement.zip
 Archive:  DUA1:[INT16H.SUPP]OPENVMS-VAX-7_3-SUPPLEMENT.ZIP;1
   inflating: aacrt060.a              
@@ -405,32 +330,26 @@ VMSI18N073.B;1      VMSI18N073.C;1
 
 Total of 37 files.
 </code></pre>
-
-<p>Ok, so you've waited for this archive to decompress - and now you are presented with 37 files. You will notice that most of the files end in a one-letter extension, the two exceptions being the .ZIP and .PCSI files. Lets delete the ZIP file to save space.</p>
-
+<p>Ok, so you&#8217;ve waited for this archive to decompress - and now you are presented with 37 files. You will notice that most of the files end in a one-letter extension, the two exceptions being the .ZIP and .PCSI files. Lets delete the ZIP file to save space.</p>
 <pre><code>$ delete DEC-VAXVMS-FORTRAN-V0606-201-1.PCSI;1
 </code></pre>
-
-<p>You should get used to using full filenames, including the revision appendage(;#) when working with files in OpenVMS. Back to our supplements! When you registered for your hobbyist PAKs, I hope you chose every one which was available as you will need licenses/PAKs for C, PASCAL, FORTRAN and anything else you'd like to install. Check your e-mail and look for the PAK which begins with: '<strong>$ LICENSE REGISTER C -</strong>'. Paste it into your terminal, and load it:</p>
-
-<pre><code>$ $ LICENSE REGISTER C /ISSUER=OPENVMS_HOBBYIST /AUTHORIZATION=DECUS-XXX-#########-#######
- /PRODUCER=DEC /UNITS=0 /TERMINATION_DATE=##-XXX-#### /ACTIVITY=CONSTANT=100
- /CHECKSUM=#-XXXX-XXXX-XXXX-XXXX
+<p>You should get used to using full filenames, including the revision appendage(;#) when working with files in OpenVMS. Back to our supplements! When you registered for your hobbyist PAKs, I hope you chose every one which was available as you will need licenses&#47;PAKs for C, PASCAL, FORTRAN and anything else you&#8217;d like to install. Check your e-mail and look for the PAK which begins with: &#8216;<strong>$ LICENSE REGISTER C -</strong>&#8217;. Paste it into your terminal, and load it:</p>
+<pre><code>$ $ LICENSE REGISTER C &#47;ISSUER=OPENVMS_HOBBYIST &#47;AUTHORIZATION=DECUS-XXX-#########-#######
+ &#47;PRODUCER=DEC &#47;UNITS=0 &#47;TERMINATION_DATE=##-XXX-#### &#47;ACTIVITY=CONSTANT=100
+ &#47;CHECKSUM=#-XXXX-XXXX-XXXX-XXXX
 
 $ license load C
 %LICENSE-I-UNLOADED, DEC C has been unloaded
 %LICENSE-I-LOADED, DEC C was successfully loaded with 0 units
 </code></pre>
-
-<p>We now have a license installed and loaded for C. Now we may install it safely, without complaints. When installing 'system' software, it is often preferred it is done as the '<strong>SYSTEM</strong>' user. Issue '<strong>lo</strong>' to logout of the system, then re-login as SYSTEM:</p>
-
+<p>We now have a license installed and loaded for C. Now we may install it safely, without complaints. When installing &#8216;system&#8217; software, it is often preferred it is done as the &#8216;<strong>SYSTEM</strong>&#8217; user. Issue &#8216;<strong>lo</strong>&#8217; to logout of the system, then re-login as SYSTEM:</p>
 <pre><code>$ lo
 Connection closed by foreign host.N-2009 00:44:44.56
 cgxlap:~ int16h$ 
 cgxlap:~ int16h$ telnet 10.0.0.69
 Trying 10.0.0.69...
 Connected to 10.0.0.69.
-Escape character is '^]'.
+Escape character is &#39;^]&#39;.
 
 
  Welcome to OpenVMS (TM) VAX Operating System, Version V7.3    
@@ -459,17 +378,17 @@ The following products will be processed:
 
 %VMSINSTAL-I-RESTORE, Restoring product save set A ...
 
-**WARNING!** If you downloaded these sets and you are not using an original CD/ISO, it's likely they do not have the correct attributes set for VMSINSTAL to acknowledge them. You may receive messages like:
+**WARNING!** If you downloaded these sets and you are not using an original CD&#47;ISO, it&#39;s likely they do not have the correct attributes set for VMSINSTAL to acknowledge them. You may receive messages like:
 
 %BACKUP-F-NOTSAVESET, DUA1:[INT16H.SUPP]CC064.A;1 is not a BACKUP save set
 %VMSINSTAL-E-NOSAVESET, Save set  A  cannot be restored.
 
-This may sound quite serious, but usually - as mentioned above, it's due to incorrect file attributes. This can be fixed quite easily:
+This may sound quite serious, but usually - as mentioned above, it&#39;s due to incorrect file attributes. This can be fixed quite easily:
 
-$ SET FILE/ATT=(LRL:32256,MRS:32256,RFM:FIX) CC064.*;*
+$ SET FILE&#47;ATT=(LRL:32256,MRS:32256,RFM:FIX) CC064.*;*
 $ @SYS$UPDATE:VMSINSTAL CC064 DUA1:[INT16H.SUPP]
 
-Installation should now continue, most of the answers to questions will be quite easy to answer; If in doubt - answer 'YES' to any questions regarding installing something.
+Installation should now continue, most of the answers to questions will be quite easy to answer; If in doubt - answer &#39;YES&#39; to any questions regarding installing something.
 
         Product:      C
         Producer:     DEC
@@ -478,33 +397,25 @@ Installation should now continue, most of the answers to questions will be quite
 
 * Does this product have an authorization key registered and loaded? YES
 
-As we have already installed and loaded our PAK, you should answer 'YES' here.
+As we have already installed and loaded our PAK, you should answer &#39;YES&#39; here.
 
     The file SYS$STARTUP:CCXX$STARTUP.COM contains commands to be
     executed at system startup to allow for the best compilation
     performance.  You may want to invoke this command file from your
-    system's site specific start up file.  This command file does not
+    system&#39;s site specific start up file.  This command file does not
     have to be invoked for correct operation of Compaq C.
 </code></pre>
-
-<p>Again, these kind of installation notes can be very useful. In this case it's not crucial to perform this task for the product to function, but sometimes there will be additional steps you must take.  </p>
-
-<h2>Installing WASD VMS Hypertext Services</h2>
-
-<p><a href="http://wasd.vsm.com.au/">WASD</a> is <strong>the</strong> HTTP server package exclusive to OpenVMS. We're going to compile and install it now so you can test out the compiler you just installed. There are architecture-specific packages we could use to install WASD, but I'm sure you're eager to let it compile while you go make some coffee. We'll start by downloading <strong>htroot930.zip</strong> from <a href="http://wasd.vsm.com.au/wasd/">wasd.vsm.com.au/wasd/</a>; make sure you are in your <strong>DOWNLOADS</strong>directory. After the transfer has completed, logout and then login as the SYSTEM user.</p>
-
-<pre><code>$ wget http://wasd.vsm.com.au/wasd/htroot930.zip
+<p>Again, these kind of installation notes can be very useful. In this case it&#8217;s not crucial to perform this task for the product to function, but sometimes there will be additional steps you must take.  </p>
+<h2 id="installing-wasd-vms-hypertext-services">Installing WASD VMS Hypertext Services</h2>
+<p><a href="http://wasd.vsm.com.au/">WASD</a> is <strong>the</strong> HTTP server package exclusive to OpenVMS. We&#8217;re going to compile and install it now so you can test out the compiler you just installed. There are architecture-specific packages we could use to install WASD, but I&#8217;m sure you&#8217;re eager to let it compile while you go make some coffee. We&#8217;ll start by downloading <strong>htroot930.zip</strong> from <a href="http://wasd.vsm.com.au/wasd/">wasd.vsm.com.au&#47;wasd&#47;</a>; make sure you are in your <strong>DOWNLOADS</strong>directory. After the transfer has completed, logout and then login as the SYSTEM user.</p>
+<pre><code>$ wget http:&#47;&#47;wasd.vsm.com.au&#47;wasd&#47;htroot930.zip
 $ lo
 </code></pre>
-
-<p>Because we have not covered the <strong>LOGIN.COM</strong> file yet, added our dcl$path to it and have not installed our utilities in [BIN] to a system-wide directory... we will have to manually set dcl$path. After this, we will change to the root of <strong>dua1</strong> using <strong>DUA1:[000000]</strong> as the path, and will finally unzip WASD there, and begin the installation.</p>
-
+<p>Because we have not covered the <strong>LOGIN.COM</strong> file yet, added our dcl$path to it and have not installed our utilities in [BIN] to a system-wide directory&#8230; we will have to manually set dcl$path. After this, we will change to the root of <strong>dua1</strong> using <strong>DUA1:[000000]</strong> as the path, and will finally unzip WASD there, and begin the installation.</p>
 <pre><code>$ SET DEF dua1:[000000]
 $ UNZIP dua1:[INT16H.DOWNLOADS]HTROOT930.ZIP
 </code></pre>
-
 <p>Extraction will take some time, it will result in the directory <strong>dua1:[HT_ROOT]</strong> being created. As per the WASD <a href="http://wasd.vsm.com.au/wasd/htroot930.txt">ReadMe</a> file - we may now proceed to install WASD.</p>
-
 <pre><code>$ @DUA1:[HT_ROOT]INSTALL
 
 %DCL-S-SPAWNED, process SYSTEM_1 spawned
@@ -514,7 +425,7 @@ $ UNZIP dua1:[INT16H.DOWNLOADS]HTROOT930.ZIP
   This package (all associated programs), comes with ABSOLUTELY NO WARRANTY.
    This is free software, and you are welcome to redistribute it under the
  conditions of the GNU GENERAL PUBLIC LICENSE, version 3, or any later version.
-                    http://www.gnu.org/licenses/gpl.txt
+                    http:&#47;&#47;www.gnu.org&#47;licenses&#47;gpl.txt
 
                ************************************************
                *  INSTALL WASD VMS HYPERTEXT SERVICES v9.3.0  *
@@ -522,9 +433,9 @@ $ UNZIP dua1:[INT16H.DOWNLOADS]HTROOT930.ZIP
 
 All sections may be individually declined before making any modifications.
 In this sense the install may be undertaken step-by-step or sections repeated.
-The first section is COMPILING/LINKING, after which you will be able to quit.
+The first section is COMPILING&#47;LINKING, after which you will be able to quit.
 In a mixed architecture cluster (including both Alpha and VAX systems) the
-compile/link section must be performed on both!
+compile&#47;link section must be performed on both!
 
 Press RETURN to continue: 
 
@@ -574,15 +485,12 @@ $ DELETE [.OBJ_VAX]*.*;*
 %DELETE-W-SEARCHFAIL, error searching for HT_ROOT:[SRC.HTTPD.OBJ_VAX]*.*;*
 -RMS-E-FNF, file not found
 $!
-$ ADMIN:   CC /DECC /STAND=RELAXED_ANSI /PREFIX=ALL /OPTIMIZE /NODEBUG /NOWARNING 
-    /FLOAT=D_FLOAT /DEFINE=(WASD_VMS_V6,WATCH_CAT=1,WATCH_MOD=0,WASD_ACME=0) 
-    /OBJ=[.OBJ_VAX]Admin    Admin.c
+$ ADMIN:   CC &#47;DECC &#47;STAND=RELAXED_ANSI &#47;PREFIX=ALL &#47;OPTIMIZE &#47;NODEBUG &#47;NOWARNING 
+    &#47;FLOAT=D_FLOAT &#47;DEFINE=(WASD_VMS_V6,WATCH_CAT=1,WATCH_MOD=0,WASD_ACME=0) 
+    &#47;OBJ=[.OBJ_VAX]Admin    Admin.c
 </code></pre>
-
-<p>You <em>could</em> install one of the listed SSL toolkits, but we don't really need SSL encryption for our little test (emulated) box at the moment. As previously mentioned, this will take some time - so find something constructive to do while you wait. I suggest looking for VAX or Alpha hardware on an auction site ;-).  </p>
-
+<p>You <em>could</em> install one of the listed SSL toolkits, but we don&#8217;t really need SSL encryption for our little test (emulated) box at the moment. As previously mentioned, this will take some time - so find something constructive to do while you wait. I suggest looking for VAX or Alpha hardware on an auction site ;-).  </p>
 <p>Eventually the build will finish. We have some more steps to do though:</p>
-
 <pre><code>                            ********************
                             *  BUILD FINISHED  *
                             ********************
@@ -608,19 +516,19 @@ Continue the installation? [NO]: YES
 %SECHAN-I-RDBADDMSG, identifier WASD_IGNORE_THIS value 80010003 added to rights database
 
                      **********************************
-                     *  CREATE/MODIFY SERVER ACCOUNT  *
+                     *  CREATE&#47;MODIFY SERVER ACCOUNT  *
                      **********************************
 
-The 'server' account HTTP$SERVER is the one the HTTPd process executes as.
+The &#39;server&#39; account HTTP$SERVER is the one the HTTPd process executes as.
 It is considered a security advantage to script using a different account.
 
-It must have a unique UIC, preferably in a group of it's own.
+It must have a unique UIC, preferably in a group of it&#39;s own.
 DO NOT choose the SYSTEM group ([1,*]) or other privileged group, or [3nn,*]
 which is reserved to OpenVMS!
 
 Note: [077,1] is a suggested UIC.
 You will be shown whether the entered uic exists before continuing.
-Entering "NONE" OR "0" skips account creation/modification.
+Entering "NONE" OR "0" skips account creation&#47;modification.
 
 [077,1]: 077,1
 
@@ -631,18 +539,13 @@ Choices: YES, create the account using this UIC.  NO, select another.
 
 [NO]: YES
 </code></pre>
-
-<p>The server account "HTTP$SERVER" must have a unique home directory.</p>
-
+<p>The server account &#8220;HTTP$SERVER&#8221; must have a unique home directory.</p>
 <p>The default is a reasonable location for most sites.</p>
-
 <p>If another device is preferred or already in place, out of the package tree,
 then that can be specified and used.  The directory name should remain as
 [HTTP$SERVER] however.  Package security settings are applied to this.</p>
-
 <p>You will be shown whether the home area already exists before continuing.
-Entering "NONE" OR "0" exits this dialog.</p>
-
+Entering &#8220;NONE&#8221; OR &#8220;0&#8221; exits this dialog.</p>
 <pre><code>[HT_ROOT:]: HT_ROOT
 
 The area HT_ROOT:[HTTP$SERVER] currently exists.
@@ -691,14 +594,11 @@ Identifier                         Value           Attributes
 
 Press RETURN to continue: 
 </code></pre>
-
-<p>What is displayed at the end may be a lot to take in. It's what user-accounts look like from UAF. There are a lot of different fields here which will be discussed at a later time, for now all you need to know that a user has been created for the server: <strong>HTTP$SERVER</strong> with a UIC of <strong>[77,1]</strong>. Hit RETURN to continue, and you will be presented with another prompt for creating an additional user - <strong>HTTP$NOBODY</strong>, which is used for the execution of DCL &amp; DECnet scripts. The defaults will be fine for us.</p>
-
+<p>What is displayed at the end may be a lot to take in. It&#8217;s what user-accounts look like from UAF. There are a lot of different fields here which will be discussed at a later time, for now all you need to know that a user has been created for the server: <strong>HTTP$SERVER</strong> with a UIC of <strong>[77,1]</strong>. Hit RETURN to continue, and you will be presented with another prompt for creating an additional user - <strong>HTTP$NOBODY</strong>, which is used for the execution of DCL &#38; DECnet scripts. The defaults will be fine for us.</p>
 <p>~</p>
-
 <pre><code>Note: [076,1] is a suggested UIC.
 You will be shown whether the entered uic exists before continuing.
-Entering "NONE" OR "0" skips account creation/modification.
+Entering "NONE" OR "0" skips account creation&#47;modification.
 
 [076,1]: 
 [NO]: YES
@@ -741,7 +641,7 @@ Please be patient, this may take some (considerable) time ...
 
 PROGRESS: 100...200...300...
 
-We can proceed with with the installation, just install everything - I'm sure you'll want to play with all the different scripts at some point.
+We can proceed with with the installation, just install everything - I&#39;m sure you&#39;ll want to play with all the different scripts at some point.
 
                            *****************************
                             *  SERVER WRITE TO [LOCAL]  *
@@ -810,7 +710,7 @@ Copy the files? [NO]: YES
     Install these scripts? [NO]: YES
 
                            *****************************
-                            *  DOCUMENT/FILE SEARCHING  *
+                            *  DOCUMENT&#47;FILE SEARCHING  *
                             *****************************
 
     QUERY and EXTRACT are scripts that can be used to perform ad hoc searching of
@@ -821,7 +721,7 @@ Copy the files? [NO]: YES
     Install these scripts? [NO]: YES
 
                        ***************************************
-                       *  CGIPLUS/RTE DEMONSTRATION SCRIPTS  *
+                       *  CGIPLUS&#47;RTE DEMONSTRATION SCRIPTS  *
                        ***************************************
 
     The CGIplus demonstration scripts are examples of how to create persistent
@@ -857,14 +757,14 @@ Copy the files? [NO]: YES
 
     Calendar ........ simple calendar maker
     Charset ......... displays the browser character set
-    Colors .......... displays fonts with different fore/background colors
+    Colors .......... displays fonts with different fore&#47;background colors
     Fetch ........... can get pages and other resources from HTTP servers
     gList ........... list and display graphics in a directory
 
     Install these scripts? [NO]: YES
 
                       **************************************
-                       *  OSU/DECNET DEMONSTRATION SCRIPTS  *
+                       *  OSU&#47;DECNET DEMONSTRATION SCRIPTS  *
                        **************************************
 
     These are some OSU demonstration scripts (from the OSU package).
@@ -880,9 +780,7 @@ Copy the files? [NO]: YES
 
     Install these scripts? [NO]: YES
 </code></pre>
-
 <p>Well done! You now have a working HTTP server installed on your system. You can start it up now by running its startup file.</p>
-
 <pre><code>$ set def DUA1:[HT_ROOT.STARTUP]
 $ @startup.com
 %WASD-I-STARTUP, begin
@@ -890,13 +788,11 @@ $ @startup.com
 %HTTPD-S-PROC_ID, identification of created process is 00000218
 %WASD-I-STARTUP, end
 </code></pre>
-
-<p>Everything appears to be in order, let's have a look at the running processes:</p>
-
-<pre><code>$ show system/full
+<p>Everything appears to be in order, let&#8217;s have a look at the running processes:</p>
+<pre><code>$ show system&#47;full
 OpenVMS V7.3  on node CGXVAX  14-JAN-2009 20:28:15.61  Uptime  1 21:25:15
         VAXserver 3900 Series
-  Pid    Process Name    State  Pri      I/O       CPU       Page flts  Pages
+  Pid    Process Name    State  Pri      I&#47;O       CPU       Page flts  Pages
 00000201 SWAPPER         HIB     16        0   0 00:00:00.15         0      0   
          [SYSTEM]                                                           0Kb
 00000205 CONFIGURE       HIB      8        5   0 00:00:00.06       112    175   
@@ -926,10 +822,7 @@ OpenVMS V7.3  on node CGXVAX  14-JAN-2009 20:28:15.61  Uptime  1 21:25:15
 00000218 HTTPd:80        HIB      6      840   0 00:00:05.02      3764   3091   
          [HTTP$SERVER]                                                   1545Kb
 </code></pre>
-
-<p>Excellent. Not only is WASD HTTPd running, it's running as the user it should be - <strong>HTTP$SERVER</strong>. Try opening a browser and accessing your new server. Many of the demo scripts+functions won't work for security reasons - you will be able to enable what you like later on when you configure and customize your server. For now, you can run '<strong>DEMO.COM</strong>' from '<strong>DUA1:[HT_ROOT.INSTALL]</strong>' which will start a demonstration server up on port 7080 in "promiscuous" mode. This should allow you to test the examples included with WASD. Be warned though, some scripts will cause the demo instance to die due the 'SYSTEM' account's <strong>AST quota</strong>. Quotas and the UAF will be explained later.</p>
-<hr/>
-<hr/>
+<p>Excellent. Not only is WASD HTTPd running, it&#8217;s running as the user it should be - <strong>HTTP$SERVER</strong>. Try opening a browser and accessing your new server. Many of the demo scripts+functions won&#8217;t work for security reasons - you will be able to enable what you like later on when you configure and customize your server. For now, you can run &#8216;<strong>DEMO.COM</strong>&#8217; from &#8216;<strong>DUA1:[HT_ROOT.INSTALL]</strong>&#8217; which will start a demonstration server up on port 7080 in &#8220;promiscuous&#8221; mode. This should allow you to test the examples included with WASD. Be warned though, some scripts will cause the demo instance to die due the &#8216;SYSTEM&#8217; account&#8217;s <strong>AST quota</strong>. Quotas and the UAF will be explained later.</p>
 <p><a href="/">${HOME}</a></p>
 <div class="footer">
 <!--

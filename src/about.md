@@ -2,13 +2,9 @@
 
 # About
 
-GPG fingerprint: `DFBA 296C C6A3 C417 4C16  C07D 7697 F7DA CBC6 8923`
-
-GPG Key: [gpg.txt](/gpg.txt)
-
 ### Curriculum Vitae
 
-[![CV of Daniel Nechtan](CV.jpg)](CV.jpg)
+[![CV of Daniel Nechtan](CV.png)](CV.pdf)
 
 ### Things I like ###
 
@@ -108,5 +104,5 @@ SAC, and anyone I've missed - active or inactive.
 * Atari ST
 * Commodore Amiga 600, 1200
 * Amstrad PCW 8256 (Grandad's!)
-* IBM 8086
+* IBM 8085
 * Patriot Cyrix M-II 333Mhz 80686
