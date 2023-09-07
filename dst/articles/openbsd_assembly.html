@@ -18,23 +18,24 @@
     <div id="headtit">
       <h4 class="">Daniel Nechtan</h4>
       <span><a href="mailto:daniel@nechtan.io">daniel@nechtan.io</a></span>
-      | <span><a href="https://wa.me/447462815195">WhatsApp</a></span>
-      | <span><a href="https://signal.me/#p/+447462815195">Signal</a></span>
+      | <span><a href="https://wa.me/447474128129">WhatsApp</a></span>
+      | <span><a href="https://signal.me/#p/+447474128129">Signal</a></span>
     </div>
   </div>
   <p></p>
   <p>
     <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1 id="assembly-language-on-openbsd-amd64arm64">Assembly language on OpenBSD amd64+arm64</h1>
+<h1>Assembly language on OpenBSD amd64+arm64</h1>
 
-<p>This is a short introduction to assembly language programming on OpenBSD&#47;amd64+arm64.  Because of security features in the kernel, I have had to rethink a series of tutorials covering Aarch64 assembly language on OpenBSD, and therefore this will serve as a placeholder-cum-reminder.</p>
+<p>This is a short introduction to assembly language programming on OpenBSD/amd64+arm64.  Because of security features in the kernel, I have had to rethink a series of tutorials covering Aarch64 assembly language on OpenBSD, and therefore this will serve as a placeholder-cum-reminder.</p>
 
 <p>OpenBSD, like many UNIX and unix-like operating systems, now uses the Executable and Linkable Format (ELF) for its binary libraries and executables.  Although the structure of this format is beyond the scope of this short introduction, it is necessary for me to explain part of one of the headers.</p>
 
@@ -43,22 +44,22 @@
 <p>The section uses a structure similar to the following:</p>
 
 <pre><code>PT_NOTE {
-    long    namesz;   &#47;* size of name *&#47;
-    long    descsz;   &#47;* size of desc *&#47;
-    long    type;     &#47;* ABI type? *&#47;
-    char    name;     &#47;* ABI&#47;vendor name *&#47;
-    long    desc;     &#47;* description *&#47;
+    long    namesz;   /* size of name */
+    long    descsz;   /* size of desc */
+    long    type;     /* ABI type? */
+    char    name;     /* ABI/vendor name */
+    long    desc;     /* description */
 }
 </code></pre>
 
 <p>For our assembled programs to link and execute correctly, we must create this section; If you are an ld(1) wizard, you can also use PHDRS to accomplish this. </p>
 
-<h5 id="our-first-program-in-c">Our first program: in C!</h5>
+<h5>Our first program: in C!</h5>
 
-<p>It&#8217;s often a good idea to prototype your assembly programs in a high level language such as C - it can then double up as both a set of notes and a working program that you can debug and compile into assembly language to compare with your own asm code. Create sysexit.c:</p>
+<p>It's often a good idea to prototype your assembly programs in a high level language such as C - it can then double up as both a set of notes and a working program that you can debug and compile into assembly language to compare with your own asm code. Create sysexit.c:</p>
 
-<pre><code>#include &#60;unistd.h&#62;
-#include &#60;sys&#47;syscall.h&#62;
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;sys/syscall.h&gt;
 
 int
 main(void)
@@ -82,7 +83,7 @@ return 0;
 
 <p>If you run the program, it should do nothing - just silently exit and return you to the shell prompt.  Exciting! Next we will rewrite this program in assembly language.</p>
 
-<h5 id="our-first-program-in-x86-64-asm-attgas-syntax">Our first program: in x86-64 Asm (AT&#38;T&#47;GAS syntax)</h5>
+<h5>Our first program: in x86-64 Asm (AT&amp;T/GAS syntax)</h5>
 
 <p>x86-64 General Purpose Registers:</p>
 
@@ -97,41 +98,41 @@ RBP    Base Pointer
 R8-15  General purpose 
 </code></pre>
 
-<p>System calls such as exit&#47;SYS_exit are defined in <strong>sys&#47;syscall.h</strong> - assemblers, unlike C compilers, can&#8217;t use these C&#47;C++ include files so we need to extract defines and macros from them to implement in assembly. That said, some fancy assemblers such as FASM and NASM may provide macros for common types and functions&#8230; but we&#8217;re good purists so won&#8217;t mention those. </p>
+<p>System calls such as exit/SYS_exit are defined in <strong>sys/syscall.h</strong> - assemblers, unlike C compilers, can't use these C/C++ include files so we need to extract defines and macros from them to implement in assembly. That said, some fancy assemblers such as FASM and NASM may provide macros for common types and functions... but we're good purists so won't mention those. </p>
 
-<p>If you look at &#47;usr&#47;include&#47;sys&#47;syscall.h you will see SYS_exit is defined near the top of the file:</p>
+<p>If you look at /usr/include/sys/syscall.h you will see SYS_exit is defined near the top of the file:</p>
 
-<pre><code>&#47;* syscall: "exit" ret: "void" args: "int" *&#47;
+<pre><code>/* syscall: "exit" ret: "void" args: "int" */
 #define SYS_exit    1
 </code></pre>
 
-<p>Our exit syscall returns void and takes one int as an argument. SYS_exit itself is is defined as &#8216;1&#8217;.  So when we make a syscall and pass SYS_exit, we are actually passing an integer that represents the function.</p>
+<p>Our exit syscall returns void and takes one int as an argument. SYS_exit itself is is defined as '1'.  So when we make a syscall and pass SYS_exit, we are actually passing an integer that represents the function.</p>
 
 <p>Syscall numbers are loaded into the rax register, and any parameters are put int rdi, rsi, rdx, etc. Any return value is left in rax.</p>
 
 <p>Equipped with this knowledge and the previous notes about the ELF program header, we can write our first assembly program, sysexit.s:</p>
 
 <pre><code>.section ".note.openbsd.ident", "a"
-    .p2align 2      &#47;* padding *&#47;
-    .long 0x8       &#47;* namesz *&#47;
-    .long 0x4       &#47;* descsz *&#47;
-    .long 0x1       &#47;* type *&#47; 
-    .ascii "OpenBSD\0"      &#47;* name *&#47;
-    .long 0x0       &#47;* desc *&#47;
+    .p2align 2      /* padding */
+    .long 0x8       /* namesz */
+    .long 0x4       /* descsz */
+    .long 0x1       /* type */ 
+    .ascii "OpenBSD\0"      /* name */
+    .long 0x0       /* desc */
     .p2align 2      
 
-.section .text      &#47;* .text section begins *&#47;
-.globl _start       &#47;* make _start symbol global&#47;known to ld *&#47;
+.section .text      /* .text section begins */
+.globl _start       /* make _start symbol global/known to ld */
 _start:
-movq $1,%rax        &#47;* copy 1 (SYS_exit) into rax register *&#47;
-movq $123,%rdi      &#47;* 1st parameter: 123 *&#47;
-syscall         &#47;* call syscall (int 0x80 on 32-bit) *&#47;
+movq $1,%rax        /* copy 1 (SYS_exit) into rax register */
+movq $123,%rdi      /* 1st parameter: 123 */
+syscall         /* call syscall (int 0x80 on 32-bit) */
 </code></pre>
 
 <p>Assemble and link with GNU tools:</p>
 
 <pre><code>$ as sysexit.s -o sysexit.o
-$ ld sysexit.o -o sysexit --dynamic-linker &#47;usr&#47;libexec&#47;ld.so
+$ ld sysexit.o -o sysexit --dynamic-linker /usr/libexec/ld.so
 </code></pre>
 
 <p>For a static executable:</p>
@@ -140,19 +141,19 @@ $ ld sysexit.o -o sysexit --dynamic-linker &#47;usr&#47;libexec&#47;ld.so
 </code></pre>
 
 <ul>
-<li>-e _start instructs the linker to use _start as an entry symbol&#47;point</li>
-<li>-static is required otherwise the resulting shared executable will look for &#47;lib&#47;ld64.so.1 (which doesn&#8217;t exist) - thanks &#47;u&#47;Kernigh!</li>
+<li>-e _start instructs the linker to use _start as an entry symbol/point</li>
+<li>-static is required otherwise the resulting shared executable will look for /lib/ld64.so.1 (which doesn't exist) - thanks /u/Kernigh!</li>
 </ul>
 
 <p>Execute our program and print the exit code:</p>
 
-<pre><code>$ .&#47;sysexit
+<pre><code>$ ./sysexit
 $ echo $?
 </code></pre>
 
-<h5 id="our-first-program-in-inline-x86-64-assembly">Our first program: in inline x86-64 assembly</h5>
+<h5>Our first program: in inline x86-64 assembly</h5>
 
-<p>Nowadays it&#8217;s often desirable to use inline assembly language within C programs; this allows precision control of registers and optimised routines to be made while retaining the beautiful ANSI C language for the bulk of the code.  Here&#8217;s how we implement our program using inline asm, inline.c:</p>
+<p>Nowadays it's often desirable to use inline assembly language within C programs; this allows precision control of registers and optimised routines to be made while retaining the beautiful ANSI C language for the bulk of the code.  Here's how we implement our program using inline asm, inline.c:</p>
 
 <pre><code>int
 main(void)
@@ -176,14 +177,14 @@ main(void) {
 <p>Compile as you normally would:</p>
 
 <pre><code>$ cc -o inline inline.c
-$ .&#47;inline
+$ ./inline
 $ echo $?
 123
 </code></pre>
 
 <p>Done! </p>
 
-<h5 id="our-first-program-in-x86-64-asm-nasm-syntax">Our first program: in x86-64 asm (NASM syntax)</h5>
+<h5>Our first program: in x86-64 asm (NASM syntax)</h5>
 
 <pre><code>section .note.openbsd.ident progbits alloc noexec nowrite
     dd 0x00000008 ; namesz
@@ -204,17 +205,17 @@ _start:
 <p>Assemble and link:</p>
 
 <pre><code>nasm -f elf64 sysexit-nasm.s -o sysexit-nasm.o
-&#47;* ld -e _start -static -o sysexit-nasm sysexit-nasm.o *&#47;
-ld -o sysexit-nasm sysexit-nasm.o --dynamic-linker &#47;usr&#47;libexec&#47;ld.so 
+/* ld -e _start -static -o sysexit-nasm sysexit-nasm.o */
+ld -o sysexit-nasm sysexit-nasm.o --dynamic-linker /usr/libexec/ld.so 
 </code></pre>
 
-<h5 id="our-first-program-in-armv8-aarch64-assembly">Our first program: in ARMv8 AArch64 assembly</h5>
+<h5>Our first program: in ARMv8 AArch64 assembly</h5>
 
 <p>AArch64 is the 64-bit state of ARMv8 processors; these processors can run a 32-bit kernel with 32-bit userland, or a 64-bit kernel with both 32 and 64-bit userland.  The architecture changes a little when in the 64-bit state.</p>
 
 <p>Registers:</p>
 
-<pre><code>X0 - X7      = Argument &#47; results registers
+<pre><code>X0 - X7      = Argument / results registers
 X8           = indirect result location
 X9 - X15         = temporary registers
 X16 - X17        = temporary intra-proc call
@@ -237,21 +238,21 @@ X30          = link register
 .text
 .globl _start 
 _start:
-    mov x0, #123    &#47;* copy 123 to x0 - reverse of AT&#38;T syntax *&#47;
-    mov x8, #1  &#47;* copy 1 into x8
-    svc #0      &#47;* supervisor instruction - formerly swi *&#47;
+    mov x0, #123    /* copy 123 to x0 - reverse of AT&amp;T syntax */
+    mov x8, #1  /* copy 1 into x8
+    svc #0      /* supervisor instruction - formerly swi */
 </code></pre>
 
 <p>Assemble and link:</p>
 
 <pre><code>$ gas sysexit-arm.s -o sysexit-arm.o
-$ ld sysexit-arm.o -o sysexit-arm --dynamic-linker &#47;usr&#47;libexec&#47;ld.so 
+$ ld sysexit-arm.o -o sysexit-arm --dynamic-linker /usr/libexec/ld.so 
 
-$ .&#47;sysexit-arm
+$ ./sysexit-arm
 $ echo $?
 </code></pre>
 
-<p>And we&#8217;re done!</p>
+<p>And we're done!</p>
 <hr/>
 <hr/>
 <p><a href="/">${HOME}</a></p>

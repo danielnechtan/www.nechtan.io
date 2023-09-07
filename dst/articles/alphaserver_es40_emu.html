@@ -18,70 +18,71 @@
     <div id="headtit">
       <h4 class="">Daniel Nechtan</h4>
       <span><a href="mailto:daniel@nechtan.io">daniel@nechtan.io</a></span>
-      | <span><a href="https://wa.me/447462815195">WhatsApp</a></span>
-      | <span><a href="https://signal.me/#p/+447462815195">Signal</a></span>
+      | <span><a href="https://wa.me/447474128129">WhatsApp</a></span>
+      | <span><a href="https://signal.me/#p/+447474128129">Signal</a></span>
     </div>
   </div>
   <p></p>
   <p>
     <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1 id="alphaserver-es40-emulation">AlphaServer ES40 Emulation</h1>
+<h1>AlphaServer ES40 Emulation</h1>
 
 <p>Emulating an AlphaServer ES40 for running Tru64 UNIX or OpenVMS</p>
 
-<p>This article was originally written for CentOS. Building ES40 on OpenBSD requires some extra work; I&#8217;ll port it soon and update this page in the near future. &#8211; 31-OCT-2018</p>
+<p>This article was originally written for CentOS. Building ES40 on OpenBSD requires some extra work; I'll port it soon and update this page in the near future. -- 31-OCT-2018</p>
 
 <p>The  <a href="http://www.es40.org/">ES40 Emulator</a>  is a portable  <a href="https://web.archive.org/web/20090606221007/http://www.compaq.com/alphaserver/es40/">AlphaServer ES40</a>  emulator. In many ways it is not unlike the Bochs IA-32 emulator in that it is portable, and provides VGA support through a VGA BIOS and the use of SDL, X11 or Win32 API calls.</p>
 
 <p>As well as emulating a DEC Alpha AXP EV68CB CPU, the ES40 Emulator also recreated the  <a href="http://www.es40.org/Typhoon">Typhoon Chipset</a>, the  <a href="http://www.es40.org/Ali_M1543C">Ali M1543C</a>  and additional  <a href="http://www.es40.org/Devices">devices</a>  that a functioning ES40 system would require.</p>
 
-<p>We are going to build and configure ES40 on a UNIX-like system without X11 or SDL support as we will be treating it as a virtual server and ES40 doesn&#8217;t support running DECWindows yet anyway (but feel free to configure DECWindows with XDM or X11 Forwarding later).</p>
+<p>We are going to build and configure ES40 on a UNIX-like system without X11 or SDL support as we will be treating it as a virtual server and ES40 doesn't support running DECWindows yet anyway (but feel free to configure DECWindows with XDM or X11 Forwarding later).</p>
 
-<h3 id="prerequisites">Prerequisites</h3>
+<h3>Prerequisites</h3>
 
 <p>As per  <a href="https://web.archive.org/web/20090606221007/http://www.es40.org/Building_the_Emulator_on_UNIX%2C_BSD%2C_Linux%2C_etc">the instructions</a>  for building ES40, you will need to make sure the following are available:</p>
 
 <ul>
-<li>  GNU C&#47;C++, make, unzip etc</li>
-<li>  <a href="http://sourceforge.net/project/showfiles.php?group_id=187340&amp;package_id=218669&amp;release_id=581747">es40_018_src.zip</a></li>
-<li>  <a href="https://github.com/pocoproject/poco/releases">Poco C++ Libraries (1.3.2+)</a></li>
-<li>  OpenSSL&#47;LibreSSL</li>
-<li>  libpcap</li>
-<li>  OpenVMS 8.3 Alpha or Tru64 Installation kit (and hobbyist license from <a href="https://www.hpe.com/h41268/live/index_e.aspx?qid=24548">HPE</a>)</li>
-<li>  <a href="cl67srmrom.exe">cl67srmrom.exe</a> from <a href="https://web.archive.org/web/20090606221007/http://h18002.www1.hp.com/alphaserver/firmware/readmes/updateviaunix-es40.html">es40.zip</a> (ES40 Firmware)</li>
-<li>  <a href="http://nongnu.org/vgabios/">vgabios-0.6a.bin</a>  - VGA BIOS</li>
+<li>GNU C/C++, make, unzip etc</li>
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=187340&amp;package_id=218669&amp;release_id=581747">es40_018_src.zip</a></li>
+<li><a href="https://github.com/pocoproject/poco/releases">Poco C++ Libraries (1.3.2+)</a></li>
+<li>OpenSSL/LibreSSL</li>
+<li>libpcap</li>
+<li>OpenVMS 8.3 Alpha or Tru64 Installation kit (and hobbyist license from <a href="https://www.hpe.com/h41268/live/index_e.aspx?qid=24548">HPE</a>)</li>
+<li><a href="cl67srmrom.exe">cl67srmrom.exe</a> from <a href="https://web.archive.org/web/20090606221007/http://h18002.www1.hp.com/alphaserver/firmware/readmes/updateviaunix-es40.html">es40.zip</a> (ES40 Firmware)</li>
+<li><a href="http://nongnu.org/vgabios/">vgabios-0.6a.bin</a>  - VGA BIOS</li>
 </ul>
 
-<h3 id="building">Building</h3>
+<h3>Building</h3>
 
-<p>Make sure libpcap, OpenSSL&#47;LibreSSL and their respective development files are installed on your system.</p>
+<p>Make sure libpcap, OpenSSL/LibreSSL and their respective development files are installed on your system.</p>
 
 <p>First we need to install poco; if it is not available from your system package manager, compile from source: </p>
 
-<pre><code>[int16h@cgxsrv01 ~]$ mkdir ES40 &#38;&#38; cd ES40
+<pre><code>[int16h@cgxsrv01 ~]$ mkdir ES40 &amp;&amp; cd ES40
 [int16h@cgxsrv01 ES40]$ wget poco-1.3.3p1.tar.gz
 [int16h@cgxsrv01 ES40]$ tar zxvf poco-1.3.3p1.tar.gz
 [int16h@cgxsrv01 ES40]$ cd poco-1.3.3p1
-[int16h@cgxsrv01 ES40]$ .&#47;configure --omit=Data&#47;ODBC,Data&#47;MySQL
+[int16h@cgxsrv01 ES40]$ ./configure --omit=Data/ODBC,Data/MySQL
 [int16h@cgxsrv01 ES40]$ make
 [int16h@cgxsrv01 ES40]$ sudo make install
 </code></pre>
 
-<p>Create a new directory within ES40 called &#8220;es40-source&#8221; (or whatever you like) and place es40_018_src.zip into this directory. Unzip the archive, then we will edit the Makefile to remove any debugging flags and GUI options (as we are going for a headless &#8216;production&#8217; server).</p>
+<p>Create a new directory within ES40 called "es40-source" (or whatever you like) and place es40_018_src.zip into this directory. Unzip the archive, then we will edit the Makefile to remove any debugging flags and GUI options (as we are going for a headless 'production' server).</p>
 
 <pre><code>[int16h@cgxsrv01 ES40]$ mkdir es40-source
-[int16h@cgxsrv01 ES40]$ unzip es40_018_src.zip -d es40-source&#47; &#38;&#38; cd es40-source
+[int16h@cgxsrv01 ES40]$ unzip es40_018_src.zip -d es40-source/ &amp;&amp; cd es40-source
 [int16h@cgxsrv01 es40-source]$ vi Makefile
 </code></pre>
 
-<p>Navigate down to the <strong>CTUNINGFLAGS</strong> section and replace &#8216;generic&#8217; with your target CPU (this is optional)</p>
+<p>Navigate down to the <strong>CTUNINGFLAGS</strong> section and replace 'generic' with your target CPU (this is optional)</p>
 
 <pre><code># CTUNINGFLAGS - tuning options for the compiler
 #       
@@ -92,7 +93,7 @@
 CTUNINGFLAGS = -O3 -mtune=generic
 </code></pre>
 
-<p>By default, ES40 will compile with &#8220;<strong>-g -DHIDE_COUNTER -DDEBUG_BACKTRACE</strong>&#8221; there are many other options which are listed below, but to help improve performance I will remove all debug flags. You may include any you like, but this is being set up as if it was a production-testing server.</p>
+<p>By default, ES40 will compile with "<strong>-g -DHIDE_COUNTER -DDEBUG_BACKTRACE</strong>" there are many other options which are listed below, but to help improve performance I will remove all debug flags. You may include any you like, but this is being set up as if it was a production-testing server.</p>
 
 <pre><code># CDEBUGFLAGS - turn on debugging in ES40
 #
@@ -108,7 +109,7 @@ CTUNINGFLAGS = -O3 -mtune=generic
 #   -DDEBUG_UNKMEM          Turn on unknown memory access debugging
 #   -DDEBUG_PCI             Turn on PCI Debugging
 #   -DDEBUG_TB              Turn on Translation Buffer debugging
-#   -DDEBUG_PORTACCESS  Turn on i&#47;o port access debugging
+#   -DDEBUG_PORTACCESS  Turn on i/o port access debugging
 #   -DDEBUG_SCSI            Turn on SCSI debugging
 #   -DDEBUG_KBD             Turn on keyboard debugging
 #   -DDEBUG_PIC             Turn on Programmable Interrupt Controller debugging
@@ -139,77 +140,77 @@ CDEBUGFLAGS = -g -DHIDE_COUNTER -DDEBUG_BACKTRACE
 OPTIONS = -DHAVE_SDL -DHAVE_X11 -DHAVE_PCAP
 </code></pre>
 
-<p>Make the &#8220;OPTIONS&#8221; section look like the following:</p>
+<p>Make the "OPTIONS" section look like the following:</p>
 
 <pre><code>OPTIONS = -DHAVE_PCAP
 </code></pre>
 
-<p>Finally save the file and exit. Type &#8216;make&#8217; to begin compilation.</p>
+<p>Finally save the file and exit. Type 'make' to begin compilation.</p>
 
 <pre><code>[int16h@cgxsrv01 es40-source]$ make
 </code></pre>
 
-<p>ES40 will now compile, don&#8217;t worry about the warnings. Once it&#8217;s complete, we will move the binary and default configuration file to a new directory:</p>
+<p>ES40 will now compile, don't worry about the warnings. Once it's complete, we will move the binary and default configuration file to a new directory:</p>
 
-<pre><code>[int16h@cgxsrv01 es40-source]$ mkdir ..&#47;es40
-[int16h@cgxsrv01 es40-source]$ cp es40{,.cfg} ..&#47;es40&#47;
-[int16h@cgxsrv01 es40-source]$ cd ..&#47;es40
+<pre><code>[int16h@cgxsrv01 es40-source]$ mkdir ../es40
+[int16h@cgxsrv01 es40-source]$ cp es40{,.cfg} ../es40/
+[int16h@cgxsrv01 es40-source]$ cd ../es40
 </code></pre>
 
 <p>We need to create 2 directories within here, one will store any disk images and ISOs - the other will contain our ES40 firmware and VGA bios binaries. We will also rename es40.cfg and create a new one from scratch. The default configuration appears to have been written on a Windows system as defined paths use backslashes. It will save you some time to use my config here, but you should read over the original so you are aware of all of the available options.</p>
 
 <pre><code>[int16h@cgxsrv01 es40]$ mkdir img rom
 [int16h@cgxsrv01 es40]$ cd rom
-[int16h@cgxsrv01 rom]$ wget http:&#47;&#47;mirror.publicns.net&#47;pub&#47;nongnu&#47;vgabios&#47;vgabios-0.6b.bin
-[int16h@cgxsrv01 rom]$ ### wget ftp:&#47;&#47;ftp.hp.com&#47;pub&#47;alphaserver&#47;firmware&#47;current_platforms&#47;v7.3_release&#47;ES40_series&#47;ES40&#47;es40.zip
+[int16h@cgxsrv01 rom]$ wget http://mirror.publicns.net/pub/nongnu/vgabios/vgabios-0.6b.bin
+[int16h@cgxsrv01 rom]$ ### wget ftp://ftp.hp.com/pub/alphaserver/firmware/current_platforms/v7.3_release/ES40_series/ES40/es40.zip
 [int16h@cgxsrv01 rom]$ ### unzip es40.zip cl67srmrom.exe
-[int16h@cgxsrv01 rom]$ wget https:&#47;&#47;cryogenix.net&#47;cl67srmrom.exe
+[int16h@cgxsrv01 rom]$ wget https://cryogenix.net/cl67srmrom.exe
 </code></pre>
 
-<p>We now have the firmware and BIOS images available to us. Although we don&#8217;t need the VGA BIOS, it&#8217;s nice to have it there incase you decide to use it in the future. Now would be a good time to prepare your media. I already had ISO images of OpenVMS and Tru64 ready - you may also create images of your installation media by using &#8216;<strong>dd</strong>&#8217;. Copy your ISO image(s) into the &#8216;<strong>img</strong>&#8217; directory, then we can get started.</p>
+<p>We now have the firmware and BIOS images available to us. Although we don't need the VGA BIOS, it's nice to have it there incase you decide to use it in the future. Now would be a good time to prepare your media. I already had ISO images of OpenVMS and Tru64 ready - you may also create images of your installation media by using '<strong>dd</strong>'. Copy your ISO image(s) into the '<strong>img</strong>' directory, then we can get started.</p>
 
 <pre><code>[int16h@cgxsrv01 rom]$ cd ..
-[int16h@cgxsrv01 img]$ mv &#47;root&#47;OpenVMS.Alpha.8.3.iso img&#47;
+[int16h@cgxsrv01 img]$ mv /root/OpenVMS.Alpha.8.3.iso img/
 [int16h@cgxsrv01 img]$ mv es40.cfg es40.cfg.bak
 </code></pre>
 
-<p>Using your favourite line&#47;text editor, re-create <strong>es40.cfg</strong> and we will configure the emulator.</p>
+<p>Using your favourite line/text editor, re-create <strong>es40.cfg</strong> and we will configure the emulator.</p>
 
-<pre><code>&#47;&#47; We don&#39;t need this, included for reference.
-&#47;&#47; gui = sdl&#47;X11&#47;win32
-&#47;&#47;
-&#47;&#47; gui = X11
-&#47;&#47; {
-&#47;&#47;   keyboard.use_mapping = false;
-&#47;&#47;   keyboard.map = "keys.map";
-&#47;&#47; }
+<pre><code>// We don't need this, included for reference.
+// gui = sdl/X11/win32
+//
+// gui = X11
+// {
+//   keyboard.use_mapping = false;
+//   keyboard.map = "keys.map";
+// }
 
 sys0 = tsunami
 {
-    rom.srm = "rom&#47;cl67srmrom.exe";
-    rom.decompressed = "rom&#47;decompressed.rom";
-    &#47;&#47; rom.flash = "rom&#47;flash.rom";
-    &#47;&#47; rom.dpr = "rom&#47;dpr.rom";
+    rom.srm = "rom/cl67srmrom.exe";
+    rom.decompressed = "rom/decompressed.rom";
+    // rom.flash = "rom/flash.rom";
+    // rom.dpr = "rom/dpr.rom";
 
-&#47;&#47; Memory allocation:
-&#47;&#47; 26 = 64 MB
-&#47;&#47; 27 = 128MB
-&#47;&#47; 28 = 256 MB
-&#47;&#47; 29 = 512 MB
-&#47;&#47; 30 = 1GB
-&#47;&#47; 31 = 2GB
+// Memory allocation:
+// 26 = 64 MB
+// 27 = 128MB
+// 28 = 256 MB
+// 29 = 512 MB
+// 30 = 1GB
+// 31 = 2GB
 
     memory.bits = 28;
 
  cpu0 = ev68cb
     {
-        &#47;&#47; onchip-cache
+        // onchip-cache
         icache = false;
     }
 
-&#47;&#47; System Internal PCI Devices: ali, ali_ide, ali_usb
+// System Internal PCI Devices: ali, ali_ide, ali_usb
 pci0.7 = ali{
-    &#47;&#47; These aren&#39;t really required for our set-up.
+    // These aren't really required for our set-up.
     mouse.enabled = true;
     lpt.outfile = "lpt.out";
     vga_console = true;
@@ -219,7 +220,7 @@ pci0.15 = ali_ide
 {
     disk0.0 = file
     {
-        file =          "img&#47;disk0.img";
+        file =          "img/disk0.img";
         serial_number = "VMS";
         rev_number    = "8.3";
         model_number  = "OpenVMS8.3";
@@ -230,7 +231,7 @@ pci0.15 = ali_ide
 
     disk1.0 = file
     {
-      file          = "img&#47;OpenVMS.Alpha.8.3.iso";
+      file          = "img/OpenVMS.Alpha.8.3.iso";
       read_only     = true;
       cdrom         = true;
     }
@@ -240,7 +241,7 @@ pci0.15 = ali_ide
   pci0.19 = ali_usb {}
 
   pci0.4 = dec21143 {
-    adapter = "eth0" &#47;&#47; Change to your ethernet device
+    adapter = "eth0" // Change to your ethernet device
   }
 
   serial0 = serial {
@@ -249,11 +250,11 @@ pci0.15 = ali_ide
 }
 </code></pre>
 
-<p>This is a good, simple configuration for your first Emulated ES40 system. You may increase &#8220;<strong>autocreate_size</strong>&#8221; to your liking as well as add, remove or modify any other options (refer to the documentation and the original config file). We are now ready to launch the emulator.</p>
+<p>This is a good, simple configuration for your first Emulated ES40 system. You may increase "<strong>autocreate_size</strong>" to your liking as well as add, remove or modify any other options (refer to the documentation and the original config file). We are now ready to launch the emulator.</p>
 
-<h3 id="starting-the-emulator">Starting the Emulator</h3>
+<h3>Starting the Emulator</h3>
 
-<pre><code>[int16h@cgxsrv01 es40]$ sudo .&#47;es40 
+<pre><code>[int16h@cgxsrv01 es40]$ sudo ./es40 
 
 
    **======================================================================**
@@ -261,29 +262,29 @@ pci0.15 = ali_ide
    ||                              Version 0.18                            ||
    ||                                                                      ||
    ||  Copyright (C) 2007-2008 by the ES40 Emulator Project                ||
-   ||  Website: http:&#47;&#47;sourceforge.net&#47;projects&#47;es40                       ||
+   ||  Website: http://sourceforge.net/projects/es40                       ||
    ||  E-mail : camiel@camicom.com                                         ||
    ||                                                                      ||
-   ||  This program is free software; you can redistribute it and&#47;or       ||
+   ||  This program is free software; you can redistribute it and/or       ||
    ||  modify it under the terms of the GNU General Public License         ||
    ||  as published by the Free Software Foundation; either version 2      ||
    ||  of the License, or (at your option) any later version.              ||
    **======================================================================**
 
-sys0(tsunami): $Id: System.cpp,v 1.68 2008&#47;03&#47;04 19:05:21 iamcamiel Exp $
-sys0(tsunami): $Id: DPR.cpp,v 1.16 2008&#47;02&#47;29 10:23:09 iamcamiel Exp $
-sys0(tsunami): $Id: Flash.cpp,v 1.15 2007&#47;12&#47;30 15:10:22 iamcamiel Exp $
-cpu0(ev68cb): $Id: AlphaCPU.cpp,v 1.71 2008&#47;03&#47;04 19:05:21 iamcamiel Exp $
-pci0.7(ali): $Id: AliM1543C.cpp,v 1.60 2008&#47;02&#47;27 12:04:19 iamcamiel Exp $
-kbc: $Id: Keyboard.cpp,v 1.4 2008&#47;02&#47;29 10:23:09 iamcamiel Exp $
-dma: $Id: DMA.cpp,v 1.2 2008&#47;02&#47;26 15:43:47 iamcamiel Exp $
+sys0(tsunami): $Id: System.cpp,v 1.68 2008/03/04 19:05:21 iamcamiel Exp $
+sys0(tsunami): $Id: DPR.cpp,v 1.16 2008/02/29 10:23:09 iamcamiel Exp $
+sys0(tsunami): $Id: Flash.cpp,v 1.15 2007/12/30 15:10:22 iamcamiel Exp $
+cpu0(ev68cb): $Id: AlphaCPU.cpp,v 1.71 2008/03/04 19:05:21 iamcamiel Exp $
+pci0.7(ali): $Id: AliM1543C.cpp,v 1.60 2008/02/27 12:04:19 iamcamiel Exp $
+kbc: $Id: Keyboard.cpp,v 1.4 2008/02/29 10:23:09 iamcamiel Exp $
+dma: $Id: DMA.cpp,v 1.2 2008/02/26 15:43:47 iamcamiel Exp $
 %IDE-I-INIT: New IDE emulator initialized.
-pci0.15(ali_ide).disk0.0(file): Could not open file img&#47;disk0.img!
+pci0.15(ali_ide).disk0.0(file): Could not open file img/disk0.img!
 pci0.15(ali_ide).disk0.0(file): writing 2000 1kB blocks:  99%
-pci0.15(ali_ide).disk0.0(file): 2000 MB file img&#47;disk0.img created.
-pci0.15(ali_ide).disk0.0(file): Mounted file img&#47;disk0.img, 4096000 512-byte blocks, 5120&#47;16&#47;50.
-pci0.15(ali_ide).disk1.0(file): Mounted file img&#47;OpenVMS.Alpha.8.3.iso, 270233 2048-byte blocks, 270233&#47;1&#47;1.
-pci0.19(ali_usb): $Id: AliM1543C_usb.cpp,v 1.5 2008&#47;02&#47;27 12:04:20 iamcamiel Exp $
+pci0.15(ali_ide).disk0.0(file): 2000 MB file img/disk0.img created.
+pci0.15(ali_ide).disk0.0(file): Mounted file img/disk0.img, 4096000 512-byte blocks, 5120/16/50.
+pci0.15(ali_ide).disk1.0(file): Mounted file img/OpenVMS.Alpha.8.3.iso, 270233 2048-byte blocks, 270233/1/1.
+pci0.19(ali_usb): $Id: AliM1543C_usb.cpp,v 1.5 2008/02/27 12:04:20 iamcamiel Exp $
 
 %NIC-Q-CHNIC: Choose a network adapter to connect to:
 1. eth0
@@ -291,24 +292,24 @@ pci0.19(ali_usb): $Id: AliM1543C_usb.cpp,v 1.5 2008&#47;02&#47;27 12:04:20 iamca
 2. lo
      (No description available)
 %NIC-Q-NICNO: Enter the interface number (1-2): 1
-pci0.4(dec21143): $Id: DEC21143.cpp,v 1.30 2008&#47;03&#47;02 09:42:52 iamcamiel Exp $
+pci0.4(dec21143): $Id: DEC21143.cpp,v 1.30 2008/03/02 09:42:52 iamcamiel Exp $
 serial0(serial): Waiting for connection on port 21264.
 </code></pre>
 
 <p>At this point you will telnet to the IP bound to the interface you chose for the serial console to proceed.</p>
 
 <pre><code>cgxlap:~ int16h$ telnet 10.0.0.11
-Escape character is &#39;^]&#39;.
+Escape character is '^]'.
 This is serial port #-1489766912 on AlphaSim
 </code></pre>
 
 <p>Quickly look at the other terminal where you started ES40 and you will notice that the emulator has now resumed.</p>
 
-<pre><code>serial0(serial): $Id: Serial.cpp,v 1.39 2008&#47;03&#47;02 09:42:52 iamcamiel Exp $
-%SYS-I-READROM: Reading original ROM image from rom&#47;cl67srmrom.exe.
+<pre><code>serial0(serial): $Id: Serial.cpp,v 1.39 2008/03/02 09:42:52 iamcamiel Exp $
+%SYS-I-READROM: Reading original ROM image from rom/cl67srmrom.exe.
 %SYS-I-DECOMP: Decompressing ROM image.
 0%....10%....20%....30%....40%....50%....60%....70%....80%....90%......100%
-%SYS-I-ROMWRT: Writing decompressed rom to rom&#47;decompressed.rom.
+%SYS-I-ROMWRT: Writing decompressed rom to rom/decompressed.rom.
 %SYM-I-PATCHROM: Patching ROM for speed.
 %SYS-I-ROMLOADED: ROM Image loaded successfully!
 flash: 2097156 bytes restored.
@@ -318,7 +319,7 @@ dpr: 16384 bytes restored.
 6232 | 000000000008bb9c
 </code></pre>
 
-<p>Our ROM image has been decompressed and patched, and the emulator has started properly. Now go back to your telnet serial console and wait for the system to initialise. Depending on your system, this may take a couple of minutes. It should be noted that this emulator is emulating an 847Mhz 64-Bit Alpha CPU as well as all the associated hardware&#8230; as you can imagine, accomplishing this on a 32-bit Intel system will put a lot of strain on the system and the emulated system itself will run slowly unless you have a high-spec machine. I&#8217;m running this on an old AMD Sempron 2800+ system with less than 1GB of RAM, I recommend  <strong>at least</strong>  an Intel Core2 Duo system.</p>
+<p>Our ROM image has been decompressed and patched, and the emulator has started properly. Now go back to your telnet serial console and wait for the system to initialise. Depending on your system, this may take a couple of minutes. It should be noted that this emulator is emulating an 847Mhz 64-Bit Alpha CPU as well as all the associated hardware... as you can imagine, accomplishing this on a 32-bit Intel system will put a lot of strain on the system and the emulated system itself will run slowly unless you have a high-spec machine. I'm running this on an old AMD Sempron 2800+ system with less than 1GB of RAM, I recommend  <strong>at least</strong>  an Intel Core2 Duo system.</p>
 
 <p>After your (hopefully short) wait, you will see the following initialisation messages:</p>
 
@@ -343,7 +344,7 @@ access NVRAM
 Memory size 256 MB
 testing memory
 ..
-probe I&#47;O subsystem
+probe I/O subsystem
 probing hose 1, PCI
 probing hose 0, PCI
 probing PCI-to-ISA bridge, bus 1
@@ -354,7 +355,7 @@ starting drivers
 entering idle loop
 *** system serial number not set. use set sys_serial_num command.
 Partition 0, Memory base: 000000000, size: 010000000
-initializing GCT&#47;FRU at 1c8000
+initializing GCT/FRU at 1c8000
 Initializing ewa dqa dqb 
 Memory Testing and Configuration Status
   Array       Size       Base Address    Intlv Mode
@@ -365,18 +366,18 @@ Memory Testing and Configuration Status
 Testing the System
 Testing the Network
 AlphaServer ES40 Console V7.3-1, built on Feb 27 2007 at 12:57:47
-P00&#62;&#62;&#62;
+P00&gt;&gt;&gt;
 </code></pre>
 
-<p>Huzzah! The virtual AlphaServer is now online and ready for you to boot your installation media. Let&#8217;s have a look at available devices and boot from the ISO.</p>
+<p>Huzzah! The virtual AlphaServer is now online and ready for you to boot your installation media. Let's have a look at available devices and boot from the ISO.</p>
 
-<pre><code>P00&#62;&#62;&#62;sh dev
+<pre><code>P00&gt;&gt;&gt;sh dev
 dqa0.0.0.15.0              DQA0                    OpenVMS8 .3
 dqb0.0.1.15.0              DQB0         OpenVMS. Alpha.8.3.iso
 dva0.0.0.1000.0            DVA0                               
 ewa0.0.0.4.0               EWA0              08-00-2B-E5-40-00
 
-P00&#62;&#62;&#62;boot DQB0
+P00&gt;&gt;&gt;boot DQB0
 (boot dqb0.0.1.15.0 -flags 0)
 block 0 of dqb0.0.1.15.0 is a valid boot block
 reading 1226 blocks from dqb0.0.1.15.0
@@ -404,7 +405,7 @@ jumping to bootstrap code
 
     You can install or upgrade the OpenVMS ALPHA operating system
     or you can install or upgrade layered products that are included
-    on the OpenVMS ALPHA distribution media (CD&#47;DVD).
+    on the OpenVMS ALPHA distribution media (CD/DVD).
 
     You can also execute DCL commands and procedures to perform
     "standalone" tasks, such as backing up the system disk.
@@ -421,10 +422,10 @@ jumping to bootstrap code
         8)  Execute DCL commands and procedures
         9)  Shut down this system
 
-Enter CHOICE or ? for help: (1&#47;2&#47;3&#47;4&#47;5&#47;6&#47;7&#47;8&#47;9&#47;?)
+Enter CHOICE or ? for help: (1/2/3/4/5/6/7/8/9/?)
 </code></pre>
 
-<p>From here you can continue to install OpenVMS as normal. So far I have been able to install and run OpenVMS 8.3 Alpha and Tru64 UNIX. This is an excellent emulator, and although it isn&#8217;t &#8220;finished&#8221; - I think it runs pretty well. It should be noted however that the network interface is a little buggy - In Tru64 I can configure it and ping the local IP, but I&#8217;m unable to send or receive traffic outside of there currently.</p>
+<p>From here you can continue to install OpenVMS as normal. So far I have been able to install and run OpenVMS 8.3 Alpha and Tru64 UNIX. This is an excellent emulator, and although it isn't "finished" - I think it runs pretty well. It should be noted however that the network interface is a little buggy - In Tru64 I can configure it and ping the local IP, but I'm unable to send or receive traffic outside of there currently.</p>
 <hr/>
 <hr/>
 <p><a href="/">${HOME}</a></p>

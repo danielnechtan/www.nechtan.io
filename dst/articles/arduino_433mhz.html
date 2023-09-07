@@ -18,23 +18,24 @@
     <div id="headtit">
       <h4 class="">Daniel Nechtan</h4>
       <span><a href="mailto:daniel@nechtan.io">daniel@nechtan.io</a></span>
-      | <span><a href="https://wa.me/447462815195">WhatsApp</a></span>
-      | <span><a href="https://signal.me/#p/+447462815195">Signal</a></span>
+      | <span><a href="https://wa.me/447474128129">WhatsApp</a></span>
+      | <span><a href="https://signal.me/#p/+447474128129">Signal</a></span>
     </div>
   </div>
   <p></p>
   <p>
     <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1 id="433-mhz-vehicle-unlocking-with-arduino-duo">433 Mhz vehicle unlocking with Arduino Duo</h1>
+<h1>433 Mhz vehicle unlocking with Arduino Duo</h1>
 
-<p>Having only one key fob for the van is anxiety-inducing in case it fails, so I decided to build a replacement with an Arduino&#47;ATMega and a 433Mhz transceiver module.</p>
+<p>Having only one key fob for the van is anxiety-inducing in case it fails, so I decided to build a replacement with an Arduino/ATMega and a 433Mhz transceiver module.</p>
 
 <p>Resources:</p>
 
@@ -43,7 +44,7 @@
 <li><a href="https://github.com/sui77/rc-switch">Alternative rc-switch library</a></li>
 </ul>
 
-<p>This was originally for a YouTube video which you can watch at <a href="https://www.youtube.com/watch?v=ANQsj8KCzRc">https:&#47;&#47;www.youtube.com&#47;watch?v=ANQsj8KCzRc</a>.</p>
+<p>This was originally for a YouTube video which you can watch at <a href="https://www.youtube.com/watch?v=ANQsj8KCzRc">https://www.youtube.com/watch?v=ANQsj8KCzRc</a>.</p>
 
 <p><a href="https://www.youtube.com/watch?v=ANQsj8KCzRc"><img src="https://img.youtube.com/vi/ANQsj8KCzRc/0.jpg" alt="Youtube Video" /></a></p>
 
@@ -57,7 +58,7 @@ RCSwitch mySwitch = RCSwitch();
 
 void setup() {
     Serial.begin(9600);
-    mySwitch.enableReceive(0); &#47;&#47; Receiver on inerrupt 0 =&#62; that is pin #2
+    mySwitch.enableReceive(0); // Receiver on inerrupt 0 =&gt; that is pin #2
 }
 
 void loop() {
@@ -69,7 +70,7 @@ void loop() {
             } else {
                 Serial.print("Received ");
                 Serial.print( mySwitch.getReceivedValue() );
-                Serial.print(" &#47; ");
+                Serial.print(" / ");
                 Serial.print( mySwitch.getReceivedBitlength() );
                 Serial.print("bit ");
                 Serial.print("Protocol: ");
@@ -83,7 +84,7 @@ void loop() {
 
 <p><strong>transmitter.c</strong></p>
 
-<pre><code>#include &#60;RCSwitch.h&#62;
+<pre><code>#include &lt;RCSwitch.h&gt;
 
 #define CODE_one 10692289
 #define CODE_two 10692290

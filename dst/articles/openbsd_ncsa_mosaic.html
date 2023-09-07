@@ -18,32 +18,33 @@
     <div id="headtit">
       <h4 class="">Daniel Nechtan</h4>
       <span><a href="mailto:daniel@nechtan.io">daniel@nechtan.io</a></span>
-      | <span><a href="https://wa.me/447462815195">WhatsApp</a></span>
-      | <span><a href="https://signal.me/#p/+447462815195">Signal</a></span>
+      | <span><a href="https://wa.me/447474128129">WhatsApp</a></span>
+      | <span><a href="https://signal.me/#p/+447474128129">Signal</a></span>
     </div>
   </div>
   <p></p>
   <p>
     <a href="/#Projects">Projects</a> &mdash;
     <a href="/#Articles">Articles</a> &mdash;
+    <a href="https://www.linkedin.com/in/danielnechtan/">LinkedIn</a> &mdash;
     <a href="https://github.com/DanielNechtan">Github</a> &mdash;
     <a href="https://twitter.com/DanielNechtan">Twitter</a> &mdash;
     <a rel="me" href="https://mastodon.sdf.org/@int16h">Mastodon</a> &mdash;
     <a href="/about.html">About</a>
   </p>
   <hr/>
-<h1 id="ncsa-mosaic-2.7-on-openbsd">NCSA Mosaic 2.7 on OpenBSD</h1>
+<h1>NCSA Mosaic 2.7 on OpenBSD</h1>
 
 <p>A classic web browser, now available on OpenBSD</p>
 
-<p>Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy this historic web browser. NCSA&#8217;s site causes a coredump, so run the binary with another URL as an argument. It&#8217;s not great as a browser on the modern web, but it does make a great gopher client!</p>
+<p>Added OpenBSD support and upgraded the archaic libpng code so you too can enjoy this historic web browser. NCSA's site causes a coredump, so run the binary with another URL as an argument. It's not great as a browser on the modern web, but it does make a great gopher client!</p>
 
-<p>Now using Cameron Kaiser&#8217;s patches and alternative (&#8216;modern&#8217;) renderer.  This needs a serious code audit before even considering submitting to ports.</p>
+<p>Now using Cameron Kaiser's patches and alternative ('modern') renderer.  This needs a serious code audit before even considering submitting to ports.</p>
 
-<pre><code>$ git clone https:&#47;&#47;github.com&#47;danielnechtan&#47;mosaic-CK-openbsd
+<pre><code>$ git clone https://github.com/danielnechtan/mosaic-CK-openbsd
 $ doas pkg_add motif
-$ cd mosaic-CK-openbsd &#38;&#38; make openbsd
-$ src&#47;Mosaic gopher:&#47;&#47;gopher.club
+$ cd mosaic-CK-openbsd &amp;&amp; make openbsd
+$ src/Mosaic gopher://gopher.club
 </code></pre>
 
 <p><a href="fvwm.png"><img src="fvwm.png" alt="Mosaic Screenshot" /></a>
