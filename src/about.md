@@ -1,7 +1,5 @@
 # About
 
-# About
-
 ### Curriculum Vitae
 
 [![CV of Daniel Nechtan](CV.png)](CV.pdf)
