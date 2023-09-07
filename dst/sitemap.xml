@@ -5,7 +5,6 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://nechtan.io/CV.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
-<url><loc>https://nechtan.io/about.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/RET_level1.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/alphaserver_es40_emu.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/articles/arduino_433mhz.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
@@ -26,4 +25,5 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://nechtan.io/contact.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/projects/cgxlive.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 <url><loc>https://nechtan.io/index.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
+<url><loc>https://nechtan.io/about.html</loc><lastmod>2023-09-07</lastmod><priority>1.0</priority></url>
 </urlset>

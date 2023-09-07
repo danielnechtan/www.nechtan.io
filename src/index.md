@@ -28,6 +28,8 @@
 ### Projects ###
 <a name="Projects"></a>
 
+* Naphtali - a Javascript-free, Tor-friendly community website platform in Perl (2021-)
+* [Gophernicus-tls](https://github.com/danielnechtan/gophernicus "2018-09-21") - TLS support for Gophernicus gopher server (2018)
 * [CGXLive](projects/cgxlive.html "2009-08-05") - Anonymous OpenBSD Live ISO (05 Aug 2009) [discontinued]
 
 ### Code ###
